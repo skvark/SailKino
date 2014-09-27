@@ -3,4 +3,4 @@ SailKino
 
 Finnkino client for Jolla.
 
-![preview](http://relativity.fi/sailkino/sailkinopreview.jpg)
+![preview](http://relativity.fi/sailkino/sailkinopreview.png)
