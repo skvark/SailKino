@@ -4,8 +4,6 @@
 #include <QString>
 #include <QList>
 #include <httpEngine.h>
-#include <kitchen.h>
-#include <helperFunctions.h>
 #include <QVector>
 #include <QTextCodec>
 #include <QNetworkReply>
