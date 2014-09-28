@@ -12,7 +12,7 @@ Page {
 
         id: info
         anchors.fill: parent
-        contentHeight: column.height + column2.height
+        contentHeight: column.height + column2.height + 10
 
         Column {
             id: column
@@ -20,7 +20,7 @@ Page {
             anchors.right: parent.right
 
             PageHeader {
-                title: qsTr(event.getTitle())
+                title: event.getTitle() + " (" + event.getProductionYear() + ")"
                 wrapMode: Text.Wrap
             }
 
@@ -47,7 +47,31 @@ Page {
                 color: Theme.primaryColor
                 textFormat: Text.RichText;
                 onLinkActivated: Qt.openUrlExternally(link)
-                text: event.getGenres()
+                text: qsTr("Genre: ") + event.getGenres()
+            }
+
+            Label {
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingLarge
+                width: parent.width
+                wrapMode: Text.Wrap
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                textFormat: Text.RichText;
+                onLinkActivated: Qt.openUrlExternally(link)
+                text: qsTr("Ikäraja: ") + event.getRating()
+            }
+
+            Label {
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingLarge
+                width: parent.width
+                wrapMode: Text.Wrap
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                textFormat: Text.RichText;
+                onLinkActivated: Qt.openUrlExternally(link)
+                text: qsTr("Kesto: ") + event.getLengthInMinutes() + qsTr(" minuuttia")
             }
 
         }

@@ -18,7 +18,10 @@ public:
           QString genres,
           QString smallImagePortrait,
           QString largeImageLandscape,
-          QString trailer);
+          QString trailer,
+          QString rating,
+          QString productionYear,
+          QString lengthInMinutes);
 
     Q_INVOKABLE QString getTitle();
     QString getID();
@@ -29,6 +32,9 @@ public:
     QString smallImagePortrait();
     Q_INVOKABLE QString getLargeImageLandscape();
     Q_INVOKABLE QString getTrailer();
+    Q_INVOKABLE QString getRating();
+    Q_INVOKABLE QString getProductionYear();
+    Q_INVOKABLE QString getLengthInMinutes();
 
 private:
     QString id_;
@@ -40,6 +46,9 @@ private:
     QString smallImagePortrait_;
     QString largeImageLandscape_;
     QString trailer_;
+    QString rating_;
+    QString productionYear_;
+    QString lengthInMinutes_;
 };
 
 #endif // EVENT_H

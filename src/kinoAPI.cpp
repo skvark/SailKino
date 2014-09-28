@@ -22,7 +22,9 @@ void kinoAPI::init() {
 
 QVariant kinoAPI::getModel(int type) const
 {
-    return QVariant::fromValue((QObject*) parser_->getModel(static_cast<HTTPEngine::EventModelType>(type)));
+    HTTPEngine::EventModelType t = static_cast<HTTPEngine::EventModelType>(type);
+    EventsModel* model = parser_->getModel(t);
+    return QVariant::fromValue((QObject*) model);
 }
 
 QVariant kinoAPI::getEvent(QString id)

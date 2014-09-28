@@ -11,45 +11,47 @@ HTTPEngine::HTTPEngine(QObject *parent) :
 
 }
 
-void HTTPEngine::getEvents(HTTPEngine::queryItemList &queryItems, EventModelType type)
+void HTTPEngine::getEvents(HTTPEngine::queryItemList &queryItems,
+                           EventModelType type)
 {
-    QUrl api_url(baseUrl + "/Events/?" + generateUrl(queryItems).toString());
-    qDebug() << api_url.toString();
+    QUrl api_url(baseUrl + "/Events/?" + generateUrl(queryItems));
     GET(api_url, events, type);
 }
 
 void HTTPEngine::getSchedule(HTTPEngine::queryItemList &queryItems)
 {
-    QUrl api_url(baseUrl + "/Schedule/?" + generateUrl(queryItems).toString());
+    QUrl api_url(baseUrl + "/Schedule/?" + generateUrl(queryItems));
     GET(api_url, schedule, InTheatres);
 }
 
 void HTTPEngine::getScheduleDates(HTTPEngine::queryItemList &queryItems)
 {
-    QUrl api_url(baseUrl + "/ScheduleDates/?" + generateUrl(queryItems).toString());
+    QUrl api_url(baseUrl + "/ScheduleDates/?" + generateUrl(queryItems));
     GET(api_url, scheduledates, InTheatres);
 }
 
 void HTTPEngine::getLanguages(HTTPEngine::queryItemList &queryItems)
 {
-    QUrl api_url(baseUrl + "/Languages/?" + generateUrl(queryItems).toString());
+    QUrl api_url(baseUrl + "/Languages/?" + generateUrl(queryItems));
     GET(api_url, languages, InTheatres);
 }
 
 void HTTPEngine::getAreas(HTTPEngine::queryItemList &queryItems)
 {
-    QUrl api_url(baseUrl + "/TheatreAreas/?" + generateUrl(queryItems).toString());
+    QUrl api_url(baseUrl + "/TheatreAreas/?" + generateUrl(queryItems));
     GET(api_url, areas, InTheatres);
 }
 
-QUrlQuery HTTPEngine::generateUrl(HTTPEngine::queryItemList &queryItems)
+QString HTTPEngine::generateUrl(HTTPEngine::queryItemList &queryItems)
 {
     QUrlQuery url;
     url.setQueryItems(queryItems);
-    return url;
+    return url.toString();
 }
 
-void HTTPEngine::GET(QUrl &url, HTTPEngine::GetMethod method, EventModelType type)
+void HTTPEngine::GET(QUrl &url,
+                     HTTPEngine::GetMethod method,
+                     EventModelType type)
 {
     QNetworkRequest request(url);
     QNetworkReply *reply = nam_.get(request);

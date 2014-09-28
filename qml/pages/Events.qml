@@ -64,7 +64,7 @@ Item {
                 Column {
                         id: column
                         width: background.width - previewimage.width
-                        height: previewimage.height
+                        height: previewimage.height + 10
 
                         Label {
                             id: header
@@ -75,7 +75,7 @@ Item {
                             textFormat: Text.RichText
                             text: title
                             anchors.leftMargin: 15
-                            font.pixelSize: Theme.fontSizeLarge
+                            font.pixelSize: Theme.fontSizeMedium
                             wrapMode: Text.WordWrap
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -121,8 +121,8 @@ Item {
                         anchors.topMargin: 20
                         anchors.left: parent.left;
                         anchors.right: parent.right;
-                        anchors.leftMargin: 10
-                        anchors.rightMargin: 10
+                        anchors.leftMargin: 15
+                        anchors.rightMargin: 5
                         textFormat: Text.RichText
                         text: shortsynopsis
                         wrapMode: Text.Wrap

@@ -45,7 +45,7 @@ private:
     void LanguagesRequest(QNetworkReply *finished);
     void scheduleDatesRequest(QNetworkReply *finished);
     void scheduleRequest(QNetworkReply *finished);
-    QUrlQuery generateUrl(queryItemList &queryItems);
+    QString generateUrl(queryItemList &queryItems);
     void GET(QUrl &url, GetMethod method, EventModelType type);
     bool checkError(QNetworkReply *finished);
 

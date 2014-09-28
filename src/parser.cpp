@@ -7,7 +7,6 @@ Parser::Parser(QObject *parent):
     httpEngine_ = new HTTPEngine();
     QObject::connect(httpEngine_, SIGNAL(eventsReady(const QByteArray&, HTTPEngine::EventModelType)),
                      this, SLOT(parseInitData(const QByteArray&, HTTPEngine::EventModelType)));
-
 }
 
 void Parser::addNewModel(HTTPEngine::EventModelType type, EventsModel* model)
@@ -23,14 +22,12 @@ void Parser::parseEvents()
 {
     QList<QPair<QString, QString> > list;
     list.append(qMakePair(QString("listType"), QString("NowInTheatres")));
-    EventsModel* new_model = new EventsModel();
-    addNewModel(HTTPEngine::EventModelType::InTheatres, new_model);
+    addNewModel(HTTPEngine::EventModelType::InTheatres, new EventsModel());
     httpEngine_->getEvents(list, HTTPEngine::EventModelType::InTheatres);
 
     list.clear();
     list.append(qMakePair(QString("listType"), QString("ComingSoon")));
-    new_model = new EventsModel();
-    addNewModel(HTTPEngine::EventModelType::ComingSoon, new_model);
+    addNewModel(HTTPEngine::EventModelType::ComingSoon, new EventsModel());
     httpEngine_->getEvents(list, HTTPEngine::EventModelType::ComingSoon);
 }
 
@@ -38,7 +35,6 @@ EventsModel *Parser::getModel(HTTPEngine::EventModelType type)
 {
     return models_.value(type);
 }
-
 
 void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) {
 
@@ -80,6 +76,15 @@ void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) 
             if(xml.name() == "Location") {
                 event.insert("Trailer", parseElement(xml));
             }
+            if(xml.name() == "Rating") {
+                event.insert("Rating", parseElement(xml));
+            }
+            if(xml.name() == "ProductionYear") {
+                event.insert("ProductionYear", parseElement(xml));
+            }
+            if(xml.name() == "LengthInMinutes") {
+                event.insert("LengthInMinutes", parseElement(xml));
+            }
         }
         xml.readNext();
     }
@@ -92,7 +97,10 @@ void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) 
                               event.value("Genres"),
                               event.value("SmallImagePortrait"),
                               event.value("LargeImageLandscape"),
-                              event.value("Trailer"));
+                              event.value("Trailer"),
+                              event.value("Rating"),
+                              event.value("ProductionYear"),
+                              event.value("LengthInMinutes"));
 
     models_.value(type)->addEvent(_event);
 }

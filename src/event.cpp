@@ -13,7 +13,10 @@ Event::Event(QString id,
              QString genres,
              QString smallImagePortrait,
              QString largeImageLandscape,
-             QString trailer):
+             QString trailer,
+             QString rating,
+             QString productionYear,
+             QString lengthInMinutes):
     id_(id),
     title_(title),
     synopsis_(synopsis),
@@ -22,7 +25,10 @@ Event::Event(QString id,
     genres_(genres),
     smallImagePortrait_(smallImagePortrait),
     largeImageLandscape_(largeImageLandscape),
-    trailer_(trailer)
+    trailer_(trailer),
+    rating_(rating),
+    productionYear_(productionYear),
+    lengthInMinutes_(lengthInMinutes)
 {}
 
 QString Event::getTitle()
@@ -68,4 +74,19 @@ QString Event::getLargeImageLandscape()
 QString Event::getTrailer()
 {
     return trailer_;
+}
+
+QString Event::getRating()
+{
+    return rating_;
+}
+
+QString Event::getProductionYear()
+{
+    return productionYear_;
+}
+
+QString Event::getLengthInMinutes()
+{
+    return lengthInMinutes_;
 }
