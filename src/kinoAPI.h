@@ -21,13 +21,11 @@ public:
     Q_INVOKABLE QVariant getEvent(QString id);
 
 signals:
-    void events();
-    void comingSoonEvents();
+    void ready();
     void loading(bool yesno);
-    void schedule();
 
 public slots:
-    void eventsReady(HTTPEngine::EventModelType type);
+    void eventsReady();
     void schedulesReady();
 
 private:

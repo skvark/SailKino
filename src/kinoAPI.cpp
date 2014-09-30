@@ -4,8 +4,8 @@ kinoAPI::kinoAPI(QObject *parent):
     QObject(parent)
 {
     parser_ = new Parser();
-    QObject::connect(parser_, SIGNAL(initData(HTTPEngine::EventModelType)),
-                     this, SLOT(eventsReady(HTTPEngine::EventModelType)));
+    QObject::connect(parser_, SIGNAL(initData()),
+                     this, SLOT(eventsReady()));
     QObject::connect(parser_, SIGNAL(scheduleData()),
                      this, SLOT(schedulesReady()));
     init();
@@ -22,6 +22,11 @@ void kinoAPI::init() {
     parser_->parseEvents();
 }
 
+void kinoAPI::eventsReady()
+{
+    parser_->getSchedules();
+}
+
 QVariant kinoAPI::getModel(int type) const
 {
     HTTPEngine::EventModelType t = static_cast<HTTPEngine::EventModelType>(type);
@@ -34,16 +39,9 @@ QVariant kinoAPI::getEvent(QString id)
     return QVariant::fromValue((QObject*) parser_->getEvent(id));
 }
 
-void kinoAPI::eventsReady(HTTPEngine::EventModelType type)
-{
-    parser_->getSchedules();
-}
-
 void kinoAPI::schedulesReady() {
     emit loading(false);
-    emit schedule();
-    emit events();
-    emit comingSoonEvents();
+    emit ready();
 }
 
 

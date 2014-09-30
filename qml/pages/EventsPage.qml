@@ -37,16 +37,18 @@ Page {
 
     Connections {
         target: kinoAPI
-        onSchedule: { inSelectedTheatre.setModel(kinoAPI.getModel(0), "In Selected Theatre") }
-        onEvents: { inTheatres.setModel(kinoAPI.getModel(0), "Now in Theatres") }
-        onComingSoonEvents: { comingSoon.setModel(kinoAPI.getModel(1), "Coming Soon") }
+        onReady: {
+            inSelectedTheatre.setModel(kinoAPI.getModel(0), "In Selected Theatre")
+            inTheatres.setModel(kinoAPI.getModel(0), "Now in Theatres")
+            comingSoon.setModel(kinoAPI.getModel(1), "Coming Soon")
+        }
         onLoading: {
-                    if(yesno) {
-                        loading = true;
-                    } else {
-                        loading = false;
-                    }
-                   }
+            if(yesno) {
+                loading = true;
+            } else {
+                loading = false;
+            }
+        }
     }
 }
 

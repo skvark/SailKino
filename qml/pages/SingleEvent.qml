@@ -59,7 +59,11 @@ Page {
                 color: Theme.primaryColor
                 textFormat: Text.RichText;
                 onLinkActivated: Qt.openUrlExternally(link)
-                text: qsTr("Ikäraja: ") + event.getRating() + qsTr(" Kesto: ") + event.getLengthInMinutes() + qsTr(" minuuttia")
+                text: qsTr("Ikäraja: ") +
+                      event.getRating() +
+                      qsTr(", Kesto: ") +
+                      event.getLengthInMinutes() +
+                      qsTr(" minuuttia")
             }
 
         }
@@ -72,8 +76,22 @@ Page {
             anchors.top: column.bottom
             anchors.leftMargin: Theme.paddingLarge
             anchors.topMargin: Theme.paddingSmall
-            height: listview.count * 65
+            height: {
+                if(listview.count !== 0) {
+                    return listview.count * 65
+                } else {
+                    return pholder.height
+                }
+            }
             spacing: 5
+
+            ViewPlaceholder {
+                id: pholder
+                height: 60
+                anchors.top: parent.top
+                enabled: listview.count == 0
+                text: qsTr("Ei näytöksiä.")
+            }
 
             delegate: ListItem {
 
@@ -110,12 +128,10 @@ Page {
                     width: parent.width
                     onClicked: {
                         Qt.openUrlExternally(showurl)
-                        console.log('asdsad' + showurl)
                     }
                 }
             }
         }
-
 
         Column {
             id: column2

@@ -27,9 +27,10 @@ public:
     void parseEvent(QXmlStreamReader &xml, HTTPEngine::EventModelType);
     QString parseElement(QXmlStreamReader &xml) const;
     Event *getEvent(QString id);
+    void parseSoonEvents();
 
 signals:
-    void initData(HTTPEngine::EventModelType type);
+    void initData();
     void scheduleData();
 
 public slots:

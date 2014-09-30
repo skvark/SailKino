@@ -26,8 +26,10 @@ void Parser::parseEvents()
     list.append(qMakePair(QString("listType"), QString("NowInTheatres")));
     addNewModel(HTTPEngine::EventModelType::InTheatres, new EventsModel());
     httpEngine_->getEvents(list, HTTPEngine::EventModelType::InTheatres);
+}
 
-    list.clear();
+void Parser::parseSoonEvents() {
+    QList<QPair<QString, QString> > list;
     list.append(qMakePair(QString("listType"), QString("ComingSoon")));
     addNewModel(HTTPEngine::EventModelType::ComingSoon, new EventsModel());
     httpEngine_->getEvents(list, HTTPEngine::EventModelType::ComingSoon);
@@ -166,7 +168,9 @@ void Parser::parseInitData(const QByteArray &data, HTTPEngine::EventModelType ty
     }
     xml.clear();
     if(type == HTTPEngine::EventModelType::ComingSoon) {
-        emit initData(type);
+        emit initData();
+    } else {
+        parseSoonEvents();
     }
 }
 
