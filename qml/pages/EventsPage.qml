@@ -26,6 +26,7 @@ Page {
 
         model: VisualItemModel {
                 id: days
+                Events { id: inSelectedTheatre }
                 Events { id: inTheatres }
                 Events { id: comingSoon }
         }
@@ -36,6 +37,7 @@ Page {
 
     Connections {
         target: kinoAPI
+        onSchedule: { inSelectedTheatre.setModel(kinoAPI.getModel(0), "In Selected Theatre") }
         onEvents: { inTheatres.setModel(kinoAPI.getModel(0), "Now in Theatres") }
         onComingSoonEvents: { comingSoon.setModel(kinoAPI.getModel(1), "Coming Soon") }
         onLoading: {

@@ -24,9 +24,11 @@ signals:
     void events();
     void comingSoonEvents();
     void loading(bool yesno);
+    void schedule();
 
 public slots:
     void eventsReady(HTTPEngine::EventModelType type);
+    void schedulesReady();
 
 private:
     Parser* parser_;

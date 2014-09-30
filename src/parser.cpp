@@ -7,6 +7,8 @@ Parser::Parser(QObject *parent):
     httpEngine_ = new HTTPEngine();
     QObject::connect(httpEngine_, SIGNAL(eventsReady(const QByteArray&, HTTPEngine::EventModelType)),
                      this, SLOT(parseInitData(const QByteArray&, HTTPEngine::EventModelType)));
+    QObject::connect(httpEngine_, SIGNAL(scheludesReady(const QByteArray&)),
+                     this, SLOT(parseSchedules(const QByteArray&)));
 }
 
 void Parser::addNewModel(HTTPEngine::EventModelType type, EventsModel* model)
@@ -29,6 +31,11 @@ void Parser::parseEvents()
     list.append(qMakePair(QString("listType"), QString("ComingSoon")));
     addNewModel(HTTPEngine::EventModelType::ComingSoon, new EventsModel());
     httpEngine_->getEvents(list, HTTPEngine::EventModelType::ComingSoon);
+}
+
+void Parser::getSchedules() {
+    QList<QPair<QString, QString> > list;
+    httpEngine_->getSchedule(list);
 }
 
 EventsModel *Parser::getModel(HTTPEngine::EventModelType type)
@@ -158,10 +165,87 @@ void Parser::parseInitData(const QByteArray &data, HTTPEngine::EventModelType ty
         qDebug() << "asdasdasd";
     }
     xml.clear();
-    emit initData(type);
+    if(type == HTTPEngine::EventModelType::ComingSoon) {
+        emit initData(type);
+    }
 }
 
+void Parser::parseSchedules(const QByteArray &data)
+{
+    QXmlStreamReader xml;
+    xml.addData(data);
 
+    while(!xml.atEnd() && !xml.hasError()) {
+        QXmlStreamReader::TokenType token = xml.readNext();
+
+        if(token == QXmlStreamReader::StartDocument) {
+            continue;
+        }
+
+        if(token == QXmlStreamReader::StartElement) {
+
+            if(xml.name() == "Schedule") {
+                continue;
+            }
+            if(xml.name() == "PubDate") {
+                continue;
+            }
+            if(xml.name() == "Shows") {
+                continue;
+            }
+            if(xml.name() == "Show") {
+                parseShow(xml);
+            }
+        }
+    }
+
+    if(xml.hasError()) {
+        qDebug() << "kissat koiria";
+    }
+    xml.clear();
+    emit scheduleData();
+}
+
+void Parser::parseShow(QXmlStreamReader& xml) {
+
+    QMap<QString, QString> show;
+    xml.readNext();
+    EventsModel* model = getModel(HTTPEngine::EventModelType::InTheatres);
+
+    while(!(xml.tokenType() == QXmlStreamReader::EndElement &&
+            xml.name() == "Show")) {
+
+        if(xml.tokenType() == QXmlStreamReader::StartElement) {
+
+            if(xml.name() == "ID") {
+                show.insert("ID", parseElement(xml));
+            }
+            if(xml.name() == "dttmShowStart") {
+                show.insert("dttmShowStart", parseElement(xml));
+            }
+            if(xml.name() == "dttmShowEnd") {
+                show.insert("dttmShowEnd", parseElement(xml));
+            }
+            if(xml.name() == "EventID") {
+                show.insert("EventID", parseElement(xml));
+            }
+            if(xml.name() == "Theatre") {
+                show.insert("Theatre", parseElement(xml));
+            }
+            if(xml.name() == "TheatreAuditorium") {
+                show.insert("TheatreAuditorium", parseElement(xml));
+            }
+            if(xml.name() == "ShowURL") {
+                show.insert("ShowURL", parseElement(xml));
+            }
+            if(xml.name() == "EventURL") {
+                show.insert("EventURL", parseElement(xml));
+            }
+        }
+        xml.readNext();
+    }
+    model->getEvent(show.value("EventID"))->addSchedule(show);
+}
 
 
 

@@ -21,7 +21,9 @@ SOURCES += src/SailKino.cpp \
     src/eventsmodel.cpp \
     src/kinoAPI.cpp \
     src/parser.cpp \
-    src/event.cpp
+    src/event.cpp \
+    src/show.cpp \
+    src/showtimemodel.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -38,6 +40,8 @@ HEADERS += \
     src/eventsmodel.h \
     src/kinoAPI.h \
     src/parser.h \
-    src/event.h
+    src/event.h \
+    src/show.h \
+    src/showtimemodel.h
 
 

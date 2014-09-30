@@ -29,7 +29,9 @@ Event::Event(QString id,
     rating_(rating),
     productionYear_(productionYear),
     lengthInMinutes_(lengthInMinutes)
-{}
+{
+    schedule_ = new ShowTimeModel();
+}
 
 QString Event::getTitle()
 {
@@ -89,4 +91,14 @@ QString Event::getProductionYear()
 QString Event::getLengthInMinutes()
 {
     return lengthInMinutes_;
+}
+
+void Event::addSchedule(QMap<QString, QString> data)
+{
+    schedule_->addShow(new Show(data));
+}
+
+QVariant Event::getModel()
+{
+    return QVariant::fromValue((QObject*) schedule_);
 }

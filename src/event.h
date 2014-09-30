@@ -3,6 +3,10 @@
 
 #include <QString>
 #include <QObject>
+#include <QMap>
+#include <QList>
+#include <show.h>
+#include <showtimemodel.h>
 
 class Event : public QObject
 {
@@ -35,6 +39,8 @@ public:
     Q_INVOKABLE QString getRating();
     Q_INVOKABLE QString getProductionYear();
     Q_INVOKABLE QString getLengthInMinutes();
+    void addSchedule(QMap<QString, QString> data);
+    Q_INVOKABLE QVariant getModel();
 
 private:
     QString id_;
@@ -49,6 +55,7 @@ private:
     QString rating_;
     QString productionYear_;
     QString lengthInMinutes_;
+    ShowTimeModel* schedule_;
 };
 
 #endif // EVENT_H

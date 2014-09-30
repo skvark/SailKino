@@ -6,6 +6,8 @@ kinoAPI::kinoAPI(QObject *parent):
     parser_ = new Parser();
     QObject::connect(parser_, SIGNAL(initData(HTTPEngine::EventModelType)),
                      this, SLOT(eventsReady(HTTPEngine::EventModelType)));
+    QObject::connect(parser_, SIGNAL(scheduleData()),
+                     this, SLOT(schedulesReady()));
     init();
 }
 
@@ -34,13 +36,14 @@ QVariant kinoAPI::getEvent(QString id)
 
 void kinoAPI::eventsReady(HTTPEngine::EventModelType type)
 {
+    parser_->getSchedules();
+}
+
+void kinoAPI::schedulesReady() {
     emit loading(false);
-    if (type == HTTPEngine::EventModelType::InTheatres) {
-        emit events();
-    }
-    else if (type == HTTPEngine::EventModelType::ComingSoon) {
-        emit comingSoonEvents();
-    }
+    emit schedule();
+    emit events();
+    emit comingSoonEvents();
 }
 
 
