@@ -2,11 +2,20 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import sailkino.events 1.0
 import QtMultimedia 5.0
+import ShowIntegrate 1.0
 
 Page {
     id: openinghours
     property string id
-    property var event: kinoAPI.getEvent(id)
+    property var event: {
+        kinoAPI.setID(id);
+        return kinoAPI.getEvent;
+    }
+
+    function scaler() {
+        console.log(1.0 - (head.title.split(" ").length * 0.02 * head.title.length * 0.06))
+        return 1.0 - (head.title.split(" ").length * 0.02 * head.title.length * 0.06)
+    }
 
     SilicaFlickable {
 
@@ -20,8 +29,11 @@ Page {
             anchors.right: parent.right
 
             PageHeader {
+                id: head
                 title: event.getTitle() + " (" + event.getProductionYear() + ")"
                 wrapMode: Text.Wrap
+
+                scale: scaler()
             }
 
             Image {
@@ -71,7 +83,7 @@ Page {
         SilicaListView {
 
             id: listview
-            model: event.getModel();
+            model: event.getModel;
             width: parent.width
             anchors.top: column.bottom
             anchors.leftMargin: Theme.paddingLarge

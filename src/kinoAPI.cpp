@@ -1,4 +1,5 @@
 #include "kinoAPI.h"
+#include <QQmlEngine>
 
 kinoAPI::kinoAPI(QObject *parent):
     QObject(parent)
@@ -22,21 +23,32 @@ void kinoAPI::init() {
     parser_->parseEvents();
 }
 
+void kinoAPI::setID(QString id)
+{
+    id_ = id;
+}
+
+EventsModel *kinoAPI::inTheatres() const
+{
+    EventsModel* model = parser_->getModel(HTTPEngine::EventModelType::InTheatres);
+    return model;
+}
+
+EventsModel *kinoAPI::comingSoon() const
+{
+    EventsModel* model = parser_->getModel(HTTPEngine::EventModelType::ComingSoon);
+    return model;
+}
+
 void kinoAPI::eventsReady()
 {
     parser_->getSchedules();
 }
 
-QVariant kinoAPI::getModel(int type) const
+Event* kinoAPI::getEvent() const
 {
-    HTTPEngine::EventModelType t = static_cast<HTTPEngine::EventModelType>(type);
-    EventsModel* model = parser_->getModel(t);
-    return QVariant::fromValue((QObject*) model);
-}
-
-QVariant kinoAPI::getEvent(QString id)
-{
-    return QVariant::fromValue((QObject*) parser_->getEvent(id));
+    Event* event = parser_->getEvent(id_);
+    return event;
 }
 
 void kinoAPI::schedulesReady() {

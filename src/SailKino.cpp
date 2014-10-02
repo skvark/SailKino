@@ -11,10 +11,14 @@
 #include <QMetaType>
 #include <event.h>
 #include <QtQml>
+#include <eventsmodel.h>
+#include <showtimemodel.h>
 
 int main(int argc, char *argv[])
 {
     qmlRegisterType<Event>("sailkino.events", 1, 0, "Event");
+    qmlRegisterType<EventsModel>("CPPIntegrate", 1, 0, "kinoAPI");
+    qmlRegisterType<ShowTimeModel>("ShowIntegrate", 1, 0, "Show");
     QCoreApplication::setApplicationName("harbour-sailkino");
     QCoreApplication::setOrganizationName("harbour-sailkino");
     kinoAPI api;

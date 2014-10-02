@@ -16,6 +16,7 @@
 class Parser : public QObject
 {
     Q_OBJECT
+
 public:
     Parser(QObject *parent = 0);
     ~Parser();

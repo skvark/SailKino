@@ -98,7 +98,7 @@ void Event::addSchedule(QMap<QString, QString> data)
     schedule_->addShow(new Show(data));
 }
 
-QVariant Event::getModel()
+ShowTimeModel *Event::getModel() const
 {
-    return QVariant::fromValue((QObject*) schedule_);
+    return schedule_;
 }

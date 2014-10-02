@@ -11,6 +11,7 @@
 class Event : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(ShowTimeModel* getModel READ getModel CONSTANT)
 
 public:
     Event(QObject *parent = 0);
@@ -40,7 +41,7 @@ public:
     Q_INVOKABLE QString getProductionYear();
     Q_INVOKABLE QString getLengthInMinutes();
     void addSchedule(QMap<QString, QString> data);
-    Q_INVOKABLE QVariant getModel();
+    ShowTimeModel* getModel() const;
 
 private:
     QString id_;

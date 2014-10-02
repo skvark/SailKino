@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import CPPIntegrate 1.0
 
 Page {
     id: page
@@ -17,6 +18,7 @@ Page {
         itemHeight: height
         height: window.height
         clip: true
+        onCurrentIndexChanged: infoText()
 
         anchors {
             top: parent.top;
@@ -25,22 +27,69 @@ Page {
         }
 
         model: VisualItemModel {
-                id: days
+                id: movieViews
                 Events { id: inSelectedTheatre }
                 Events { id: inTheatres }
                 Events { id: comingSoon }
         }
     }
 
+    DockedPanel {
+
+        id: panel
+        open: true
+        width: parent.width
+        height: Theme.itemSizeExtraSmall
+        dock: Dock.Bottom
+
+        Rectangle {
+            anchors.fill: background
+            color: Theme.rgba(Theme.highlightBackgroundColor, 0.7)
+        }
+
+        BackgroundItem {
+            id: background
+            height: parent.height
+            width: parent.width
+        }
+
+        Label {
+            id: bottomLabel
+            width: parent.width
+            height: parent.height
+            text: info
+            font.pixelSize: Theme.fontSizeSmall
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        BusyIndicator {
+            anchors.centerIn: parent
+            running: loading
+            size: BusyIndicatorSize.Small
+        }
+
+    }
+
     property var date: new Date();
     property bool loading: true;
+    property string info
+
+    function infoText() {
+        if (menuView.currentItem !== null) {
+            info = menuView.currentItem.pgheader + " - " + date.toLocaleDateString()
+        } else {
+            info = ""
+        }
+    }
 
     Connections {
         target: kinoAPI
         onReady: {
-            inSelectedTheatre.setModel(kinoAPI.getModel(0), "In Selected Theatre")
-            inTheatres.setModel(kinoAPI.getModel(0), "Now in Theatres")
-            comingSoon.setModel(kinoAPI.getModel(1), "Coming Soon")
+            inSelectedTheatre.setModel(kinoAPI.inTheatres, "In Selected Theatre")
+            inTheatres.setModel(kinoAPI.inTheatres, "Now in Theatres")
+            comingSoon.setModel(kinoAPI.comingSoon, "Coming Soon")
+            infoText()
         }
         onLoading: {
             if(yesno) {
