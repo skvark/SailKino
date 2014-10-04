@@ -8,14 +8,15 @@
 #include <QList>
 #include <QStringList>
 #include <QVariantList>
+#include <QDebug>
 
 class SettingsManager
 {
 public:
     SettingsManager();
     ~SettingsManager();
-    bool saveSettings(QList<QString> settings);
-    QList<QString> loadSettings();
+    void saveSettings(QString area);
+    QString loadSettings();
 
 private:
     QSettings *settings_;

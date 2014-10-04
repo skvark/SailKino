@@ -1,15 +1,22 @@
 #include "kinoAPI.h"
-#include <QQmlEngine>
 
 kinoAPI::kinoAPI(QObject *parent):
     QObject(parent)
 {
     parser_ = new Parser();
+    settings_ = new SettingsManager();
     QObject::connect(parser_, SIGNAL(initData()),
                      this, SLOT(eventsReady()));
     QObject::connect(parser_, SIGNAL(scheduleData()),
                      this, SLOT(schedulesReady()));
-    init();
+    QObject::connect(parser_, SIGNAL(areaData()),
+                     this, SLOT(areasParsed()));
+    parser_->getAreas();
+    if(getArea().isEmpty()) {
+        areaSelectedEarlier_ = false;
+    } else {
+        areaSelectedEarlier_ = true;
+    }
 }
 
 kinoAPI::~kinoAPI()
@@ -20,7 +27,7 @@ kinoAPI::~kinoAPI()
 
 void kinoAPI::init() {
     emit loading(true);
-    parser_->parseEvents();
+    parser_->parseEvents(getArea());
 }
 
 void kinoAPI::setID(QString id)
@@ -42,7 +49,7 @@ EventsModel *kinoAPI::comingSoon() const
 
 void kinoAPI::eventsReady()
 {
-    parser_->getSchedules();
+    parser_->getSchedules(getArea());
 }
 
 Event* kinoAPI::getEvent() const
@@ -51,9 +58,44 @@ Event* kinoAPI::getEvent() const
     return event;
 }
 
+QString kinoAPI::getArea()
+{
+    return settings_->loadSettings();
+}
+
+QString kinoAPI::getAreaName()
+{
+    QString areaid = settings_->loadSettings();
+    return parser_->getAreaName(areaid);
+}
+
+void kinoAPI::saveArea(QString area)
+{
+    settings_->saveSettings(parser_->getAreaID(area));
+}
+
+QVariant kinoAPI::getAreas()
+{
+    return QVariant::fromValue(parser_->getAreasList());
+}
+
+bool kinoAPI::areaSelectedEarlier()
+{
+    return areaSelectedEarlier_;
+}
+
+void kinoAPI::clearModels() {
+    parser_->clear();
+}
+
 void kinoAPI::schedulesReady() {
     emit loading(false);
     emit ready();
+}
+
+void kinoAPI::areasParsed()
+{
+    emit areas();
 }
 
 

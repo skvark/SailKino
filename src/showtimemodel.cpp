@@ -35,6 +35,10 @@ int ShowTimeModel::rowCount(const QModelIndex & parent) const {
 void ShowTimeModel::clear()
 {
     beginResetModel();
+    foreach(Show* show, shows_) {
+        delete show;
+        show = NULL;
+    }
     shows_.clear();
     endResetModel();
 }

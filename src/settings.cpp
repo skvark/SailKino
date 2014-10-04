@@ -2,6 +2,7 @@
 
 SettingsManager::SettingsManager()
 {
+    qDebug() << QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     QString data_dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, data_dir);
     settings_ = new QSettings;
@@ -14,20 +15,17 @@ SettingsManager::~SettingsManager()
     settings_ = 0;
 }
 
-bool SettingsManager::saveSettings(QList<QString> data)
+void SettingsManager::saveSettings(QString area)
 {
-    QVariantList datalist;
-    foreach(QString setting, data){
-        datalist << setting;
+    QVariant data;
+    if(!area.isEmpty()) {
+        data = QVariant::fromValue(area);
+        settings_->setValue("area", data);
+        settings_->sync();
     }
-    settings_->setValue("settings", datalist);
-    settings_->sync();
-    return true;
 }
 
-QList<QString> SettingsManager::loadSettings()
+QString SettingsManager::loadSettings()
 {
-    QList<QString> list;
-    return list;
-
+    return settings_->value("area").toString();
 }

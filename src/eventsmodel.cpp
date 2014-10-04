@@ -33,6 +33,11 @@ int EventsModel::rowCount(const QModelIndex & parent) const {
 void EventsModel::clear()
 {
     beginResetModel();
+    foreach(Event* event, events_) {
+        event->getModel()->clear();
+        delete event;
+        event = NULL;
+    }
     events_.clear();
     endResetModel();
 }

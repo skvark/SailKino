@@ -13,7 +13,8 @@ Page {
     }
 
     function scaler() {
-        console.log(1.0 - (head.title.split(" ").length * 0.02 * head.title.length * 0.06))
+        // this scales the header so that it fits :D
+        // does not work correctly, just a workaround
         return 1.0 - (head.title.split(" ").length * 0.02 * head.title.length * 0.06)
     }
 
@@ -32,7 +33,6 @@ Page {
                 id: head
                 title: event.getTitle() + " (" + event.getProductionYear() + ")"
                 wrapMode: Text.Wrap
-
                 scale: scaler()
             }
 
@@ -103,6 +103,7 @@ Page {
                 anchors.top: parent.top
                 enabled: listview.count == 0
                 text: qsTr("Ei näytöksiä.")
+                scale: 0.5
             }
 
             delegate: ListItem {
@@ -123,7 +124,7 @@ Page {
                     color: Theme.primaryColor
                     textFormat: Text.RichText;
                     verticalAlignment: Text.AlignVCenter
-                    text: theatre + ", " + auditorium + "<br />" + start + " - " + end
+                    text: start + " - " + end + "<br />" + theatre + ", " + auditorium
                 }
 
                 Rectangle {

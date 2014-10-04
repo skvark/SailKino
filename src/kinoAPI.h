@@ -6,7 +6,9 @@
 #include <eventsmodel.h>
 #include <QDebug>
 #include <httpEngine.h>
-
+#include <settings.h>
+#include <QString>
+#include <QStringList>
 
 class kinoAPI : public QObject
 {
@@ -24,20 +26,30 @@ public:
     EventsModel *inTheatres() const;
     EventsModel *comingSoon() const;
     Event* getEvent() const;
+    QString getArea();
+    Q_INVOKABLE QString getAreaName();
+    Q_INVOKABLE void saveArea(QString area);
+    Q_INVOKABLE QVariant getAreas();
+    Q_INVOKABLE bool areaSelectedEarlier();
+    Q_INVOKABLE void clearModels();
 
 signals:
     void ready();
     void loading(bool yesno);
+    void areas();
+    void placeholder();
 
 public slots:
     void eventsReady();
     void schedulesReady();
+    void areasParsed();
 
 private:
     Parser* parser_;
     EventsModel* model_;
     QString id_;
-
+    SettingsManager* settings_;
+    bool areaSelectedEarlier_;
 };
 
 #endif // GETFOODDATA_H

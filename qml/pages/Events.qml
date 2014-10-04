@@ -23,8 +23,18 @@ Item {
             }
         }
 
+
         PullDownMenu {
             id: menu
+            MenuItem {
+                text: "About"
+            }
+            MenuItem {
+                text: "Area"
+                onClicked: {
+                    pageStack.push("SelectArea.qml");
+                }
+            }
         }
 
         anchors.fill: parent
@@ -137,6 +147,5 @@ Item {
 
         VerticalScrollDecorator { flickable: listview }
     }
-
 }
 

@@ -37,7 +37,7 @@ public:
     void getSchedule(queryItemList &queryItems);
     void getScheduleDates(queryItemList &queryItems);
     void getLanguages(queryItemList &queryItems);
-    void getAreas(queryItemList &queryItems);
+    void getAreas();
 
 private:
     void eventsRequest(QNetworkReply *finished, EventModelType type);

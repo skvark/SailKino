@@ -9,6 +9,8 @@ Parser::Parser(QObject *parent):
                      this, SLOT(parseInitData(const QByteArray&, HTTPEngine::EventModelType)));
     QObject::connect(httpEngine_, SIGNAL(scheludesReady(const QByteArray&)),
                      this, SLOT(parseSchedules(const QByteArray&)));
+    QObject::connect(httpEngine_, SIGNAL(areasReady(const QByteArray&)),
+                     this, SLOT(parseAreas(const QByteArray&)));
 }
 
 void Parser::addNewModel(HTTPEngine::EventModelType type, EventsModel* model)
@@ -20,14 +22,48 @@ Parser::~Parser()
 {
 }
 
-void Parser::parseEvents()
+void Parser::getAreas()
+{
+    httpEngine_->getAreas();
+}
+
+QStringList Parser::getAreasList()
+{
+    QStringList areas;
+    foreach(QString area, areas_) {
+        if(area != "Valitse alue/teatteri")
+            areas.append(area);
+    }
+    return areas;
+}
+
+void Parser::clear()
+{
+    foreach(EventsModel* model, models_) {
+        model->clear();
+    }
+}
+
+QString Parser::getAreaName(QString id)
+{
+    return areas_.value(id);
+}
+
+QString Parser::getAreaID(QString area)
+{
+    return areas_.key(area);
+}
+
+void Parser::parseEvents(QString area)
 {
     QList<QPair<QString, QString> > list;
     list.append(qMakePair(QString("listType"), QString("NowInTheatres")));
+    list.append(qMakePair(QString("area"), area));
     addNewModel(HTTPEngine::EventModelType::InTheatres, new EventsModel());
     httpEngine_->getEvents(list, HTTPEngine::EventModelType::InTheatres);
 }
 
+// area has no effect on this
 void Parser::parseSoonEvents() {
     QList<QPair<QString, QString> > list;
     list.append(qMakePair(QString("listType"), QString("ComingSoon")));
@@ -35,8 +71,40 @@ void Parser::parseSoonEvents() {
     httpEngine_->getEvents(list, HTTPEngine::EventModelType::ComingSoon);
 }
 
-void Parser::getSchedules() {
+void Parser::parseAreas(const QByteArray &data)
+{
+    QXmlStreamReader xml;
+    xml.addData(data);
+
+    while(!xml.atEnd() && !xml.hasError()) {
+        QXmlStreamReader::TokenType token = xml.readNext();
+
+        if(token == QXmlStreamReader::StartDocument) {
+            continue;
+        }
+
+        if(token == QXmlStreamReader::StartElement) {
+
+            if(xml.name() == "TheatreAreas") {
+                continue;
+            }
+
+            if(xml.name() == "TheatreArea") {
+                parseArea(xml);
+            }
+        }
+    }
+
+    if(xml.hasError()) {
+        qDebug() << "asdasdasd";
+    }
+    xml.clear();
+    emit areaData();
+}
+
+void Parser::getSchedules(QString area) {
     QList<QPair<QString, QString> > list;
+    list.append(qMakePair(QString("area"), area));
     httpEngine_->getSchedule(list);
 }
 
@@ -112,6 +180,30 @@ void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) 
                               event.value("LengthInMinutes"));
 
     models_.value(type)->addEvent(_event);
+}
+
+void Parser::parseArea(QXmlStreamReader &xml)
+{
+    QString id;
+    QString name;
+    xml.readNext();
+
+    while(!(xml.tokenType() == QXmlStreamReader::EndElement &&
+            xml.name() == "TheatreArea")) {
+
+        if(xml.tokenType() == QXmlStreamReader::StartElement) {
+
+            if(xml.name() == "ID") {
+                id = parseElement(xml);
+            }
+            if(xml.name() == "Name") {
+                name = parseElement(xml);
+            }
+        }
+        xml.readNext();
+    }
+
+    areas_.insert(id, name);
 }
 
 QString Parser::parseElement(QXmlStreamReader& xml) const {

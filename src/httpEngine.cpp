@@ -36,9 +36,9 @@ void HTTPEngine::getLanguages(HTTPEngine::queryItemList &queryItems)
     GET(api_url, languages, InTheatres);
 }
 
-void HTTPEngine::getAreas(HTTPEngine::queryItemList &queryItems)
+void HTTPEngine::getAreas()
 {
-    QUrl api_url(baseUrl + "/TheatreAreas/?" + generateUrl(queryItems));
+    QUrl api_url(baseUrl + "/TheatreAreas/");
     GET(api_url, areas, InTheatres);
 }
 

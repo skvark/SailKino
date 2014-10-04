@@ -4,11 +4,23 @@ import CPPIntegrate 1.0
 
 Page {
     id: page
+    Component.onCompleted: init()
 
     BusyIndicator {
         anchors.centerIn: parent
         size: BusyIndicatorSize.Large
         running: loading
+    }
+
+    SilicaFlickable {
+
+        width: parent.width
+
+        ViewPlaceholder {
+            id: pholder
+            enabled: loading == false && holder == true
+            text: qsTr("Et ole asettanut vielä sijaintiasi. Valitse sijainti vetovalikosta.")
+        }
     }
 
     SlideshowView {
@@ -33,7 +45,7 @@ Page {
                 Events { id: comingSoon }
         }
     }
-
+    /*
     DockedPanel {
 
         id: panel
@@ -70,10 +82,11 @@ Page {
         }
 
     }
-
+    */
     property var date: new Date();
-    property bool loading: true;
-    property string info
+    property bool loading: false;
+    property bool holder: false;
+    property string info;
 
     function infoText() {
         if (menuView.currentItem !== null) {
@@ -83,16 +96,26 @@ Page {
         }
     }
 
+    function init() {
+        if (kinoAPI.areaSelectedEarlier()) {
+            holder = false
+            kinoAPI.init();
+        } else {
+            holder = true
+        }
+    }
+
     Connections {
         target: kinoAPI
         onReady: {
-            inSelectedTheatre.setModel(kinoAPI.inTheatres, "In Selected Theatre")
-            inTheatres.setModel(kinoAPI.inTheatres, "Now in Theatres")
-            comingSoon.setModel(kinoAPI.comingSoon, "Coming Soon")
+            inSelectedTheatre.setModel(kinoAPI.inTheatres, "Valitussa teatterissa")
+            inTheatres.setModel(kinoAPI.inTheatres, "Nyt teattereissa")
+            comingSoon.setModel(kinoAPI.comingSoon, "Tulossa pian")
             infoText()
         }
         onLoading: {
             if(yesno) {
+                holder = false
                 loading = true;
             } else {
                 loading = false;

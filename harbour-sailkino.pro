@@ -32,7 +32,8 @@ OTHER_FILES += \
     rpm/harbour-sailkino.yaml \
     qml/pages/Events.qml \
     qml/pages/EventsPage.qml \
-    qml/pages/SingleEvent.qml
+    qml/pages/SingleEvent.qml \
+    qml/pages/SelectArea.qml
 
 HEADERS += \
     src/httpEngine.h \
