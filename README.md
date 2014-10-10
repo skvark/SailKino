@@ -7,6 +7,9 @@ TODO:
 
 - date selection
 - language selection
+- settings view?
+- filter/search function
+- links to imdb/rotten tomatoes and points? 
 - icon and other images for Harbour
 - about page
 - ???
