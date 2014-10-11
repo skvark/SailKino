@@ -5,6 +5,7 @@ kinoAPI::kinoAPI(QObject *parent):
 {
     parser_ = new Parser();
     settings_ = new SettingsManager();
+    date_ = QDate::currentDate();
     QObject::connect(parser_, SIGNAL(initData()),
                      this, SLOT(eventsReady()));
     QObject::connect(parser_, SIGNAL(scheduleData()),
@@ -49,7 +50,7 @@ EventsModel *kinoAPI::comingSoon() const
 
 void kinoAPI::eventsReady()
 {
-    parser_->getSchedules(getArea());
+    parser_->getSchedules(getArea(), date_);
 }
 
 Event* kinoAPI::getEvent() const
@@ -61,6 +62,18 @@ Event* kinoAPI::getEvent() const
 QString kinoAPI::getArea()
 {
     return settings_->loadSettings();
+}
+
+void kinoAPI::setDate(QDate date)
+{
+    date_ = date;
+    emit schedulesLoading(true);
+    eventsReady();
+}
+
+QDate kinoAPI::getDate()
+{
+    return date_;
 }
 
 QString kinoAPI::getAreaName()
@@ -90,6 +103,7 @@ void kinoAPI::clearModels() {
 
 void kinoAPI::schedulesReady() {
     emit loading(false);
+    emit schedulesLoading(false);
     emit ready();
 }
 

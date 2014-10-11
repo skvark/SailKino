@@ -12,6 +12,7 @@
 #include <event.h>
 #include <eventsmodel.h>
 #include <QXmlStreamReader>
+#include <QDate>
 
 class Parser : public QObject
 {
@@ -23,7 +24,7 @@ public:
 
     void addNewModel(HTTPEngine::EventModelType, EventsModel *model);
     void parseEvents(QString area);
-    void getSchedules(QString area);
+    void getSchedules(QString area, QDate date);
     EventsModel *getModel(HTTPEngine::EventModelType);
     void parseEvent(QXmlStreamReader &xml, HTTPEngine::EventModelType);
     void parseArea(QXmlStreamReader &xml);

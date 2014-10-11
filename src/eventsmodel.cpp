@@ -52,6 +52,13 @@ Event *EventsModel::getEvent(QString id)
     return NULL;
 }
 
+void EventsModel::clearSchedules()
+{
+    foreach(Event* event, events_) {
+        event->getModel()->clear();
+    }
+}
+
 QVariant EventsModel::data(const QModelIndex & index, int role) const {
 
     if (index.row() < 0 || index.row() > events_.count())

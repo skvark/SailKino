@@ -22,20 +22,28 @@ public:
     ~kinoAPI();
 
     Q_INVOKABLE void init();
+
+    Event* getEvent() const;
     Q_INVOKABLE void setID(QString id);
+
     EventsModel *inTheatres() const;
     EventsModel *comingSoon() const;
-    Event* getEvent() const;
+
+    Q_INVOKABLE void setDate(QDate date);
+    Q_INVOKABLE QDate getDate();
+
     QString getArea();
     Q_INVOKABLE QString getAreaName();
     Q_INVOKABLE void saveArea(QString area);
     Q_INVOKABLE QVariant getAreas();
     Q_INVOKABLE bool areaSelectedEarlier();
+
     Q_INVOKABLE void clearModels();
 
 signals:
     void ready();
     void loading(bool yesno);
+    void schedulesLoading(bool yesno);
     void areas();
     void placeholder();
 
@@ -49,6 +57,7 @@ private:
     EventsModel* model_;
     QString id_;
     SettingsManager* settings_;
+    QDate date_;
     bool areaSelectedEarlier_;
 };
 

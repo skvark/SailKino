@@ -102,9 +102,15 @@ void Parser::parseAreas(const QByteArray &data)
     emit areaData();
 }
 
-void Parser::getSchedules(QString area) {
+void Parser::getSchedules(QString area, QDate date) {
+
+    foreach(EventsModel* model, models_) {
+        model->clearSchedules();
+    }
+
     QList<QPair<QString, QString> > list;
     list.append(qMakePair(QString("area"), area));
+    list.append(qMakePair(QString("dt"), date.toString("dd.MM.yyyy")));
     httpEngine_->getSchedule(list);
 }
 

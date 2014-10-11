@@ -24,6 +24,28 @@ Page {
         anchors.fill: parent
         contentHeight: column.height + listview.height + column2.height + 20
 
+        PullDownMenu {
+            id: menu
+
+            MenuItem {
+                text: "Change Date"
+
+                onClicked: {
+                    var dialog = pageStack.push(pickerComponent, {
+                        date: kinoAPI.getDate()
+                    })
+                    dialog.accepted.connect(function() {
+                        kinoAPI.setDate(dialog.date);
+                    })
+                }
+
+                Component {
+                    id: pickerComponent
+                    DatePickerDialog {}
+                }
+            }
+        }
+
         Column {
             id: column
             anchors.left: parent.left
@@ -48,6 +70,15 @@ Page {
                            }
                        }
                fillMode: Image.PreserveAspectFit
+
+               BackgroundItem {
+                   id: video
+                   anchors.fill: parent
+                   onClicked: {
+                       onClicked: pageStack.push(Qt.resolvedUrl("TrailerPlayer.qml"), { videourl: event.getTrailer() })
+                   }
+               }
+
             }
 
             Label {
@@ -85,6 +116,7 @@ Page {
             id: listview
             model: event.getModel;
             width: parent.width
+            interactive: false;
             anchors.top: column.bottom
             anchors.leftMargin: Theme.paddingLarge
             anchors.topMargin: Theme.paddingSmall
@@ -101,9 +133,15 @@ Page {
                 id: pholder
                 height: 60
                 anchors.top: parent.top
-                enabled: listview.count == 0
+                enabled: listview.count == 0 && !loading
                 text: qsTr("Ei näytöksiä.")
                 scale: 0.5
+            }
+
+            BusyIndicator {
+                anchors.centerIn: parent
+                size: BusyIndicatorSize.Small
+                running: loading
             }
 
             delegate: ListItem {
@@ -169,5 +207,18 @@ Page {
             }
         }
         VerticalScrollDecorator { flickable: info }
+    }
+
+    property bool loading: false;
+
+    Connections {
+        target: kinoAPI
+        onSchedulesLoading: {
+            if(yesno) {
+                loading = true;
+            } else {
+                loading = false;
+            }
+        }
     }
 }

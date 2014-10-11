@@ -25,6 +25,7 @@ class EventsModel : public QAbstractListModel
      QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
      void clear();
      Event *getEvent(QString id);
+     void clearSchedules();
 
 public slots:
 
