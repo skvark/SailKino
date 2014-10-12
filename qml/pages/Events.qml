@@ -27,7 +27,10 @@ Item {
         PullDownMenu {
             id: menu
             MenuItem {
-                text: "About"
+                text: "Search"
+                onClicked: {
+                    pageStack.push("SearchPage.qml");
+                }
             }
             MenuItem {
                 text: "Area"

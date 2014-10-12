@@ -59,6 +59,27 @@ void EventsModel::clearSchedules()
     }
 }
 
+int EventsModel::count()
+{
+    return events_.size();
+}
+
+QVariantMap EventsModel::get(int row) {
+
+    QHash<int,QByteArray> names = roleNames();
+    QHashIterator<int, QByteArray> i(names);
+    QVariantMap res;
+
+    while (i.hasNext()) {
+        i.next();
+        QModelIndex idx = index(row, 0);
+        QVariant data = idx.data(i.key());
+        res[i.value()] = data;
+    }
+    return res;
+
+}
+
 QVariant EventsModel::data(const QModelIndex & index, int role) const {
 
     if (index.row() < 0 || index.row() > events_.count())

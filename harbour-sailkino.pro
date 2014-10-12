@@ -34,7 +34,8 @@ OTHER_FILES += \
     qml/pages/EventsPage.qml \
     qml/pages/SingleEvent.qml \
     qml/pages/SelectArea.qml \
-    qml/pages/TrailerPlayer.qml
+    qml/pages/TrailerPlayer.qml \
+    qml/pages/SearchPage.qml
 
 HEADERS += \
     src/httpEngine.h \
