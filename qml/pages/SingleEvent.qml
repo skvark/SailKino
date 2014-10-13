@@ -6,16 +6,11 @@ import ShowIntegrate 1.0
 
 Page {
     id: openinghours
-    property string id
+    property string id;
+    property string currentdate: kinoAPI.getDate().toLocaleDateString();
     property var event: {
         kinoAPI.setID(id);
         return kinoAPI.getEvent;
-    }
-
-    function scaler() {
-        // this scales the header so that it fits :D
-        // does not work correctly, just a workaround
-        return 1.0 - (head.title.split(" ").length * 0.02 * head.title.length * 0.06)
     }
 
     SilicaFlickable {
@@ -36,6 +31,7 @@ Page {
                     })
                     dialog.accepted.connect(function() {
                         kinoAPI.setDate(dialog.date);
+                        currentdate = kinoAPI.getDate().toLocaleDateString();
                     })
                 }
 
@@ -48,14 +44,23 @@ Page {
 
         Column {
             id: column
-            anchors.left: parent.left
-            anchors.right: parent.right
 
             PageHeader {
                 id: head
-                title: event.getTitle() + " (" + event.getProductionYear() + ")"
-                wrapMode: Text.Wrap
-                scale: scaler()
+
+                Label {
+                    text: event.getTitle() + " (" + event.getProductionYear() + ")"
+                    wrapMode: Text.Wrap
+                    color: Theme.highlightColor
+                    anchors.leftMargin: 110
+                    anchors.topMargin: 15
+                    height: 80
+                    verticalAlignment: Text.AlignVCenter
+                    textFormat: Text.RichText;
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                }
             }
 
             Image {
@@ -79,6 +84,11 @@ Page {
                    }
                }
 
+               Image {
+                   anchors.fill: parent
+                   source: "../images/play.png"
+               }
+
             }
 
             Label {
@@ -94,6 +104,7 @@ Page {
             }
 
             Label {
+                id: agelabel
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingLarge
                 width: parent.width
@@ -107,6 +118,21 @@ Page {
                       qsTr(", Kesto: ") +
                       event.getLengthInMinutes() +
                       qsTr(" minuuttia")
+            }
+
+            Label {
+                id: showlistheader
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingLarge
+                anchors.topMargin: Theme.paddingLarge
+                height: 50
+                verticalAlignment: Text.AlignVCenter
+                width: parent.width
+                wrapMode: Text.Wrap
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                textFormat: Text.RichText;
+                text: currentdate
             }
 
         }

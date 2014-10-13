@@ -19,7 +19,7 @@ QString Show::getId()
 
 QString Show::getStart()
 {
-    return showStart_.toString("dd.MM.yy hh:mm");
+    return showStart_.toString("hh:mm");
 }
 
 QString Show::getEnd()
