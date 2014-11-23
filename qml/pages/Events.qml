@@ -6,9 +6,29 @@ Item {
     height: menuView.height;
     width: menuView.width
 
-    function setModel(model, title) {
-        listview.model = model
-        pgheader = title
+    function setModel(model, title, comingsoon) {
+        eventsModel.clear();
+        if(kinoAPI.getFilterState() === true && !comingsoon) {
+            filter(model);
+        } else {
+            listview.model = model;
+        }
+        pgheader = title;
+    }
+
+    function filter(model) {
+        for(var i = 0; i < model.count() ; ++i) {
+            kinoAPI.setID(model.get(i).id);
+            console.log(kinoAPI.getEvent.hasShows())
+            if(kinoAPI.getEvent.hasShows()) {
+                eventsModel.append(model.get(i));
+            }
+        }
+        listview.model = eventsModel;
+    }
+
+    ListModel {
+        id: eventsModel
     }
 
     property string pgheader: "";
@@ -26,18 +46,39 @@ Item {
 
         PullDownMenu {
             id: menu
+
+            MenuItem {
+                text: "Settings"
+                onClicked: {
+                    pageStack.push("Settings.qml");
+                }
+            }
+
             MenuItem {
                 text: "Search"
                 onClicked: {
                     pageStack.push("SearchPage.qml");
                 }
             }
+
             MenuItem {
-                text: "Area"
+                text: "Change Date"
+
                 onClicked: {
-                    pageStack.push("SelectArea.qml");
+                    var dialog = pageStack.push(pickerComponent, {
+                        date: kinoAPI.getDate()
+                    })
+                    dialog.accepted.connect(function() {
+                        kinoAPI.setDate(dialog.date);
+                    })
+                }
+
+                Component {
+                    id: pickerComponent
+                    DatePickerDialog {}
                 }
             }
+
         }
 
         anchors.fill: parent

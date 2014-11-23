@@ -13,6 +13,7 @@
 #include <eventsmodel.h>
 #include <QXmlStreamReader>
 #include <QDate>
+#include <settings.h>
 
 class Parser : public QObject
 {
@@ -32,26 +33,34 @@ public:
     Event *getEvent(QString id);
     void parseSoonEvents();
     void getAreas();
+    void getLanguages();
     QString getAreaName(QString id);
     QString getAreaID(QString area);
     QStringList getAreasList();
+    void setLocation(SettingsManager::Country country);
     void clear();
+    void setLanguage(QString lang);
+    QString convertLangToISOCode(QString lang);
 
 signals:
     void initData();
     void scheduleData();
     void areaData();
+    void languageData(QVariant);
 
 public slots:
     void parseInitData(const QByteArray &data, HTTPEngine::EventModelType type);
     void parseSchedules(const QByteArray &data);
     void parseAreas(const QByteArray &data);
+    void parseLanguages(const QByteArray &data);
 
 private:
     HTTPEngine *httpEngine_;
     QMap<HTTPEngine::EventModelType, EventsModel*> models_;
     QMap<QString, QString> areas_;
+    QMap<QString, QString> languages_;
     void parseShow(QXmlStreamReader &xml);
+    void parseLanguage(QXmlStreamReader &xml);
 };
 
 #endif // FOODPARSER_H

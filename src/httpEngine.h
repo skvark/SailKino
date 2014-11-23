@@ -8,6 +8,14 @@
 #include <QUrlQuery>
 #include <QHash>
 #include <QPair>
+#include <settings.h>
+
+namespace {
+    const QString baseUrlFI = "http://www.finnkino.fi";
+    const QString baseUrlEE = "http://www.forumcinemas.ee";
+    const QString baseUrlLV = "http://www.forumcinemas.lv";
+    const QString baseUrlLT = "http://www.forumcinemas.lt";
+}
 
 class HTTPEngine : public QObject
 {
@@ -36,8 +44,10 @@ public:
     void getEvents(queryItemList &queryItems, EventModelType type);
     void getSchedule(queryItemList &queryItems);
     void getScheduleDates(queryItemList &queryItems);
-    void getLanguages(queryItemList &queryItems);
+    void getLanguages();
     void getAreas();
+    void setLocation(SettingsManager::Country country);
+    void setLanguage(QString language);
 
 private:
     void eventsRequest(QNetworkReply *finished, EventModelType type);
@@ -63,6 +73,8 @@ public slots:
 private:
     QNetworkAccessManager nam_;
     QHash<QNetworkReply*, QPair<GetMethod, EventModelType> > hash_;
+    QString baseUrl_;
+    QString lang_;
 };
 
 #endif // HTTPENGINE_H

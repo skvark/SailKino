@@ -1,8 +1,6 @@
 #include "httpengine.h"
 #include <QDebug>
 
-const QString baseUrl = "http://www.finnkino.fi/xml";
-
 HTTPEngine::HTTPEngine(QObject *parent) :
     QObject(parent)
 {
@@ -14,32 +12,61 @@ HTTPEngine::HTTPEngine(QObject *parent) :
 void HTTPEngine::getEvents(HTTPEngine::queryItemList &queryItems,
                            EventModelType type)
 {
-    QUrl api_url(baseUrl + "/Events/?" + generateUrl(queryItems));
+    QUrl api_url(baseUrl_ + lang_ + "/xml/Events/?" + generateUrl(queryItems));
     GET(api_url, events, type);
 }
 
 void HTTPEngine::getSchedule(HTTPEngine::queryItemList &queryItems)
 {
-    QUrl api_url(baseUrl + "/Schedule/?" + generateUrl(queryItems));
+    QUrl api_url(baseUrl_ + lang_ + "/xml/Schedule/?" + generateUrl(queryItems));
     GET(api_url, schedule, InTheatres);
 }
 
 void HTTPEngine::getScheduleDates(HTTPEngine::queryItemList &queryItems)
 {
-    QUrl api_url(baseUrl + "/ScheduleDates/?" + generateUrl(queryItems));
+    QUrl api_url(baseUrl_ + lang_ + "/xml/ScheduleDates/?" + generateUrl(queryItems));
     GET(api_url, scheduledates, InTheatres);
 }
 
-void HTTPEngine::getLanguages(HTTPEngine::queryItemList &queryItems)
+void HTTPEngine::getLanguages()
 {
-    QUrl api_url(baseUrl + "/Languages/?" + generateUrl(queryItems));
+    qDebug() << baseUrl_ + lang_ + "/xml/Languages/";
+    QUrl api_url(baseUrl_ + lang_ + "/xml/Languages/");
     GET(api_url, languages, InTheatres);
 }
 
 void HTTPEngine::getAreas()
 {
-    QUrl api_url(baseUrl + "/TheatreAreas/");
+    qDebug() << baseUrl_ + lang_ + "/xml/TheatreAreas/";
+    QUrl api_url(baseUrl_ + lang_ + "/xml/TheatreAreas/");
     GET(api_url, areas, InTheatres);
+}
+
+void HTTPEngine::setLanguage(QString language)
+{
+    lang_ = language;
+}
+
+void HTTPEngine::setLocation(SettingsManager::Country code)
+{
+    switch(code)
+    {
+    case SettingsManager::Country::FI:
+        baseUrl_ = baseUrlFI;
+        break;
+    case SettingsManager::Country::EE:
+        baseUrl_ = baseUrlEE;
+        break;
+    case SettingsManager::Country::LV:
+        baseUrl_ = baseUrlLV;
+        break;
+    case SettingsManager::Country::LT:
+        baseUrl_ = baseUrlLT;
+        break;
+    default:
+        baseUrl_ = baseUrlFI;
+        break;
+    }
 }
 
 QString HTTPEngine::generateUrl(HTTPEngine::queryItemList &queryItems)

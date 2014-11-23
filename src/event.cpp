@@ -93,6 +93,15 @@ QString Event::getLengthInMinutes()
     return lengthInMinutes_;
 }
 
+bool Event::hasShows()
+{
+    if(schedule_->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void Event::addSchedule(QMap<QString, QString> data)
 {
     schedule_->addShow(new Show(data));

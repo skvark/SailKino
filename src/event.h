@@ -40,6 +40,7 @@ public:
     Q_INVOKABLE QString getRating();
     Q_INVOKABLE QString getProductionYear();
     Q_INVOKABLE QString getLengthInMinutes();
+    Q_INVOKABLE bool hasShows();
     void addSchedule(QMap<QString, QString> data);
     ShowTimeModel* getModel() const;
 

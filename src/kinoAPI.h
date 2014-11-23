@@ -38,7 +38,18 @@ public:
     Q_INVOKABLE QVariant getAreas();
     Q_INVOKABLE bool areaSelectedEarlier();
 
+    Q_INVOKABLE QVariant getLocations();
+    Q_INVOKABLE void saveLocation(QString loc);
+    Q_INVOKABLE void saveLanguage(QString lang);
+
     Q_INVOKABLE void clearModels();
+    Q_INVOKABLE void resetLanguage();
+
+    Q_INVOKABLE QString getCountryName();
+    Q_INVOKABLE QString getLanguageName();
+
+    Q_INVOKABLE void setFilterState(bool state);
+    Q_INVOKABLE bool getFilterState();
 
 signals:
     void ready();
@@ -46,11 +57,14 @@ signals:
     void schedulesLoading(bool yesno);
     void areas();
     void placeholder();
+    void languagesLoading();
+    void languagesReady(QVariant langs);
 
 public slots:
     void eventsReady();
     void schedulesReady();
     void areasParsed();
+    void getLanguages();
 
 private:
     Parser* parser_;

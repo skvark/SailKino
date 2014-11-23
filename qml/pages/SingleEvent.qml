@@ -113,11 +113,20 @@ Page {
                 color: Theme.primaryColor
                 textFormat: Text.RichText;
                 onLinkActivated: Qt.openUrlExternally(link)
-                text: qsTr("Ikäraja: ") +
-                      event.getRating() +
-                      qsTr(", Kesto: ") +
-                      event.getLengthInMinutes() +
-                      qsTr(" minuuttia")
+                text: qsTr("Age limit: ") + event.getRating()
+            }
+
+            Label {
+                id: lengthlabel
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingLarge
+                width: parent.width
+                wrapMode: Text.Wrap
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                textFormat: Text.RichText;
+                onLinkActivated: Qt.openUrlExternally(link)
+                text: qsTr("Length (min): ") + event.getLengthInMinutes()
             }
 
             Label {

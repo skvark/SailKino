@@ -11,6 +11,8 @@ Parser::Parser(QObject *parent):
                      this, SLOT(parseSchedules(const QByteArray&)));
     QObject::connect(httpEngine_, SIGNAL(areasReady(const QByteArray&)),
                      this, SLOT(parseAreas(const QByteArray&)));
+    QObject::connect(httpEngine_, SIGNAL(languagesReady(const QByteArray&)),
+                     this, SLOT(parseLanguages(const QByteArray&)));
 }
 
 void Parser::addNewModel(HTTPEngine::EventModelType type, EventsModel* model)
@@ -24,7 +26,13 @@ Parser::~Parser()
 
 void Parser::getAreas()
 {
+    areas_.clear();
     httpEngine_->getAreas();
+}
+
+void Parser::getLanguages()
+{
+    httpEngine_->getLanguages();
 }
 
 QStringList Parser::getAreasList()
@@ -34,7 +42,25 @@ QStringList Parser::getAreasList()
         if(area != "Valitse alue/teatteri")
             areas.append(area);
     }
+    qDebug() << areas;
     return areas;
+}
+
+void Parser::setLocation(SettingsManager::Country country)
+{
+    httpEngine_->setLocation(country);
+}
+
+void Parser::setLanguage(QString lang)
+{
+    qDebug() << lang;
+    httpEngine_->setLanguage(lang);
+}
+
+QString Parser::convertLangToISOCode(QString lang)
+{
+    qDebug() << languages_.key(lang);
+    return languages_.key(lang);
 }
 
 void Parser::clear()
@@ -100,6 +126,66 @@ void Parser::parseAreas(const QByteArray &data)
     }
     xml.clear();
     emit areaData();
+}
+
+void Parser::parseLanguages(const QByteArray &data)
+{
+    QXmlStreamReader xml;
+    xml.addData(data);
+    languages_.clear();
+
+    while(!xml.atEnd() && !xml.hasError()) {
+        QXmlStreamReader::TokenType token = xml.readNext();
+
+        if(token == QXmlStreamReader::StartDocument) {
+            continue;
+        }
+
+        if(token == QXmlStreamReader::StartElement) {
+
+            if(xml.name() == "Languages") {
+                continue;
+            }
+
+            if(xml.name() == "Language") {
+                parseLanguage(xml);
+            }
+        }
+    }
+
+    if(xml.hasError()) {
+        qDebug() << "asdasdasd";
+    }
+    xml.clear();
+
+    QStringList langs;
+    foreach(QString value, languages_.values()) {
+        langs.append(value);
+    }
+    emit languageData(QVariant::fromValue(langs));
+}
+
+void Parser::parseLanguage(QXmlStreamReader &xml)
+{
+    QString isocode;
+    QString name;
+    xml.readNext();
+
+    while(!(xml.tokenType() == QXmlStreamReader::EndElement &&
+            xml.name() == "Language")) {
+
+        if(xml.tokenType() == QXmlStreamReader::StartElement) {
+
+            if(xml.name() == "ISOCode") {
+                isocode = parseElement(xml);
+            }
+            if(xml.name() == "Name") {
+                name = parseElement(xml);
+            }
+        }
+        xml.readNext();
+    }
+    languages_.insert(isocode, name);
 }
 
 void Parser::getSchedules(QString area, QDate date) {
@@ -208,7 +294,7 @@ void Parser::parseArea(QXmlStreamReader &xml)
         }
         xml.readNext();
     }
-
+    qDebug() << name;
     areas_.insert(id, name);
 }
 

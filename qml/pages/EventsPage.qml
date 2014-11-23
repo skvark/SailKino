@@ -19,7 +19,7 @@ Page {
         ViewPlaceholder {
             id: pholder
             enabled: loading == false && holder == true
-            text: qsTr("Et ole asettanut vielä sijaintiasi. Valitse sijainti vetovalikosta.")
+            text: qsTr("Please select country, language and area in the settings to see events.")
         }
     }
 
@@ -30,7 +30,6 @@ Page {
         itemHeight: height
         height: window.height
         clip: true
-        onCurrentIndexChanged: infoText()
 
         anchors {
             top: parent.top;
@@ -41,60 +40,79 @@ Page {
         model: VisualItemModel {
                 id: movieViews
                 Events { id: inSelectedTheatre }
-                Events { id: inTheatres }
                 Events { id: comingSoon }
         }
     }
-    /*
+
     DockedPanel {
 
         id: panel
-        open: true
+        open: false
         width: parent.width
         height: Theme.itemSizeExtraSmall
         dock: Dock.Bottom
 
-        Rectangle {
-            anchors.fill: background
-            color: Theme.rgba(Theme.highlightBackgroundColor, 0.7)
+        BackgroundItem {
+            id: background1
+            anchors.left: parent.left;
+            width: parent.width / 2
+            height: parent.height
+            onClicked:  {
+                console.log()
+                if (menuView.currentIndex !== 0) {
+                    menuView.decrementCurrentIndex()
+                }
+            }
+
         }
 
-        BackgroundItem {
-            id: background
-            height: parent.height
-            width: parent.width
+        Rectangle {
+            anchors.fill: background1
+            color: Theme.rgba(0, 0, 0, 1)
         }
 
         Label {
-            id: bottomLabel
-            width: parent.width
+            id: bottomLabelLeft
+            anchors.fill: background1
+            textFormat: Text.RichText;
+            font.pixelSize: 20
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+
+        }
+
+        BackgroundItem {
+            id: background2
+            anchors.right: parent.right;
+            width: parent.width / 2
             height: parent.height
-            text: info
+            onClicked:  {
+                if (menuView.currentIndex !== 1) {
+                    menuView.incrementCurrentIndex()
+                }
+            }
+        }
+
+        Rectangle {
+            anchors.fill: background2
+            color: Theme.rgba(0, 0, 0, 1)
+        }
+
+        Label {
+            id: bottomLabelRight
+            anchors.fill: background2
+            textFormat: Text.RichText;
+            text: "Coming Soon"
             font.pixelSize: Theme.fontSizeSmall
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
         }
 
-        BusyIndicator {
-            anchors.centerIn: parent
-            running: loading
-            size: BusyIndicatorSize.Small
-        }
-
     }
-    */
-    property var date: new Date();
+
     property bool loading: false;
     property bool holder: false;
     property string info;
-
-    function infoText() {
-        if (menuView.currentItem !== null) {
-            info = menuView.currentItem.pgheader + " - " + date.toLocaleDateString()
-        } else {
-            info = ""
-        }
-    }
 
     function init() {
         if (kinoAPI.areaSelectedEarlier()) {
@@ -108,10 +126,10 @@ Page {
     Connections {
         target: kinoAPI
         onReady: {
-            inSelectedTheatre.setModel(kinoAPI.inTheatres, "Valitussa teatterissa")
-            inTheatres.setModel(kinoAPI.inTheatres, "Nyt teattereissa")
-            comingSoon.setModel(kinoAPI.comingSoon, "Tulossa pian")
-            infoText()
+            inSelectedTheatre.setModel(kinoAPI.inTheatres, kinoAPI.getAreaName(), false)
+            comingSoon.setModel(kinoAPI.comingSoon, "Coming soon", true)
+            bottomLabelLeft.text = kinoAPI.getAreaName() + "<br />" + kinoAPI.getDate().toLocaleDateString();
+            panel.open = true;
         }
         onLoading: {
             if(yesno) {
