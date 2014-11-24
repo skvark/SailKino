@@ -30,14 +30,12 @@ void HTTPEngine::getScheduleDates(HTTPEngine::queryItemList &queryItems)
 
 void HTTPEngine::getLanguages()
 {
-    qDebug() << baseUrl_ + lang_ + "/xml/Languages/";
     QUrl api_url(baseUrl_ + lang_ + "/xml/Languages/");
     GET(api_url, languages, InTheatres);
 }
 
 void HTTPEngine::getAreas()
 {
-    qDebug() << baseUrl_ + lang_ + "/xml/TheatreAreas/";
     QUrl api_url(baseUrl_ + lang_ + "/xml/TheatreAreas/");
     GET(api_url, areas, InTheatres);
 }

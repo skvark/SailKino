@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import CPPIntegrate 1.0
+import harbour.sailkino.eventsmodel 1.0
 
 Page {
 
@@ -19,9 +19,13 @@ Page {
         }
     }
 
-    Component.onDestruction: {
-        kinoAPI.clearModels();
-        kinoAPI.init();
+    onStatusChanged: {
+        if (status === PageStatus.Deactivating) {
+            if (_navigation === PageNavigation.Back) {
+                kinoAPI.clearModels();
+                kinoAPI.init();
+            }
+        }
     }
 
     BusyIndicator {
@@ -75,7 +79,7 @@ Page {
             id: filterSwitch
             anchors.top: generalsection.bottom
             text: "Filter events"
-            description: "Filters events without show for selected date."
+            description: "Filters events which have no shows for selected date."
             automaticCheck: true
             checked: kinoAPI.getFilterState();
             onCheckedChanged: {
@@ -95,7 +99,7 @@ Page {
                 anchors.right: areasection.right
                 anchors.top: areasection.bottom
                 textFormat: Text.RichText
-                text: "Country can be selected via pulley menu."
+                text: "Country can be selected via the pulley menu."
                 color: Theme.secondaryColor
             }
 
@@ -104,13 +108,15 @@ Page {
         SilicaListView {
 
             id: listView
-            height: 540
+            height: 450
             width: page.width;
             anchors.top: areasection.bottom
             anchors.leftMargin: Theme.paddingMedium
             anchors.topMargin: 110
+            currentIndex: -1;
 
             ViewPlaceholder {
+                verticalOffset: -300
                 id: pholder
                 enabled: loading === false && holder === true
                 text: qsTr("You haven't selected country and language yet. Please select them via the pulley menu.")
@@ -163,6 +169,7 @@ Page {
             loading = false;
             holder = false;
             listView.model = kinoAPI.getAreas();
+            listView.currentIndex = listView.model.indexOf(kinoAPI.getAreaName());
         }
     }
 }

@@ -56,6 +56,7 @@ signals:
     void loading(bool yesno);
     void schedulesLoading(bool yesno);
     void areas();
+    void clear();
     void placeholder();
     void languagesLoading();
     void languagesReady(QVariant langs);

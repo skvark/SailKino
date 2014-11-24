@@ -13,13 +13,15 @@ Item {
         } else {
             listview.model = model;
         }
+        if(!comingsoon) {
+            dt = kinoAPI.getDate().toLocaleDateString();
+        }
         pgheader = title;
     }
 
     function filter(model) {
         for(var i = 0; i < model.count() ; ++i) {
             kinoAPI.setID(model.get(i).id);
-            console.log(kinoAPI.getEvent.hasShows())
             if(kinoAPI.getEvent.hasShows()) {
                 eventsModel.append(model.get(i));
             }
@@ -32,17 +34,26 @@ Item {
     }
 
     property string pgheader: "";
+    property string dt: "";
 
     SilicaListView {
 
         id: listview
 
         header: Component {
+
             PageHeader {
                 title: pgheader
+                height: 140
+
+                SectionHeader {
+                    id: section
+                    text: dt
+                    anchors.top: parent.top
+                    anchors.topMargin: 60
+                }
             }
         }
-
 
         PullDownMenu {
             id: menu
@@ -50,6 +61,7 @@ Item {
             MenuItem {
                 text: "Settings"
                 onClicked: {
+                    pgheader = "";
                     pageStack.push("Settings.qml");
                 }
             }
@@ -122,16 +134,29 @@ Item {
 
                         Label {
                             id: header
-                            height: parent.height
+                            height: 110
                             width: parent.width
                             anchors.left: parent.left;
                             anchors.right: parent.right;
                             textFormat: Text.RichText
                             text: title
                             anchors.leftMargin: 15
-                            font.pixelSize: Theme.fontSizeMedium
+                            font.pixelSize: 36
                             wrapMode: Text.WordWrap
                             verticalAlignment: Text.AlignVCenter
+                        }
+                        Label {
+                            id: genres
+                            height: 20
+                            width: parent.width
+                            anchors.left: parent.left;
+                            anchors.right: parent.right;
+                            textFormat: Text.RichText
+                            text: genre
+                            anchors.leftMargin: 15
+                            font.pixelSize: 25
+                            color: Theme.rgba(Theme.secondaryColor, 0.5)
+                            wrapMode: Text.WordWrap
                         }
 
                     }
@@ -172,7 +197,7 @@ Item {
 
                     Label {
                         id: moviecontent
-                        anchors.topMargin: 20
+                        anchors.topMargin: 24
                         anchors.left: parent.left;
                         anchors.right: parent.right;
                         anchors.leftMargin: 15
@@ -190,6 +215,15 @@ Item {
         contentWidth: page.width
 
         VerticalScrollDecorator { flickable: listview }
+    }
+
+    Connections {
+        target: kinoAPI
+        onClear: {
+            if(listview.model !== undefined) {
+                listview.model.clear();
+            }
+        }
     }
 }
 

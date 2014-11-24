@@ -36,7 +36,8 @@ OTHER_FILES += \
     qml/pages/TrailerPlayer.qml \
     qml/pages/SearchPage.qml \
     qml/pages/SelectLocationLanguage.qml \
-    qml/pages/Settings.qml
+    qml/pages/Settings.qml \
+    qml/pages/About.qml
 
 HEADERS += \
     src/httpEngine.h \

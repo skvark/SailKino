@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import CPPIntegrate 1.0
+import harbour.sailkino.eventsmodel 1.0
 
 Dialog {
 
@@ -20,7 +20,15 @@ Dialog {
         old_country = kinoAPI.getCountryName();
         old_lang = kinoAPI.getLanguageName();
         kinoAPI.resetLanguage();
-        current_country = combocontent.model.modelData;
+        for(var i = 0; i < kinoAPI.getLocations().length; ++i) {
+            if(old_country === kinoAPI.getLocations()[i]) {
+                combo.currentIndex = i;
+                kinoAPI.resetLanguage();
+                kinoAPI.saveLocation(old_country);
+                break;
+            }
+        }
+        listView.currentIndex = -1;
     }
 
     SilicaFlickable {
@@ -57,6 +65,7 @@ Dialog {
                                 current_country = modelData;
                                 kinoAPI.resetLanguage();
                                 kinoAPI.saveLocation(current_country);
+                                listView.currentIndex = -1;
                             }
                         }
                     }

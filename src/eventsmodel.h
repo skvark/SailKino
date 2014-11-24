@@ -16,14 +16,15 @@ class EventsModel : public QAbstractListModel
          TitleRole,
          IDRole,
          ShortSynopsisRole,
-         SmallImagePortraitRole
+         SmallImagePortraitRole,
+         GenreRole
      };
 
      EventsModel(QObject *parent = 0);
      void addEvent(Event* event);
      int rowCount(const QModelIndex & parent = QModelIndex()) const;
      QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-     void clear();
+     Q_INVOKABLE void clear();
      Event *getEvent(QString id);
      void clearSchedules();
      Q_INVOKABLE int count();

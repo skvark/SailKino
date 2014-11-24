@@ -82,6 +82,7 @@ QString SettingsManager::loadLanguage()
     return settings_->value("language").toString();
 }
 
+
 void SettingsManager::saveFilter(bool state)
 {
     QVariant data;

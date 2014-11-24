@@ -42,7 +42,6 @@ QStringList Parser::getAreasList()
         if(area != "Valitse alue/teatteri")
             areas.append(area);
     }
-    qDebug() << areas;
     return areas;
 }
 
@@ -53,13 +52,11 @@ void Parser::setLocation(SettingsManager::Country country)
 
 void Parser::setLanguage(QString lang)
 {
-    qDebug() << lang;
     httpEngine_->setLanguage(lang);
 }
 
 QString Parser::convertLangToISOCode(QString lang)
 {
-    qDebug() << languages_.key(lang);
     return languages_.key(lang);
 }
 
@@ -122,8 +119,8 @@ void Parser::parseAreas(const QByteArray &data)
     }
 
     if(xml.hasError()) {
-        qDebug() << "asdasdasd";
     }
+
     xml.clear();
     emit areaData();
 }
@@ -154,8 +151,8 @@ void Parser::parseLanguages(const QByteArray &data)
     }
 
     if(xml.hasError()) {
-        qDebug() << "asdasdasd";
     }
+
     xml.clear();
 
     QStringList langs;
@@ -294,7 +291,6 @@ void Parser::parseArea(QXmlStreamReader &xml)
         }
         xml.readNext();
     }
-    qDebug() << name;
     areas_.insert(id, name);
 }
 
@@ -348,8 +344,8 @@ void Parser::parseInitData(const QByteArray &data, HTTPEngine::EventModelType ty
     }
 
     if(xml.hasError()) {
-        qDebug() << "asdasdasd";
     }
+
     xml.clear();
     if(type == HTTPEngine::EventModelType::ComingSoon) {
         emit initData();
@@ -388,8 +384,8 @@ void Parser::parseSchedules(const QByteArray &data)
     }
 
     if(xml.hasError()) {
-        qDebug() << "kissat koiria";
     }
+
     xml.clear();
     emit scheduleData();
 }

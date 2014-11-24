@@ -1,8 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import sailkino.events 1.0
+import harbour.sailkino.events 1.0
 import QtMultimedia 5.0
-import ShowIntegrate 1.0
+import harbour.sailkino.showtimemodel 1.0
 
 Page {
     id: openinghours
@@ -126,7 +126,7 @@ Page {
                 color: Theme.primaryColor
                 textFormat: Text.RichText;
                 onLinkActivated: Qt.openUrlExternally(link)
-                text: qsTr("Length (min): ") + event.getLengthInMinutes()
+                text: qsTr("Length: ") + event.getLengthInMinutes() + " min"
             }
 
             Label {
@@ -169,7 +169,7 @@ Page {
                 height: 60
                 anchors.top: parent.top
                 enabled: listview.count == 0 && !loading
-                text: qsTr("Ei näytöksiä.")
+                text: qsTr("No shows.")
                 scale: 0.5
             }
 

@@ -15,6 +15,7 @@ QHash<int, QByteArray> EventsModel::roleNames() const
     roles[IDRole] = "id";
     roles[ShortSynopsisRole] = "shortsynopsis";
     roles[SmallImagePortraitRole] = "smallimageportrait";
+    roles[GenreRole] = "genre";
     return roles;
 }
 
@@ -29,14 +30,13 @@ int EventsModel::rowCount(const QModelIndex & parent) const {
     return events_.size();
 }
 
-
 void EventsModel::clear()
 {
     beginResetModel();
     foreach(Event* event, events_) {
         event->getModel()->clear();
         delete event;
-        event = NULL;
+        event = nullptr;
     }
     events_.clear();
     endResetModel();
@@ -49,7 +49,7 @@ Event *EventsModel::getEvent(QString id)
             return event;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 void EventsModel::clearSchedules()
@@ -94,6 +94,8 @@ QVariant EventsModel::data(const QModelIndex & index, int role) const {
         return event->getShortSynopsis();
     else if(role == SmallImagePortraitRole)
         return event->smallImagePortrait();
+    else if(role == GenreRole)
+        return event->getGenres();
 
     return QVariant();
 }
