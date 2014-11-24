@@ -1,5 +1,5 @@
-#ifndef GETFOODDATA_H
-#define GETFOODDATA_H
+#ifndef KINOAPI_H
+#define KINOAPI_H
 
 #include <parser.h>
 #include <settings.h>
@@ -76,4 +76,4 @@ private:
     bool areaSelectedEarlier_;
 };
 
-#endif // GETFOODDATA_H
+#endif // KINOAPI_H

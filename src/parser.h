@@ -1,5 +1,5 @@
-#ifndef FOODPARSER_H
-#define FOODPARSER_H
+#ifndef PARSER_H
+#define PARSER_H
 
 #include <QString>
 #include <QList>
@@ -63,4 +63,4 @@ private:
     void parseLanguage(QXmlStreamReader &xml);
 };
 
-#endif // FOODPARSER_H
+#endif // PARSER_H
