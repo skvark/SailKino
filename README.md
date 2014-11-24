@@ -5,7 +5,6 @@ Finnkino client for Jolla. If you want to contribute, create a pull request.
 
 TODO:
 
-- pulley item in single event/events listing: settings (area selection [done], how many days forward to fetch shows for a event, language selection)
 - links to imdb/rotten tomatoes and points? 
 - about page (pulley item in setting view)
 
