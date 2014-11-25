@@ -53,4 +53,12 @@ Page {
         }
 
     }
+
+    Connections {
+        target: Qt.application
+        onActiveChanged:
+            if(!Qt.application.active) {
+                playVideo.pause();
+            }
+    }
 }

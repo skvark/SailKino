@@ -1,6 +1,6 @@
 Name: harbour-sailkino
 Summary: Finnkino movies.
-Version: 0.0
+Version: 0.1
 QMakeOptions:
 - VERSION='%{version}-%{release}'
 Release: 0
