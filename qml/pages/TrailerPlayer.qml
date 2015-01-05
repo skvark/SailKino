@@ -11,6 +11,16 @@ Page {
     Component.onCompleted: {
         playVideo.source = videourl;
         playVideo.play();
+        kinoAPI.setBlankingMode(true);
+    }
+
+    onStatusChanged: {
+        if (status === PageStatus.Deactivating) {
+            if (_navigation === PageNavigation.Back) {
+                playVideo.stop();
+                kinoAPI.setBlankingMode(false);
+            }
+        }
     }
 
     SilicaFlickable {
@@ -26,6 +36,13 @@ Page {
 
         MediaPlayer {
             id: playVideo
+
+            onStatusChanged: {
+                if (playVideo.status === MediaPlayer.EndOfMedia) {
+                    kinoAPI.setBlankingMode(false);
+                }
+            }
+
         }
 
         VideoOutput {
@@ -46,8 +63,10 @@ Page {
             onClicked: {
                 if(playVideo.playbackState === MediaPlayer.PlayingState) {
                     playVideo.pause()
+                    kinoAPI.setBlankingMode(false);
                 } else if (playVideo.playbackState === MediaPlayer.PausedState) {
                     playVideo.play()
+                    kinoAPI.setBlankingMode(true);
                 }
             }
         }
@@ -58,6 +77,7 @@ Page {
         target: Qt.application
         onActiveChanged:
             if(!Qt.application.active) {
+                kinoAPI.setBlankingMode(false);
                 playVideo.pause();
             }
     }

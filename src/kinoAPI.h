@@ -51,6 +51,8 @@ public:
     Q_INVOKABLE void setFilterState(bool state);
     Q_INVOKABLE bool getFilterState();
 
+    Q_INVOKABLE void setBlankingMode(bool state);
+
 signals:
     void ready();
     void loading(bool yesno);

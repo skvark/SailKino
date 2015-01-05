@@ -11,7 +11,7 @@
 TARGET = harbour-sailkino
 CONFIG += sailfishapp
 CONFIG += c++11
-QT += network
+QT += network dbus
 INCLUDEPATH += src/
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
