@@ -7,6 +7,7 @@ Page {
     id: videopage
     allowedOrientations: Orientation.All
     property string videourl;
+    property string videoerror: "";
 
     Component.onCompleted: {
         playVideo.source = videourl;
@@ -30,8 +31,8 @@ Page {
 
         ViewPlaceholder {
             id: pholder
-            enabled: videourl.length === 0
-            text: qsTr("There's no trailer available for this movie.")
+            enabled: videourl.length === 0 || videoerror !== ""
+            text: qsTr("There's no trailer available for this movie or the video stream type is not supported.\n\n" + videoerror)
         }
 
         MediaPlayer {
@@ -42,7 +43,10 @@ Page {
                     kinoAPI.setBlankingMode(false);
                 }
             }
-
+            onError: {
+                videoerror = playVideo.errorString;
+                playVideo.stop();
+            }
         }
 
         VideoOutput {

@@ -13,6 +13,8 @@ Parser::Parser(QObject *parent):
                      this, SLOT(parseAreas(const QByteArray&)));
     QObject::connect(httpEngine_, SIGNAL(languagesReady(const QByteArray&)),
                      this, SLOT(parseLanguages(const QByteArray&)));
+    QObject::connect(httpEngine_, SIGNAL(youtubeReady(QString, QString)),
+                     this, SLOT(trailerUrl(QString, QString)));
 }
 
 void Parser::addNewModel(HTTPEngine::EventModelType type, EventsModel* model)
@@ -162,6 +164,14 @@ void Parser::parseLanguages(const QByteArray &data)
     emit languageData(QVariant::fromValue(langs));
 }
 
+void Parser::trailerUrl(QString url, QString id)
+{
+    Event* event = getEvent(id);
+    if(event) {
+        event->setTrailerUrl(url);
+    }
+}
+
 void Parser::parseLanguage(QXmlStreamReader &xml)
 {
     QString isocode;
@@ -242,6 +252,9 @@ void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) 
             if(xml.name() == "Location") {
                 event.insert("Trailer", parseElement(xml));
             }
+            if(xml.name() == "MediaResourceFormat") {
+                event.insert("TrailerType", parseElement(xml));
+            }
             if(xml.name() == "Rating") {
                 event.insert("Rating", parseElement(xml));
             }
@@ -264,11 +277,15 @@ void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) 
                               event.value("SmallImagePortrait"),
                               event.value("LargeImageLandscape"),
                               event.value("Trailer"),
+                              event.value("TrailerType"),
                               event.value("Rating"),
                               event.value("ProductionYear"),
                               event.value("LengthInMinutes"));
 
     models_.value(type)->addEvent(_event);
+    QObject::connect(_event, SIGNAL(parseYoutube(QString, QString)),
+                     httpEngine_, SLOT(getYoutubeVideoInfo(QString, QString)));
+    _event->verifyTrailerUrl();
 }
 
 void Parser::parseArea(QXmlStreamReader &xml)

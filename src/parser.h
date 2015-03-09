@@ -53,6 +53,7 @@ public slots:
     void parseSchedules(const QByteArray &data);
     void parseAreas(const QByteArray &data);
     void parseLanguages(const QByteArray &data);
+    void trailerUrl(QString url, QString id);
 
 private:
     HTTPEngine *httpEngine_;

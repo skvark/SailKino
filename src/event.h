@@ -24,6 +24,7 @@ public:
           QString smallImagePortrait,
           QString largeImageLandscape,
           QString trailer,
+          QString trailerType,
           QString rating,
           QString productionYear,
           QString lengthInMinutes);
@@ -44,6 +45,12 @@ public:
     void addSchedule(QMap<QString, QString> data);
     ShowTimeModel* getModel() const;
 
+    void verifyTrailerUrl();
+    void setTrailerUrl(QString url);
+
+signals:
+    void parseYoutube(QString video_id, QString id);
+
 private:
     QString id_;
     QString title_;
@@ -54,6 +61,7 @@ private:
     QString smallImagePortrait_;
     QString largeImageLandscape_;
     QString trailer_;
+    QString trailerType_;
     QString rating_;
     QString productionYear_;
     QString lengthInMinutes_;

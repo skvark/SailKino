@@ -14,6 +14,7 @@ Event::Event(QString id,
              QString smallImagePortrait,
              QString largeImageLandscape,
              QString trailer,
+             QString trailerType,
              QString rating,
              QString productionYear,
              QString lengthInMinutes):
@@ -26,6 +27,7 @@ Event::Event(QString id,
     smallImagePortrait_(smallImagePortrait),
     largeImageLandscape_(largeImageLandscape),
     trailer_(trailer),
+    trailerType_(trailerType),
     rating_(rating),
     productionYear_(productionYear),
     lengthInMinutes_(lengthInMinutes)
@@ -73,6 +75,14 @@ QString Event::getLargeImageLandscape()
     return largeImageLandscape_;
 }
 
+void Event::verifyTrailerUrl() {
+    if (trailerType_ != "YouTubeVideo") {
+        return;
+    } else {
+        emit parseYoutube(trailer_, id_);
+    }
+}
+
 QString Event::getTrailer()
 {
     return trailer_;
@@ -110,4 +120,9 @@ void Event::addSchedule(QMap<QString, QString> data)
 ShowTimeModel *Event::getModel() const
 {
     return schedule_;
+}
+
+void Event::setTrailerUrl(QString url)
+{
+    trailer_ = url;
 }
