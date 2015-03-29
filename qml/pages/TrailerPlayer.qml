@@ -7,7 +7,7 @@ Page {
     id: videopage
     allowedOrientations: Orientation.All
     property string videourl;
-    property string videoerror: "";
+    property string videoerror: ""; 
 
     Component.onCompleted: {
         playVideo.source = videourl;

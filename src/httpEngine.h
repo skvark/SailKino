@@ -51,6 +51,7 @@ public:
     void getSchedule(queryItemList &queryItems);
     void getScheduleDates(queryItemList &queryItems);
     void getLanguages();
+    QString getCurrentLang();
     void getAreas();
     void setLocation(SettingsManager::Country country);
     void setLanguage(QString language);

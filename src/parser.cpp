@@ -437,10 +437,18 @@ void Parser::parseShow(QXmlStreamReader& xml) {
                 show.insert("TheatreAuditorium", parseElement(xml));
             }
             if(xml.name() == "ShowURL") {
-                show.insert("ShowURL", parseElement(xml));
+                QString url = parseElement(xml);
+                if (httpEngine_->getCurrentLang() == "/fin") {
+                    url = url.replace(QLatin1String("http://www"), QString("http://m"));
+                }
+                show.insert("ShowURL", url);
             }
             if(xml.name() == "EventURL") {
-                show.insert("EventURL", parseElement(xml));
+                QString url = parseElement(xml);
+                if (httpEngine_->getCurrentLang() == "/fin") {
+                    url = url.replace(QLatin1String("http://www"), QString("http://m"));
+                }
+                show.insert("EventURL", url);
             }
         }
         xml.readNext();

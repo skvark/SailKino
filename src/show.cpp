@@ -39,10 +39,10 @@ QString Show::getAuditorium()
 
 QString Show::getShowUrl()
 {
-    return showUrl_.replace(QLatin1String("http://www"), QString("http://m"));
+    return showUrl_;
 }
 
 QString Show::getEventUrl()
 {
-    return eventUrl_.replace(QLatin1String("http://www"), QString("http://m"));
+    return eventUrl_;
 }

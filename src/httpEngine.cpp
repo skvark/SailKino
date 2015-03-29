@@ -34,6 +34,11 @@ void HTTPEngine::getLanguages()
     GET(api_url, languages, InTheatres);
 }
 
+QString HTTPEngine::getCurrentLang()
+{
+    return lang_;
+}
+
 void HTTPEngine::getAreas()
 {
     QUrl api_url(baseUrl_ + lang_ + "/xml/TheatreAreas/");
