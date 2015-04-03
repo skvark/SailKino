@@ -82,7 +82,6 @@ Item {
                     })
                     dialog.accepted.connect(function() {
                         listview.visible = false;
-                        dateChanged();
                         kinoAPI.setDate(dialog.date);
                     })
                 }
