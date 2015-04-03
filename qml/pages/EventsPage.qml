@@ -189,7 +189,13 @@ Page {
                         horizontalAlignment: Text.AlignHCenter
                         anchors.topMargin: 5
                         textFormat: Text.RichText
-                        text: ""
+                        text: {
+                            if (kinoAPI.getAreaName().length !== 0) {
+                                return kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
+                            } else {
+                                return kinoAPI.getDate().toDateString();
+                            }
+                        }
                         wrapMode: Text.Wrap
                         font.pixelSize: 22
                     }
@@ -207,6 +213,8 @@ Page {
                             date: kinoAPI.getDate()
                         })
                         dialog.accepted.connect(function() {
+                            inSelectedTheatre.visible = false;
+                            comingSoon.visible = false;
                             kinoAPI.setDate(dialog.date);
                         })
                     }
@@ -268,7 +276,13 @@ Page {
                 loading = true;
             } else {
                 loading = false;
+                inSelectedTheatre.visible = true;
+                comingSoon.visible = true;
             }
+        }
+
+        onDateChanged: {
+            locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
         }
     }
 }

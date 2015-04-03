@@ -81,6 +81,8 @@ Item {
                         date: kinoAPI.getDate()
                     })
                     dialog.accepted.connect(function() {
+                        listview.visible = false;
+                        dateChanged();
                         kinoAPI.setDate(dialog.date);
                     })
                 }
@@ -222,6 +224,11 @@ Item {
         onClear: {
             if(listview.model !== undefined) {
                 listview.model.clear();
+            }
+        }
+        onLoading: {
+            if (yesno === false) {
+                listview.visible = true;
             }
         }
     }

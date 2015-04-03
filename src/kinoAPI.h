@@ -62,6 +62,7 @@ signals:
     void placeholder();
     void languagesLoading();
     void languagesReady(QVariant langs);
+    void dateChanged();
 
 public slots:
     void eventsReady();

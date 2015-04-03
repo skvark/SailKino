@@ -152,6 +152,8 @@ void kinoAPI::setDate(QDate date)
     } else {
         date_ = date;
     }
+    emit dateChanged();
+    emit loading(true);
     emit schedulesLoading(true);
     eventsReady();
 }
