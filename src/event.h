@@ -7,10 +7,12 @@
 #include <QList>
 #include <show.h>
 #include <showtimemodel.h>
+#include "schedulefiltermodel.h"
 
 class Event : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(ScheduleFilterModel* getFilteredModel READ getFilteredModel CONSTANT)
     Q_PROPERTY(ShowTimeModel* getModel READ getModel CONSTANT)
 
 public:
@@ -43,10 +45,14 @@ public:
     Q_INVOKABLE QString getLengthInMinutes();
     Q_INVOKABLE bool hasShows();
     void addSchedule(QMap<QString, QString> data);
-    ShowTimeModel* getModel() const;
+    ShowTimeModel *getModel() const;
 
     void verifyTrailerUrl();
     void setTrailerUrl(QString url);
+
+    ScheduleFilterModel *getFilteredModel() const;
+    void filter();
+    Q_INVOKABLE bool filteredHasShows();
 
 signals:
     void parseYoutube(QString video_id, QString id);
@@ -66,6 +72,7 @@ private:
     QString productionYear_;
     QString lengthInMinutes_;
     ShowTimeModel* schedule_;
+    ScheduleFilterModel* filteredSchedule_;
 };
 
 #endif // EVENT_H

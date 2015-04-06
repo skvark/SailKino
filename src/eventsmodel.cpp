@@ -80,6 +80,11 @@ QVariantMap EventsModel::get(int row) {
 
 }
 
+QList<Event *> EventsModel::all()
+{
+    return events_;
+}
+
 QVariant EventsModel::data(const QModelIndex & index, int role) const {
 
     if (index.row() < 0 || index.row() > events_.count())

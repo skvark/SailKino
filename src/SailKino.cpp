@@ -12,6 +12,7 @@
 #include <QtQml>
 #include <eventsmodel.h>
 #include <showtimemodel.h>
+#include "schedulefiltermodel.h"
 #include <kinoAPI.h>
 
 int main(int argc, char *argv[])
@@ -19,6 +20,7 @@ int main(int argc, char *argv[])
    qmlRegisterType<Event>("harbour.sailkino.events", 1, 0, "Event");
    qmlRegisterType<EventsModel>("harbour.sailkino.eventsmodel", 1, 0, "EventsModel");
    qmlRegisterType<ShowTimeModel>("harbour.sailkino.showtimemodel", 1, 0, "ShowTimeModel");
+   qmlRegisterType<ScheduleFilterModel>("harbour.sailkino.schedulefiltermodel", 1, 0, "ScheduleFilterModel");
    QCoreApplication::setApplicationName("harbour-sailkino");
    QCoreApplication::setOrganizationName("harbour-sailkino");
    kinoAPI api;

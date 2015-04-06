@@ -29,6 +29,7 @@ class EventsModel : public QAbstractListModel
      void clearSchedules();
      Q_INVOKABLE int count();
      Q_INVOKABLE QVariantMap get(int row);
+     QList<Event *> all();
 
 public slots:
 

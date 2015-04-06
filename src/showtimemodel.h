@@ -15,6 +15,7 @@ public:
     enum ShowRoles {
         IdRole,
         ShowStartRole,
+        ShowStartDateTimeRole,
         ShowEndRole,
         TheatreRole,
         TheatreAuditoriumRole,

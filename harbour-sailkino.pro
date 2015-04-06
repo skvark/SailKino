@@ -26,7 +26,8 @@ SOURCES += src/SailKino.cpp \
     src/parser.cpp \
     src/event.cpp \
     src/show.cpp \
-    src/showtimemodel.cpp
+    src/showtimemodel.cpp \
+    src/schedulefiltermodel.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -50,6 +51,7 @@ HEADERS += \
     src/parser.h \
     src/event.h \
     src/show.h \
-    src/showtimemodel.h
+    src/showtimemodel.h \
+    src/schedulefiltermodel.h
 
 

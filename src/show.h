@@ -17,6 +17,7 @@ public:
     QString getAuditorium();
     QString getShowUrl();
     QString getEventUrl();
+    QDateTime getStartTime();
 
 private:
 

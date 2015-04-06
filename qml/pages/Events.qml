@@ -20,9 +20,18 @@ Item {
     }
 
     function filter(model) {
+
         for(var i = 0; i < model.count() ; ++i) {
             kinoAPI.setID(model.get(i).id);
-            if(kinoAPI.getEvent.hasShows()) {
+            var count = 0;
+
+            if(kinoAPI.getDate().toLocaleDateString() === (new Date()).toLocaleDateString()) {
+                count = kinoAPI.getEvent.filteredHasShows();
+            } else {
+                count = kinoAPI.getEvent.hasShows();
+            }
+
+            if(count > 0) {
                 eventsModel.append(model.get(i));
             }
         }
@@ -72,26 +81,12 @@ Item {
                     pageStack.push("SearchPage.qml");
                 }
             }
+        }
 
-            MenuItem {
-                text: "Change Date"
-
-                onClicked: {
-                    var dialog = pageStack.push(pickerComponent, {
-                        date: kinoAPI.getDate()
-                    })
-                    dialog.accepted.connect(function() {
-                        listview.visible = false;
-                        kinoAPI.setDate(dialog.date);
-                    })
-                }
-
-                Component {
-                    id: pickerComponent
-                    DatePickerDialog {}
-                }
-            }
-
+        ViewPlaceholder {
+            id: pholder
+            enabled: listview.count === 0 && !loading
+            text: qsTr("No events available for selected date.")
         }
 
         anchors.fill: parent
@@ -218,6 +213,8 @@ Item {
         VerticalScrollDecorator { flickable: listview }
     }
 
+    property bool loading: true;
+
     Connections {
         target: kinoAPI
         onClear: {
@@ -227,7 +224,10 @@ Item {
         }
         onLoading: {
             if (yesno === false) {
+                loading = false;
                 listview.visible = true;
+            } else {
+                loading = true;
             }
         }
     }

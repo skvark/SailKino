@@ -1,4 +1,5 @@
 #include "event.h"
+#include <QDateTime>
 
 Event::Event(QObject *parent)
 {
@@ -103,8 +104,17 @@ QString Event::getLengthInMinutes()
     return lengthInMinutes_;
 }
 
-bool Event::hasShows()
+bool Event::filteredHasShows()
 {
+    if(filteredSchedule_->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Event::hasShows()
+{ 
     if(schedule_->rowCount() > 0) {
         return true;
     } else {
@@ -115,6 +125,19 @@ bool Event::hasShows()
 void Event::addSchedule(QMap<QString, QString> data)
 {
     schedule_->addShow(new Show(data));
+}
+
+ScheduleFilterModel *Event::getFilteredModel() const
+{
+    return filteredSchedule_;
+}
+
+void Event::filter() {
+    auto scheduleProxyModel = new ScheduleFilterModel();
+    scheduleProxyModel->setSourceModel(schedule_);
+    scheduleProxyModel->setMinDateTime(QDateTime::currentDateTime());
+    scheduleProxyModel->setDynamicSortFilter(true);
+    filteredSchedule_ = scheduleProxyModel;
 }
 
 ShowTimeModel *Event::getModel() const

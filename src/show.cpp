@@ -1,4 +1,5 @@
 #include "show.h"
+#include <QDebug>
 
 Show::Show(QMap<QString, QString> init)
 {
@@ -15,6 +16,10 @@ Show::Show(QMap<QString, QString> init)
 QString Show::getId()
 {
     return id_;
+}
+
+QDateTime Show::getStartTime() {
+    return showStart_;
 }
 
 QString Show::getStart()

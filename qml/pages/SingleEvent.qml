@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import harbour.sailkino.events 1.0
 import QtMultimedia 5.0
 import harbour.sailkino.showtimemodel 1.0
+import harbour.sailkino.schedulefiltermodel 1.0
 
 Page {
     id: openinghours
@@ -149,7 +150,13 @@ Page {
         SilicaListView {
 
             id: listview
-            model: event.getModel;
+            model: {
+                if(kinoAPI.getDate().toLocaleDateString() === (new Date()).toLocaleDateString()) {
+                    event.getFilteredModel;
+                } else {
+                    event.getModel;
+                }
+            }
             width: parent.width
             interactive: false;
             anchors.top: column.bottom

@@ -404,6 +404,11 @@ void Parser::parseSchedules(const QByteArray &data)
     }
 
     xml.clear();
+
+    foreach(Event* event, getModel(HTTPEngine::EventModelType::InTheatres)->all()) {
+        event->filter();
+    }
+
     emit scheduleData();
 }
 
