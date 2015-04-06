@@ -32,15 +32,8 @@ void ShowTimeModel::addShow(Show* show)
 
 int ShowTimeModel::rowCount(const QModelIndex & parent) const {
 
-    // only shows which are in the future taken into account
-    int count = 0;
-    foreach(Show* show, shows_) {
-        if(show->getStartTime() > QDateTime::currentDateTime()) {
-            ++count;
-        }
-    }
+    return shows_.count();
 
-    return count;
 }
 
 void ShowTimeModel::clear()
