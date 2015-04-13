@@ -24,6 +24,7 @@ public:
           QString shortSynopsis,
           QString genres,
           QString smallImagePortrait,
+          QString mediumImagePortrait,
           QString largeImageLandscape,
           QString trailer,
           QString trailerType,
@@ -38,13 +39,14 @@ public:
     QString getShortSynopsis();
     Q_INVOKABLE QString originalTitle();
     QString smallImagePortrait();
+    Q_INVOKABLE QString mediumImagePortrait();
     Q_INVOKABLE QString getLargeImageLandscape();
     Q_INVOKABLE QString getTrailer();
     Q_INVOKABLE QString getRating();
     Q_INVOKABLE QString getProductionYear();
     Q_INVOKABLE QString getLengthInMinutes();
     Q_INVOKABLE bool hasShows();
-    void addSchedule(QMap<QString, QString> data);
+    Show *addSchedule(QMap<QString, QString> data);
     ShowTimeModel *getModel() const;
 
     void verifyTrailerUrl();
@@ -66,6 +68,7 @@ private:
     QString shortSynopsis_;
     QString genres_;
     QString smallImagePortrait_;
+    QString mediumImagePortrait_;
     QString largeImageLandscape_;
     QString trailer_;
     QString trailerType_;

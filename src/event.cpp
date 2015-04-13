@@ -13,6 +13,7 @@ Event::Event(QString id,
              QString shortSynopsis,
              QString genres,
              QString smallImagePortrait,
+             QString mediumImagePortrait,
              QString largeImageLandscape,
              QString trailer,
              QString trailerType,
@@ -26,6 +27,7 @@ Event::Event(QString id,
     shortSynopsis_(shortSynopsis),
     genres_(genres),
     smallImagePortrait_(smallImagePortrait),
+    mediumImagePortrait_(mediumImagePortrait),
     largeImageLandscape_(largeImageLandscape),
     trailer_(trailer),
     trailerType_(trailerType),
@@ -69,6 +71,11 @@ QString Event::originalTitle()
 QString Event::smallImagePortrait()
 {
     return smallImagePortrait_;
+}
+
+QString Event::mediumImagePortrait()
+{
+    return mediumImagePortrait_;
 }
 
 QString Event::getLargeImageLandscape()
@@ -122,9 +129,11 @@ bool Event::hasShows()
     }
 }
 
-void Event::addSchedule(QMap<QString, QString> data)
+Show* Event::addSchedule(QMap<QString, QString> data)
 {
-    schedule_->addShow(new Show(data));
+    Show* show = new Show(data);
+    schedule_->addShow(show);
+    return show;
 }
 
 ScheduleFilterModel *Event::getFilteredModel() const

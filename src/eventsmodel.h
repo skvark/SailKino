@@ -17,6 +17,7 @@ class EventsModel : public QAbstractListModel
          IDRole,
          ShortSynopsisRole,
          SmallImagePortraitRole,
+         MediumImagePortraitRole,
          GenreRole
      };
 

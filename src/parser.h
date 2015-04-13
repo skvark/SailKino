@@ -14,6 +14,8 @@
 #include <QXmlStreamReader>
 #include <QDate>
 #include <settings.h>
+#include <QDateTime>
+#include <QPair>
 
 class Parser : public QObject
 {
@@ -60,6 +62,7 @@ private:
     QMap<HTTPEngine::EventModelType, EventsModel*> models_;
     QMap<QString, QString> areas_;
     QMap<QString, QString> languages_;
+    QMap<QDateTime, QPair<Event*, Show*> > coverData_;
     void parseShow(QXmlStreamReader &xml);
     void parseLanguage(QXmlStreamReader &xml);
 };

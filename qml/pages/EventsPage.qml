@@ -28,7 +28,7 @@ Page {
         id: menuView
         itemWidth: width
         itemHeight: height
-        height: window.height - footer.visibleHeight
+        height: app.height - footer.visibleHeight
         clip: true
 
         anchors {

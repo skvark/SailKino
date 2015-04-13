@@ -15,6 +15,7 @@ QHash<int, QByteArray> EventsModel::roleNames() const
     roles[IDRole] = "id";
     roles[ShortSynopsisRole] = "shortsynopsis";
     roles[SmallImagePortraitRole] = "smallimageportrait";
+    roles[MediumImagePortraitRole] = "mediumimageportrait";
     roles[GenreRole] = "genre";
     return roles;
 }
@@ -106,6 +107,8 @@ QVariant EventsModel::data(const QModelIndex & index, int role) const {
         return event->getShortSynopsis();
     else if(role == SmallImagePortraitRole)
         return event->smallImagePortrait();
+    else if(role == MediumImagePortraitRole)
+        return event->mediumImagePortrait();
     else if(role == GenreRole)
         return event->getGenres();
 

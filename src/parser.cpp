@@ -246,6 +246,9 @@ void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) 
             if(xml.name() == "EventSmallImagePortrait") {
                 event.insert("SmallImagePortrait", parseElement(xml));
             }
+            if(xml.name() == "EventMediumImagePortrait") {
+                event.insert("MediumImagePortrait", parseElement(xml));
+            }
             if(xml.name() == "EventLargeImageLandscape") {
                 event.insert("LargeImageLandscape", parseElement(xml));
             }
@@ -275,6 +278,7 @@ void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) 
                               event.value("ShortSynopsis"),
                               event.value("Genres"),
                               event.value("SmallImagePortrait"),
+                              event.value("MediumImagePortrait"),
                               event.value("LargeImageLandscape"),
                               event.value("Trailer"),
                               event.value("TrailerType"),
@@ -458,7 +462,10 @@ void Parser::parseShow(QXmlStreamReader& xml) {
         }
         xml.readNext();
     }
-    model->getEvent(show.value("EventID"))->addSchedule(show);
+
+    Event* _event = model->getEvent(show.value("EventID"));
+    _event->addSchedule(show);
+
 }
 
 
