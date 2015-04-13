@@ -6,9 +6,11 @@ import harbour.sailkino.showtimemodel 1.0
 import harbour.sailkino.schedulefiltermodel 1.0
 
 Page {
-    id: openinghours
+    id: singleevent
     property string id;
+    property bool comingsoonmodel;
     property string currentdate: kinoAPI.getDate().toLocaleDateString();
+
     property var event: {
         kinoAPI.setID(id);
         return kinoAPI.getEvent;
@@ -151,7 +153,8 @@ Page {
 
             id: listview
             model: {
-                if(kinoAPI.getDate().toLocaleDateString() === (new Date()).toLocaleDateString()) {
+                if(kinoAPI.getDate().toLocaleDateString() === (new Date()).toLocaleDateString() && !comingsoonmodel) {
+                    event.reFilter();
                     event.getFilteredModel;
                 } else {
                     event.getModel;

@@ -140,6 +140,10 @@ void Event::filter() {
     filteredSchedule_ = scheduleProxyModel;
 }
 
+void Event::reFilter() {
+    filteredSchedule_->invalidate();
+}
+
 ShowTimeModel *Event::getModel() const
 {
     return schedule_;

@@ -27,6 +27,7 @@ class EventsModel : public QAbstractListModel
      Q_INVOKABLE void clear();
      Event *getEvent(QString id);
      void clearSchedules();
+     void filterShows();
      Q_INVOKABLE int count();
      Q_INVOKABLE QVariantMap get(int row);
      QList<Event *> all();

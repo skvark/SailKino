@@ -235,6 +235,7 @@ Page {
                 MenuItem {
                     text: "Settings"
                     onClicked: {
+                        filterdatetimer.stop();
                         pageStack.push("Settings.qml");
                     }
                 }
@@ -245,6 +246,7 @@ Page {
     property bool loading: false;
     property bool holder: false;
     property string info;
+    property date initialDate: new Date();
 
     function init() {
 
@@ -259,6 +261,31 @@ Page {
         }
     }
 
+    Timer {
+        id: filterdatetimer
+        // 15 min interval
+        interval: 900000;
+        running: false;
+        repeat: true;
+        onTriggered: {
+
+            // Update if date changes
+            var curDate = new Date().toDateString();
+            if (initialDate.toDateString() < curDate) {
+                initialDate = new Date();
+                kinoAPI.setDate(initialDate);
+            }
+
+            // filter inTheatres if date is today
+            if(initialDate.toDateString() === kinoAPI.getDate().toDateString() && kinoAPI.getFilterState()) {
+                kinoAPI.reFilter();
+                inSelectedTheatre.setModel(kinoAPI.inTheatres,
+                                           kinoAPI.getAreaName(),
+                                           false);
+            }
+        }
+    }
+
     Connections {
         target: kinoAPI
 
@@ -268,6 +295,7 @@ Page {
                                        false);
             comingSoon.setModel(kinoAPI.comingSoon, "Coming soon", true);
             locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
+            filterdatetimer.start();
         }
 
         onLoading: {

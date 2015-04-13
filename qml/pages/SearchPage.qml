@@ -103,7 +103,7 @@ Page {
                     id: eventitem
                     anchors.fill: parent
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("SingleEvent.qml"), { id: id })
+                        pageStack.push(Qt.resolvedUrl("SingleEvent.qml"), { id: id, comingsoonmodel: false })
                     }
                 }
             }

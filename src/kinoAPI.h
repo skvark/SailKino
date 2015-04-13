@@ -53,6 +53,8 @@ public:
 
     Q_INVOKABLE void setBlankingMode(bool state);
 
+    Q_INVOKABLE void reFilter();
+
 signals:
     void ready();
     void loading(bool yesno);

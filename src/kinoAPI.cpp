@@ -88,6 +88,13 @@ bool kinoAPI::getFilterState()
 }
 
 /*
+    This is called peridiodically at QML side to filter events.
+*/
+void kinoAPI::reFilter() {
+    parser_->getModel(HTTPEngine::EventModelType::InTheatres)->filterShows();
+}
+
+/*
     Sets an temporary event ID value, which is then used in kinoAPI::getEvent
     to get the specified event object pointer.
 */

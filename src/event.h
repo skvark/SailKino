@@ -53,6 +53,7 @@ public:
     ScheduleFilterModel *getFilteredModel() const;
     void filter();
     Q_INVOKABLE bool filteredHasShows();
+    Q_INVOKABLE void reFilter();
 
 signals:
     void parseYoutube(QString video_id, QString id);

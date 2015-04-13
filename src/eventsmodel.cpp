@@ -59,6 +59,13 @@ void EventsModel::clearSchedules()
     }
 }
 
+void EventsModel::filterShows()
+{
+    foreach(Event* event, events_) {
+        event->reFilter();
+    }
+}
+
 int EventsModel::count()
 {
     return events_.size();

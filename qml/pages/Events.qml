@@ -8,6 +8,11 @@ Item {
 
     function setModel(model, title, comingsoon) {
         eventsModel.clear();
+
+        if(comingsoon) {
+            comingsoonmodel = comingsoon;
+        }
+
         if(kinoAPI.getFilterState() === true && !comingsoon) {
             filter(model);
         } else {
@@ -71,6 +76,7 @@ Item {
                 text: "Settings"
                 onClicked: {
                     pgheader = "";
+                    filterdatetimer.stop();
                     pageStack.push("Settings.qml");
                 }
             }
@@ -112,7 +118,7 @@ Item {
                 anchors.right: parent.right;
                 anchors.rightMargin: Theme.paddingMedium
                 height: row.height + row2.height + 20;
-                onClicked: pageStack.push(Qt.resolvedUrl("SingleEvent.qml"), { id: id })
+                onClicked: pageStack.push(Qt.resolvedUrl("SingleEvent.qml"), { id: id, comingsoonmodel: comingsoonmodel })
 
             }
 
@@ -214,6 +220,7 @@ Item {
     }
 
     property bool loading: true;
+    property bool comingsoonmodel: false;
 
     Connections {
         target: kinoAPI
