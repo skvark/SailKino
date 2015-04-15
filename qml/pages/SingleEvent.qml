@@ -134,7 +134,6 @@ Page {
 
             BackgroundItem {
 
-                anchors.left: singleevent.left
                 height: 50
 
                 Label {
