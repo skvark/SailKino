@@ -5,49 +5,101 @@ import harbour.sailkino.eventsmodel 1.0
 
 CoverBackground {
 
-    property bool active: status === Cover.Active;
+    property bool active: status === Cover.Active || applicationActive
     property bool ready: false;
-    property string eventid;
+    property int index: 0;
+    property EventsModel events;
     anchors.fill: parent
 
-    SlideshowView {
-
-        id: view
-        anchors.fill: parent
-        delegate:
-
-            Image {
-                property variant eventData: model
-                id: coverpic
-                anchors.fill: parent;
-                source: mediumimageportrait
-                NumberAnimation on opacity {
-                    from: 0
-                    to: 1
-                    duration: 1000
-                }
-           }
-    }
-
-
-    Timer {
-        id: timer
-        interval: 3000;
-        running: ready && active;
-        repeat: true;
-        onTriggered: {
-            view.incrementCurrentIndex()
+    CoverActionList {
+        enabled: ready && active
+        CoverAction {
+            iconSource: "image://theme/icon-cover-new"
+            onTriggered: {
+                pageStack.push(Qt.resolvedUrl("../pages/SingleEvent.qml"), { id: events.get(index - 1).id, comingsoonmodel: false })
+                app.activate();
+            }
         }
     }
 
-    CoverActionList {
-        enabled: true
-        CoverAction {
-            iconSource: "image://theme/icon-cover-new.png"
-            onTriggered: {
-                pageStack.push(Qt.resolvedUrl("../pages/SingleEvent.qml"), { id: view.currentItem.eventData.id, comingsoonmodel: false })
-                app.activate();
+    CoverPlaceholder {
+        id: holder
+        visible: true
+        text: {
+            if(ready && active) {
+                "SailKino \n\r\n\r" + events.get(index - 1).title
+            } else {
+                "SailKino"
             }
+        }
+        z: -1
+    }
+
+    Image {
+        id: coverpic
+        visible: ready && active
+        anchors.fill: parent
+
+        NumberAnimation on opacity {
+            id: fadeout
+            running: false
+            from: 1
+            to: 0
+            duration: 1000
+            onStopped: {
+                if(events.get(index - 1).mediumimageportrait !== "")
+                {
+                    coverpic.source = events.get(index - 1).mediumimageportrait
+                    coverpic.visible = true;
+                }
+                else if (events.get(index - 1).smallimageportrait !== "")
+                {
+                    coverpic.source = events.get(index - 1).smallimageportrait
+                    coverpic.visible = true;
+                }
+                else
+                {
+                    coverpic.visible = false;
+                    coverpic.source = ""
+                    holder.text = events.get(index - 1).title
+                }
+            }
+        }
+
+        NumberAnimation on opacity {
+            id: fadein
+            running: false
+            from: 0
+            to: 1
+            duration: 1000
+        }
+
+        onStatusChanged:
+            if (coverpic.status === Image.Ready) {
+                fadein.start()
+            }
+    }
+
+    Timer {
+        id: timer
+        interval: 7000;
+        triggeredOnStart: true;
+        running: ready && active;
+        repeat: true;
+        onTriggered: {
+
+            if(events.count() - 1 > index) {
+                ++index;
+            } else {
+                index = 1;
+            }
+
+            if(index === 1) {
+                fadeout.onStopped()
+            } else {
+                fadeout.start()
+            }
+
         }
     }
 
@@ -59,8 +111,9 @@ CoverBackground {
             if(yesno) {
                 ready = false;
             } else {
+                events = kinoAPI.inTheatres;
+                index = 0;
                 ready = true;
-                view.model = kinoAPI.inTheatres;
             }
         }
     }

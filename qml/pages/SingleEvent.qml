@@ -132,21 +132,37 @@ Page {
                 text: qsTr("Length: ") + event.getLengthInMinutes() + " min"
             }
 
-            Label {
-                id: showlistheader
-                anchors.left: parent.left
-                anchors.leftMargin: Theme.paddingLarge
-                anchors.topMargin: Theme.paddingLarge
-                height: 50
-                verticalAlignment: Text.AlignVCenter
-                width: parent.width
-                wrapMode: Text.Wrap
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
-                textFormat: Text.RichText;
-                text: currentdate
-            }
+            BackgroundItem {
 
+                anchors.left: singleevent.left
+                height: 50
+
+                Label {
+                    id: showlistheader
+                    anchors.fill: parent
+                    anchors.leftMargin: Theme.paddingLarge
+                    height: 50
+                    verticalAlignment: Text.AlignVCenter
+                    width: parent.width
+                    wrapMode: Text.Wrap
+                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.highlightColor
+                    textFormat: Text.RichText;
+                    text: currentdate
+                }
+
+                onClicked: {
+
+                    var dialog = pageStack.push(pickerComponent, {
+                        date: kinoAPI.getDate()
+                    })
+                    dialog.accepted.connect(function() {
+                        kinoAPI.setDate(dialog.date);
+                        currentdate = kinoAPI.getDate().toLocaleDateString();
+                    })
+                }
+
+            }
         }
 
         SilicaListView {
