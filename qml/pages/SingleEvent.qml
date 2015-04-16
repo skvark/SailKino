@@ -55,8 +55,8 @@ Page {
                     text: event.getTitle() + " (" + event.getProductionYear() + ")"
                     wrapMode: Text.Wrap
                     color: Theme.highlightColor
-                    anchors.leftMargin: 110
-                    anchors.topMargin: 15
+                    anchors.leftMargin: Theme.paddingLarge + Theme.paddingLarge
+                    anchors.topMargin: Theme.paddingMedium
                     height: 80
                     verticalAlignment: Text.AlignVCenter
                     textFormat: Text.RichText;
