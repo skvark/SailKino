@@ -194,7 +194,7 @@ void HTTPEngine::youtubeRequest(QNetworkReply *finished, QString eventID) {
     // Get the url_encoded_fmt_stream_map from the json monster
     QJsonDocument doc = QJsonDocument::fromJson(data, &err);
     QJsonArray all_data = doc.array();
-    QJsonObject data_object = all_data.at(1).toObject();
+    QJsonObject data_object = all_data.at(2).toObject();
     QJsonObject data2 = data_object[QString("data")].toObject();
     QJsonObject swfcfg = data2[QString("swfcfg")].toObject();
     QJsonObject args = swfcfg[QString("args")].toObject();
