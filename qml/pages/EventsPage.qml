@@ -59,7 +59,7 @@ Page {
         id: footer
         property int visibleHeight: footercontent.contentY + height
         anchors { bottom: parent.bottom; left: parent.left; right: parent.right }
-        height: 125
+        height: 0.13 * Screen.height
 
         SilicaFlickable {
 
@@ -77,7 +77,7 @@ Page {
             Row {
 
                 id: nav
-                height: 65
+                height: 0.0677 * Screen.height
 
                 BackgroundItem {
 
@@ -175,7 +175,7 @@ Page {
             }
 
             Row {
-                height: 60
+                height: 0.0625 * Screen.height
                 anchors.top: nav.bottom
 
                 Item {
@@ -197,7 +197,7 @@ Page {
                             }
                         }
                         wrapMode: Text.Wrap
-                        font.pixelSize: 22
+                        font.pixelSize: 0.0229 * Screen.height
                     }
                 }
             }

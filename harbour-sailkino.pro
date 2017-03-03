@@ -33,7 +33,6 @@ OTHER_FILES += \
     qml/cover/CoverPage.qml \
     harbour-sailkino.desktop \
     qml/harbour-sailkino.qml \
-    rpm/harbour-sailkino.yaml \
     qml/pages/Events.qml \
     qml/pages/EventsPage.qml \
     qml/pages/SingleEvent.qml \
@@ -53,5 +52,9 @@ HEADERS += \
     src/show.h \
     src/showtimemodel.h \
     src/schedulefiltermodel.h
+
+DISTFILES += \
+    qml/pages/ScreenBlank.qml \
+    rpm/harbour-sailkino.spec
 
 

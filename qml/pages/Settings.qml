@@ -5,7 +5,6 @@ import harbour.sailkino.eventsmodel 1.0
 Page {
 
     id: page
-    width: 540
 
     Component.onCompleted: {
         if(kinoAPI.getAreas().length !== 0 ){
@@ -108,7 +107,7 @@ Page {
         SilicaListView {
 
             id: listView
-            height: 450
+            height: Screen.height - 520
             width: page.width;
             anchors.top: areasection.bottom
             anchors.leftMargin: Theme.paddingMedium

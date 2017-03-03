@@ -68,8 +68,9 @@ Page {
 
             Image {
                id: previewimage
-               width: 540;
-               height: 211;
+               width: Screen.width
+               height: (250 * Screen.width) / 670
+
                source: {
                    if (event.getLargeImageLandscape() !== "") {
                               return event.getLargeImageLandscape();
@@ -77,6 +78,7 @@ Page {
                               return "../images/default-cover.png"
                            }
                        }
+
                fillMode: Image.PreserveAspectFit
 
                BackgroundItem {
@@ -175,23 +177,26 @@ Page {
                     event.getModel;
                 }
             }
+
             width: parent.width
             interactive: false;
             anchors.top: column.bottom
             anchors.leftMargin: Theme.paddingLarge
             anchors.topMargin: Theme.paddingSmall
+
             height: {
                 if(listview.count !== 0) {
-                    return listview.count * 65
+                    return listview.count * 90
                 } else {
                     return pholder.height
                 }
             }
+
             spacing: 5
 
             ViewPlaceholder {
                 id: pholder
-                height: 60
+                height: 85
                 anchors.top: parent.top
                 enabled: listview.count == 0 && !loading
                 text: qsTr("No shows.")
@@ -207,14 +212,14 @@ Page {
             delegate: ListItem {
 
                 id: item
-                contentHeight: 60
+                contentHeight: 85
                 width: parent.width
 
                 Label {
                     id: time
                     anchors.left: parent.left
                     width: parent.width
-                    height: 60
+                    height: 85
                     anchors.leftMargin: Theme.paddingLarge
                     anchors.bottomMargin: Theme.paddingLarge
                     wrapMode: Text.Wrap
@@ -228,14 +233,13 @@ Page {
                 Rectangle {
                     anchors.left: time.left
                     anchors.leftMargin: -Theme.paddingLarge
-                    anchors.topMargin: 10
                     color: Theme.rgba(Theme.highlightBackgroundColor, 0.3)
-                    height: 60
-                    width: 15
+                    height: parent.height
+                    width: Theme.paddingLarge / 2
                 }
 
                 BackgroundItem {
-                    height: 60
+                    height: 85
                     width: parent.width
                     onClicked: {
                         Qt.openUrlExternally(showurl)

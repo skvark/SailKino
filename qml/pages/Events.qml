@@ -58,13 +58,13 @@ Item {
 
             PageHeader {
                 title: pgheader
-                height: 140
+                height: 0.146 * Screen.height
 
                 SectionHeader {
                     id: section
                     text: dt
                     anchors.top: parent.top
-                    anchors.topMargin: 60
+                    anchors.topMargin: 0.0625 * Screen.height
                 }
             }
         }
@@ -117,7 +117,7 @@ Item {
                 anchors.leftMargin: Theme.paddingMedium
                 anchors.right: parent.right;
                 anchors.rightMargin: Theme.paddingMedium
-                height: row.height + row2.height + 20;
+                height: row.height + row2.height + 30;
                 onClicked: pageStack.push(Qt.resolvedUrl("SingleEvent.qml"), { id: id, comingsoonmodel: comingsoonmodel })
 
             }
@@ -143,7 +143,7 @@ Item {
                             textFormat: Text.RichText
                             text: title
                             anchors.leftMargin: 15
-                            font.pixelSize: 36
+                            font.pixelSize: Screen.width >= 1000 ? 46 : 36
                             wrapMode: Text.WordWrap
                             verticalAlignment: Text.AlignVCenter
                         }
@@ -156,7 +156,7 @@ Item {
                             textFormat: Text.RichText
                             text: genre
                             anchors.leftMargin: 15
-                            font.pixelSize: 25
+                            font.pixelSize: Screen.width >= 1000 ? 35 : 25
                             color: Theme.rgba(Theme.secondaryColor, 0.5)
                             wrapMode: Text.WordWrap
                         }

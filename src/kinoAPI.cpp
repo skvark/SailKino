@@ -275,27 +275,3 @@ void kinoAPI::getLanguages()
     emit languagesLoading();
     parser_->getLanguages();
 }
-
-/* Prevents screen going dark during video playback.
-   true = no blanking
-   false = blanks normally
-*/
-void kinoAPI::setBlankingMode(bool state)
-{
-
-    QDBusConnection system = QDBusConnection::connectToBus(QDBusConnection::SystemBus,
-                                                           "system");
-
-    QDBusInterface interface("com.nokia.mce",
-                             "/com/nokia/mce/request",
-                             "com.nokia.mce.request",
-                             system);
-
-    if (state) {
-        interface.call(QLatin1String("req_display_blanking_pause"));
-    } else {
-        interface.call(QLatin1String("req_display_cancel_blanking_pause"));
-    }
-
-}
-

@@ -66,7 +66,7 @@ Page {
             width: parent.width
             anchors.top: headerContainer.bottom
             anchors.topMargin: 70
-            height: 600
+            height: Screen.height - 400
 
             delegate: ListItem {
 
