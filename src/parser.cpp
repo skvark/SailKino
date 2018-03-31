@@ -175,6 +175,7 @@ void Parser::trailerUrl(QString url, QString id)
 void Parser::parseLanguage(QXmlStreamReader &xml)
 {
     QString isocode;
+    QString isocodetwo;
     QString name;
     xml.readNext();
 
@@ -182,9 +183,11 @@ void Parser::parseLanguage(QXmlStreamReader &xml)
             xml.name() == "Language")) {
 
         if(xml.tokenType() == QXmlStreamReader::StartElement) {
-
             if(xml.name() == "ISOCode") {
                 isocode = parseElement(xml);
+            }
+            if(xml.name() == "ISOTwoLetterCode") {
+                isocodetwo = parseElement(xml);
             }
             if(xml.name() == "Name") {
                 name = parseElement(xml);
@@ -192,7 +195,12 @@ void Parser::parseLanguage(QXmlStreamReader &xml)
         }
         xml.readNext();
     }
-    languages_.insert(isocode, name);
+
+    if (isocodetwo == "FI") {
+        languages_.insert(isocodetwo, name);
+    } else {
+        languages_.insert(isocode, name);
+    }
 }
 
 void Parser::getSchedules(QString area, QDate date) {

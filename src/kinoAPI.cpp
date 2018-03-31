@@ -24,19 +24,24 @@ kinoAPI::kinoAPI(QObject *parent):
     QObject::connect(parser_, SIGNAL(languageData(QVariant)),
                      this, SIGNAL(languagesReady(QVariant)));
 
+    bool apiBreak = settings_->loadLanguage() == "/fin" || (settings_->loadLanguage().length() != 4 && settings_->loadLanguage() != "/FI");
+
     // if country and lang are set, we can fetch areas at startup
-    if (settings_->getCountryName().length() != 0
-            && settings_->loadLanguage().length() != 0) {
+    if (settings_->getCountryName().length() != 0 &&
+            settings_->loadLanguage().length() != 0 &&
+            !apiBreak) { // Finnkino API break fix...
         parser_->setLocation(settings_->country());
         parser_->setLanguage(settings_->loadLanguage());
         parser_->getAreas();
-    }
 
-    // if area is not set, raise flag
-    if(getArea().isEmpty()) {
-        areaSelectedEarlier_ = false;
+        // if area is not set, raise flag
+        if(getArea().isEmpty() || apiBreak) {
+            areaSelectedEarlier_ = false;
+        } else {
+            areaSelectedEarlier_ = true;
+        }
     } else {
-        areaSelectedEarlier_ = true;
+        areaSelectedEarlier_ = false;
     }
 }
 

@@ -17,10 +17,10 @@
 #include <QSet>
 
 namespace {
-    const QString baseUrlFI = "http://www.finnkino.fi";
-    const QString baseUrlEE = "http://www.forumcinemas.ee";
-    const QString baseUrlLV = "http://www.forumcinemas.lv";
-    const QString baseUrlLT = "http://www.forumcinemas.lt";
+    const QString baseUrlFI = "https://www.finnkino.fi";
+    const QString baseUrlEE = "https://www.forumcinemas.ee";
+    const QString baseUrlLV = "https://www.forumcinemas.lv";
+    const QString baseUrlLT = "https://www.forumcinemas.lt";
 }
 
 class HTTPEngine : public QObject
