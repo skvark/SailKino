@@ -53,16 +53,13 @@ Page {
 
                 Label {
                     text: event.getTitle() + " (" + event.getProductionYear() + ")"
+                    x: Theme.paddingLarge
                     wrapMode: Text.Wrap
                     color: Theme.highlightColor
-                    anchors.leftMargin: Theme.paddingLarge + Theme.paddingLarge
-                    anchors.topMargin: Theme.paddingMedium
-                    height: 80
                     verticalAlignment: Text.AlignVCenter
-                    textFormat: Text.RichText;
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    horizontalAlignment: Text.AlignRight
+                    height: head.height
+                    width: head.width - Theme.paddingLarge*2
                 }
             }
 
