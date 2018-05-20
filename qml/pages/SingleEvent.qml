@@ -96,7 +96,7 @@ Page {
             Label {
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingLarge
-                width: parent.width
+                width: parent.width - Theme.paddingLarge * 2
                 wrapMode: Text.Wrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -109,7 +109,7 @@ Page {
                 id: agelabel
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingLarge
-                width: parent.width
+                width: parent.width - Theme.paddingLarge * 2
                 wrapMode: Text.Wrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -122,7 +122,7 @@ Page {
                 id: lengthlabel
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingLarge
-                width: parent.width
+                width: parent.width - Theme.paddingLarge * 2
                 wrapMode: Text.Wrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -141,7 +141,7 @@ Page {
                     anchors.leftMargin: Theme.paddingLarge
                     height: Theme.fontSizeSmall*2
                     verticalAlignment: Text.AlignVCenter
-                    width: parent.width
+                    width: parent.width - Theme.paddingLarge * 2
                     wrapMode: Text.Wrap
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.highlightColor
@@ -215,7 +215,7 @@ Page {
                 Label {
                     id: time
                     anchors.left: parent.left
-                    width: parent.width
+                    width: parent.width - Theme.paddingLarge * 2
                     height: Theme.fontSizeExtraSmall*3
                     anchors.leftMargin: Theme.paddingLarge
                     anchors.bottomMargin: Theme.paddingLarge
