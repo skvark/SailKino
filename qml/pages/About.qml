@@ -37,8 +37,8 @@ Page {
                       "<span class=\"legend\">Icon and cover image by</span><br />Juho Heinisuo</p>" +
 
                       "<p>SailKino is an unofficial Finnkino and Forum Cinemas client application.<br /><br />" +
-                      "The content of the application is provided via Finnkino and Forum Cinemas XML API.
-                       Authors of SailKino are not responsible for any invalid content.</p>" +
+                      "The content of the application is provided via Finnkino and Forum Cinemas XML API." +
+                      "Authors of SailKino are not responsible for any invalid content.</p>" +
 
                       "<p>This software is released under MIT license.<br />" +
                       "You can get the code and contribute at:\n" +
