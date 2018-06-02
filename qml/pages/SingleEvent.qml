@@ -20,7 +20,7 @@ Page {
 
         id: info
         anchors.fill: parent
-        contentHeight: column.height + listview.height + column2.height + 20
+        contentHeight: column.height + listview.height + column2.height + Theme.paddingLarge
 
         PullDownMenu {
             id: menu
@@ -53,16 +53,13 @@ Page {
 
                 Label {
                     text: event.getTitle() + " (" + event.getProductionYear() + ")"
+                    x: Theme.paddingLarge
                     wrapMode: Text.Wrap
                     color: Theme.highlightColor
-                    anchors.leftMargin: Theme.paddingLarge + Theme.paddingLarge
-                    anchors.topMargin: Theme.paddingMedium
-                    height: 80
                     verticalAlignment: Text.AlignVCenter
-                    textFormat: Text.RichText;
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    horizontalAlignment: Text.AlignRight
+                    height: head.height
+                    width: head.width - Theme.paddingLarge*2
                 }
             }
 
@@ -99,7 +96,7 @@ Page {
             Label {
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingLarge
-                width: parent.width
+                width: parent.width - Theme.paddingLarge * 2
                 wrapMode: Text.Wrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -112,7 +109,7 @@ Page {
                 id: agelabel
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingLarge
-                width: parent.width
+                width: parent.width - Theme.paddingLarge * 2
                 wrapMode: Text.Wrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -125,7 +122,7 @@ Page {
                 id: lengthlabel
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingLarge
-                width: parent.width
+                width: parent.width - Theme.paddingLarge * 2
                 wrapMode: Text.Wrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -136,15 +133,15 @@ Page {
 
             BackgroundItem {
 
-                height: 50
+                height: Theme.fontSizeSmall*2
 
                 Label {
                     id: showlistheader
                     anchors.fill: parent
                     anchors.leftMargin: Theme.paddingLarge
-                    height: 50
+                    height: Theme.fontSizeSmall*2
                     verticalAlignment: Text.AlignVCenter
-                    width: parent.width
+                    width: parent.width - Theme.paddingLarge * 2
                     wrapMode: Text.Wrap
                     font.pixelSize: Theme.fontSizeSmall
                     color: Theme.highlightColor
@@ -186,7 +183,7 @@ Page {
 
             height: {
                 if(listview.count !== 0) {
-                    return listview.count * 90
+                    return listview.count * Theme.fontSizeExtraSmall*3 + Theme.fontSizeExtraSmall
                 } else {
                     return pholder.height
                 }
@@ -196,7 +193,7 @@ Page {
 
             ViewPlaceholder {
                 id: pholder
-                height: 85
+                height: Theme.fontSizeExtraSmall*3
                 anchors.top: parent.top
                 enabled: listview.count == 0 && !loading
                 text: qsTr("No shows.")
@@ -212,14 +209,14 @@ Page {
             delegate: ListItem {
 
                 id: item
-                contentHeight: 85
+                contentHeight: Theme.fontSizeExtraSmall*3
                 width: parent.width
 
                 Label {
                     id: time
                     anchors.left: parent.left
-                    width: parent.width
-                    height: 85
+                    width: parent.width - Theme.paddingLarge * 2
+                    height: Theme.fontSizeExtraSmall*3
                     anchors.leftMargin: Theme.paddingLarge
                     anchors.bottomMargin: Theme.paddingLarge
                     wrapMode: Text.Wrap
@@ -239,7 +236,7 @@ Page {
                 }
 
                 BackgroundItem {
-                    height: 85
+                    height: Theme.fontSizeExtraSmall*3
                     width: parent.width
                     onClicked: {
                         Qt.openUrlExternally(showurl)
@@ -250,7 +247,7 @@ Page {
 
         Column {
             id: column2
-            height: synopsis.height + 20
+            height: synopsis.height + Theme.paddingLarger
             anchors.top: listview.bottom;
             anchors.left: parent.left
             anchors.right: parent.right
