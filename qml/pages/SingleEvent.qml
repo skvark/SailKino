@@ -82,7 +82,7 @@ Page {
                    id: video
                    anchors.fill: parent
                    onClicked: {
-                       onClicked: pageStack.push(Qt.resolvedUrl("TrailerPlayer.qml"), { videourl: event.getTrailer() })
+                       onClicked: Qt.openUrlExternally(event.getTrailer())
                    }
                }
 

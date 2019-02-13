@@ -130,14 +130,6 @@ bool HTTPEngine::checkError(QNetworkReply *finished)
     return false;
 }
 
-void HTTPEngine::getYoutubeVideoInfo(QString video_id, QString event_id)
-{
-    QUrl infoUrl(QString("https://www.youtube.com/watch?v=") + video_id + QString("&spf=prefetch"));
-    QNetworkRequest request(infoUrl);
-    QNetworkReply *reply = nam_.get(request);
-    youtubeReplies_.insert(reply, event_id);
-}
-
 void HTTPEngine::eventsRequest(QNetworkReply *finished, HTTPEngine::EventModelType type)
 {
     if (checkError(finished))

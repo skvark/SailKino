@@ -77,7 +77,6 @@ signals:
     void networkError(QNetworkReply::NetworkError error);
 
 public slots:
-    void getYoutubeVideoInfo(QString video_id, QString event_id);
     void finished(QNetworkReply *reply);
 
 private:

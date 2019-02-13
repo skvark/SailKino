@@ -261,7 +261,7 @@ void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) 
                 event.insert("LargeImageLandscape", parseElement(xml));
             }
             if(xml.name() == "Location") {
-                event.insert("Trailer", parseElement(xml));
+                event.insert("Trailer", QString("https://m.youtube.com/watch?v=%1").arg(parseElement(xml)));
             }
             if(xml.name() == "MediaResourceFormat") {
                 event.insert("TrailerType", parseElement(xml));
@@ -295,9 +295,6 @@ void Parser::parseEvent(QXmlStreamReader& xml, HTTPEngine::EventModelType type) 
                               event.value("LengthInMinutes"));
 
     models_.value(type)->addEvent(_event);
-    QObject::connect(_event, SIGNAL(parseYoutube(QString, QString)),
-                     httpEngine_, SLOT(getYoutubeVideoInfo(QString, QString)));
-    _event->verifyTrailerUrl();
 }
 
 void Parser::parseArea(QXmlStreamReader &xml)
