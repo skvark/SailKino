@@ -28,6 +28,7 @@ void EventsModel::addEvent(Event* event)
 }
 
 int EventsModel::rowCount(const QModelIndex & parent) const {
+    Q_UNUSED(parent);
     return events_.size();
 }
 

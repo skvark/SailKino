@@ -31,7 +31,7 @@ void ShowTimeModel::addShow(Show* show)
 }
 
 int ShowTimeModel::rowCount(const QModelIndex & parent) const {
-
+    Q_UNUSED(parent);
     return shows_.count();
 
 }
