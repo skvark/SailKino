@@ -5,7 +5,6 @@
 #include <QStringList>
 #include <QString>
 #include <QDate>
-#include <QDebug>
 #include "show.h"
 
 class ShowTimeModel : public QAbstractListModel

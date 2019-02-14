@@ -53,7 +53,6 @@ HEADERS += \
     src/schedulefiltermodel.h
 
 DISTFILES += \
-    qml/pages/ScreenBlank.qml \
     rpm/harbour-sailkino.spec
 
 TRANSLATIONS += \

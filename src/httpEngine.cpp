@@ -1,5 +1,4 @@
 #include "httpEngine.h"
-#include <QDebug>
 
 HTTPEngine::HTTPEngine(QObject *parent) :
     QObject(parent)

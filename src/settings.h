@@ -8,7 +8,6 @@
 #include <QList>
 #include <QStringList>
 #include <QVariantList>
-#include <QDebug>
 
 class SettingsManager : public QObject
 {

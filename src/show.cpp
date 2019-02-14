@@ -1,5 +1,4 @@
 #include "show.h"
-#include <QDebug>
 
 Show::Show(QMap<QString, QString> init)
 {

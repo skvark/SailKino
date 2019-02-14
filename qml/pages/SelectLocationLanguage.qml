@@ -69,7 +69,6 @@ Dialog {
                                 kinoAPI.saveLocation(current_country);
                                 listView.currentIndex = -1;
                             }
-                            Component.onCompleted: console.log("Country:", model.modelData, countryTr[model.modelData])
                         }
                     }
                 }
@@ -90,7 +89,6 @@ Dialog {
         SilicaListView {
 
             id: listView
-            onCurrentIndexChanged: console.log("CurrInd",currentIndex)
             anchors {
                top: locations.bottom
                left: parent.left
@@ -127,7 +125,6 @@ Dialog {
                     listView.currentIndex = index;
                     current_lang = modelData
                 }
-                Component.onCompleted: console.log("Language:", model.modelData, languageTr[modelData])
             }
 
             VerticalScrollDecorator { flickable: listView }

@@ -7,7 +7,6 @@
 #include <QVector>
 #include <QTextCodec>
 #include <QNetworkReply>
-#include <QDebug>
 #include <QDate>
 #include <event.h>
 #include <eventsmodel.h>

@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QSortFilterProxyModel>
 #include <QDateTime>
-#include <QDebug>
 
 class ScheduleFilterModel : public QSortFilterProxyModel
 {

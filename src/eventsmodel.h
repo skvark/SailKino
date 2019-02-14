@@ -5,7 +5,6 @@
 #include <QStringList>
 #include <QString>
 #include <QDate>
-#include <QDebug>
 #include <event.h>
 
 class EventsModel : public QAbstractListModel
