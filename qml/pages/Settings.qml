@@ -8,21 +8,21 @@ Page {
 
     Component.onCompleted: {
         if(kinoAPI.getAreas().length !== 0 ){
-            loading = false;
-            listView.model = kinoAPI.getAreas();
-            listView.currentIndex = listView.model.indexOf(kinoAPI.getAreaName());
+            loading = false
+            listView.model = kinoAPI.getAreas()
+            listView.currentIndex = listView.model.indexOf(kinoAPI.getAreaName())
         } else {
-            loading = false;
-            holder = true;
-            listView.currentIndex = -1;
+            loading = false
+            holder = true
+            listView.currentIndex = -1
         }
     }
 
     onStatusChanged: {
         if (status === PageStatus.Deactivating) {
             if (_navigation === PageNavigation.Back) {
-                kinoAPI.clearModels();
-                kinoAPI.init();
+                kinoAPI.clearModels()
+                kinoAPI.init()
             }
         }
     }
@@ -42,17 +42,15 @@ Page {
 
             MenuItem {
                 text: "About"
-                onClicked: {
-                    pageStack.push("About.qml");
-                }
+                onClicked: pageStack.push("About.qml")
             }
 
             MenuItem {
                 text: "Country & Language"
                 onClicked: {
-                    var dialog = pageStack.push("SelectLocationLanguage.qml");
+                    var dialog = pageStack.push("SelectLocationLanguage.qml")
                     dialog.accepted.connect(function() {
-                        areaModel.clear();
+                        areaModel.clear()
                     })
                 }
             }
@@ -71,7 +69,6 @@ Page {
             id: generalsection
             text: qsTr("General")
             anchors.top: headerContainer.bottom
-            height: 50;
         }
 
         TextSwitch {
@@ -80,9 +77,9 @@ Page {
             text: "Filter events"
             description: "Filters events which have no shows for selected date."
             automaticCheck: true
-            checked: kinoAPI.getFilterState();
+            checked: kinoAPI.getFilterState()
             onCheckedChanged: {
-                kinoAPI.setFilterState(checked);
+                kinoAPI.setFilterState(checked)
             }
         }
 
@@ -90,29 +87,17 @@ Page {
             id: areasection
             text: qsTr("Area")
             anchors.top: filterSwitch.bottom
-            height: 40;
-
-            Label {
-                id: label
-                font.pixelSize: 22
-                anchors.right: areasection.right
-                anchors.top: areasection.bottom
-                textFormat: Text.RichText
-                text: "Country can be selected via the pulley menu."
-                color: Theme.secondaryColor
-            }
-
         }
 
         SilicaListView {
 
             id: listView
-            height: Screen.height - 520
-            width: page.width;
+            height: Screen.height - areasection.y - areasection.height
+            width: parent.width
             anchors.top: areasection.bottom
             anchors.leftMargin: Theme.paddingMedium
-            anchors.topMargin: 110
-            currentIndex: -1;
+            currentIndex: -1
+            clip: true
 
             ViewPlaceholder {
                 verticalOffset: -300
@@ -126,7 +111,7 @@ Page {
                 id: delegate
                 height: Theme.ItemSizeMedium
                 width: parent.width
-                highlighted: listView.currentIndex == index;
+                highlighted: listView.currentIndex == index
 
                 Label {
                     id: label2
@@ -138,9 +123,9 @@ Page {
                 }
 
                 onClicked: {
-                    listView.currentIndex = index;
-                    current = modelData;
-                    save();
+                    listView.currentIndex = index
+                    current = modelData
+                    save()
                 }
 
             }
@@ -153,22 +138,22 @@ Page {
         id: areaModel
     }
 
-    property bool loading: true;
-    property bool holder: false;
-    property string current;
+    property bool loading: true
+    property bool holder: false
+    property string current
 
     function save() {
-        kinoAPI.saveArea(current);
-        kinoAPI.clearModels();
+        kinoAPI.saveArea(current)
+        kinoAPI.clearModels()
     }
 
     Connections {
         target: kinoAPI
         onAreas: {
-            loading = false;
-            holder = false;
-            listView.model = kinoAPI.getAreas();
-            listView.currentIndex = listView.model.indexOf(kinoAPI.getAreaName());
+            loading = false
+            holder = false
+            listView.model = kinoAPI.getAreas()
+            listView.currentIndex = listView.model.indexOf(kinoAPI.getAreaName())
         }
     }
 }
