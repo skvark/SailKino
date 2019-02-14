@@ -60,32 +60,32 @@
 <context>
     <name>EventsPage</name>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="22"/>
+        <location filename="../qml/pages/EventsPage.qml" line="24"/>
         <source>Please select country, language and area in the settings to see events.</source>
         <translation>Ole hyvä ja valitse asetuksista teatteri, kieli ja maa nähdäksesi esitykset.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="97"/>
+        <location filename="../qml/pages/EventsPage.qml" line="100"/>
         <source>In Theatres</source>
         <translation>Ohjelmistossa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="142"/>
+        <location filename="../qml/pages/EventsPage.qml" line="145"/>
         <source>Coming Soon</source>
         <translation>Tulossa pian</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="210"/>
+        <location filename="../qml/pages/EventsPage.qml" line="213"/>
         <source>Change Date</source>
         <translation>Vaihda päivä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="230"/>
+        <location filename="../qml/pages/EventsPage.qml" line="233"/>
         <source>Search</source>
         <translation>Haku</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="237"/>
+        <location filename="../qml/pages/EventsPage.qml" line="240"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
@@ -128,13 +128,13 @@
     </message>
     <message>
         <location filename="../qml/pages/SelectLocationLanguage.qml" line="53"/>
-        <source>Location</source>
-        <translation>Sijainti</translation>
+        <source>Country</source>
+        <translation>Maa</translation>
     </message>
     <message>
         <location filename="../qml/pages/SelectLocationLanguage.qml" line="54"/>
-        <source>Select location to see available languages.</source>
-        <translation>Valitse sijainti nähdäksesi tarjolla olevat kielet.</translation>
+        <source>Select country to see available languages.</source>
+        <translation>Valitse maa nähdäkseksi kielet.</translation>
     </message>
 </context>
 <context>
@@ -179,6 +179,29 @@
         <location filename="../qml/pages/Settings.qml" line="106"/>
         <source>You haven&apos;t selected country and language yet. Please select them via the pulley menu.</source>
         <translation>Et ole vielä valinnut maata ja kieltä. Löydät ne vetovalikosta.</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsManager</name>
+    <message>
+        <location filename="../src/settings.cpp" line="4"/>
+        <source>Finland</source>
+        <translation>Suomi</translation>
+    </message>
+    <message>
+        <location filename="../src/settings.cpp" line="5"/>
+        <source>Estonia</source>
+        <translation>Viro</translation>
+    </message>
+    <message>
+        <location filename="../src/settings.cpp" line="6"/>
+        <source>Latvia</source>
+        <translation>Latvia</translation>
+    </message>
+    <message>
+        <location filename="../src/settings.cpp" line="7"/>
+        <source>Lithuania</source>
+        <translation>Liettua</translation>
     </message>
 </context>
 <context>

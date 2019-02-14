@@ -1,10 +1,10 @@
 #include "settings.h"
 
 QList<QString> SettingsManager::countryList_ = QList<QString>()
-        << QString("Finland")
-        << QString("Estonia")
-        << QString("Latvia")
-        << QString("Lithuania");
+        << QString(tr("Finland"))
+        << QString(tr("Estonia"))
+        << QString(tr("Latvia"))
+        << QString(tr("Lithuania"));
 
 SettingsManager::SettingsManager(QObject *parent):
     QObject(parent)

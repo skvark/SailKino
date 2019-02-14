@@ -60,32 +60,32 @@
 <context>
     <name>EventsPage</name>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="22"/>
+        <location filename="../qml/pages/EventsPage.qml" line="24"/>
         <source>Please select country, language and area in the settings to see events.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="97"/>
+        <location filename="../qml/pages/EventsPage.qml" line="100"/>
         <source>In Theatres</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="142"/>
+        <location filename="../qml/pages/EventsPage.qml" line="145"/>
         <source>Coming Soon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="210"/>
+        <location filename="../qml/pages/EventsPage.qml" line="213"/>
         <source>Change Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="230"/>
+        <location filename="../qml/pages/EventsPage.qml" line="233"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="237"/>
+        <location filename="../qml/pages/EventsPage.qml" line="240"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -128,12 +128,12 @@
     </message>
     <message>
         <location filename="../qml/pages/SelectLocationLanguage.qml" line="53"/>
-        <source>Location</source>
+        <source>Country</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SelectLocationLanguage.qml" line="54"/>
-        <source>Select location to see available languages.</source>
+        <source>Select country to see available languages.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -177,6 +177,29 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="106"/>
         <source>You haven&apos;t selected country and language yet. Please select them via the pulley menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsManager</name>
+    <message>
+        <location filename="../src/settings.cpp" line="4"/>
+        <source>Finland</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/settings.cpp" line="5"/>
+        <source>Estonia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/settings.cpp" line="6"/>
+        <source>Latvia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/settings.cpp" line="7"/>
+        <source>Lithuania</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
