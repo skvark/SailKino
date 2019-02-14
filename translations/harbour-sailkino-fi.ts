@@ -142,71 +142,71 @@
         <translation>Valitse maa nähdäksesi saatavilla olevat kielet.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="80"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="79"/>
         <source>Language</source>
         <translation>Kieli</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="81"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="80"/>
         <source>Select language from the list below.</source>
         <translation>Valitse kieli allaolevasta listasta.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="148"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="145"/>
         <source>Finland</source>
         <comment>Country</comment>
         <translation>Suomi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="149"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="146"/>
         <source>Estonia</source>
         <comment>Country</comment>
         <translation>Viro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="150"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="147"/>
         <source>Latvia</source>
         <comment>Country</comment>
         <translation>Latvia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="151"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="148"/>
         <source>Lithuania</source>
         <comment>Country</comment>
         <translation>Liettua</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="155"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="152"/>
         <source>English</source>
         <comment>Language</comment>
         <translation>englanti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="156"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="153"/>
         <source>Finnish</source>
         <comment>Language</comment>
         <translation>suomi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="157"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="154"/>
         <source>Estonian</source>
         <comment>Language</comment>
         <translation>viro</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="158"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="155"/>
         <source>Latvian</source>
         <comment>Language</comment>
         <translation>latvia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="159"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="156"/>
         <source>Lithuanian</source>
         <comment>Language</comment>
         <translation>liettua</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="160"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="157"/>
         <source>Russian</source>
         <comment>Language</comment>
         <translation>venäjä</translation>
@@ -263,22 +263,22 @@
         <translation>Vaihda päivä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SingleEvent.qml" line="105"/>
+        <location filename="../qml/pages/SingleEvent.qml" line="107"/>
         <source>Genre: </source>
         <translation>Tyylilaji: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/SingleEvent.qml" line="118"/>
+        <location filename="../qml/pages/SingleEvent.qml" line="120"/>
         <source>Age limit: </source>
         <translation>Ikäraja: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/SingleEvent.qml" line="131"/>
+        <location filename="../qml/pages/SingleEvent.qml" line="133"/>
         <source>Length: </source>
         <translation>Kesto: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/SingleEvent.qml" line="199"/>
+        <location filename="../qml/pages/SingleEvent.qml" line="201"/>
         <source>No shows.</source>
         <translation>Ei näytöksiä.</translation>
     </message>
