@@ -65,7 +65,7 @@ Page {
             left: parent.left
             right: parent.right
         }
-        height: 2*Theme.fontSizeSmall + 1.25*Theme.fontSizeExtraSmall + 3*Theme.paddingSmall
+        height: 3*Theme.fontSizeSmall + 1.25*Theme.fontSizeExtraSmall + 3*Theme.paddingSmall
 
         SilicaFlickable {
 
@@ -84,7 +84,7 @@ Page {
 
             Row {
                 id: nav
-                height: 2*Theme.fontSizeSmall
+                height: 3*Theme.fontSizeSmall
                 width: parent.width
 
                 BackgroundItem {
@@ -94,6 +94,7 @@ Page {
                     height: parent.height
 
                     Label {
+                        id: inTeathersLabel
                         anchors.centerIn: parent
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.highlightColor
@@ -106,7 +107,9 @@ Page {
 
                     Rectangle {
                         id: dockrectangle1
-                        anchors.fill: parent
+                        anchors.centerIn: parent
+                        height: 1.5*inTeathersLabel.height
+                        width: Math.max(inTeathersLabel.width, inTeathersLabel.width) * 1.5
                         color: Theme.rgba(Theme.highlightColor, 0.0)
                         radius: Theme.paddingSmall
                         anchors.margins: Theme.paddingMedium
@@ -139,6 +142,7 @@ Page {
                     height: parent.height
 
                     Label {
+                        id: comingSoonLabel
                         anchors.centerIn: parent
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.highlightColor
@@ -151,7 +155,9 @@ Page {
 
                     Rectangle {
                         id: dockrectangle2
-                        anchors.fill: parent
+                        anchors.centerIn: parent
+                        height: comingSoonLabel.height * 2
+                        width: Math.max(inTeathersLabel.width, inTeathersLabel.width) * 1.5
                         radius: Theme.paddingSmall;
                         color: Theme.rgba(Theme.highlightColor, 0.0)
                         anchors.margins: Theme.paddingMedium
