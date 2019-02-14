@@ -50,8 +50,8 @@ Dialog {
 
             ComboBox {
                id: combo
-               label: qsTr("Location")
-               description: qsTr("Select location to see available languages.")
+               label: qsTr("Country")
+               description: qsTr("Select country to see available languages.")
                currentIndex: 0
                width: parent.width
 

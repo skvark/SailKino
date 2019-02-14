@@ -146,8 +146,9 @@
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="49"/>
-        <source>Country &amp; Language</source>
+        <source>Country and language</source>
         <translation>Maa ja kieli</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="64"/>

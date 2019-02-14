@@ -46,7 +46,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Country & Language")
+                text: qsTr("Country and language")
                 onClicked: {
                     var dialog = pageStack.push("SelectLocationLanguage.qml")
                     dialog.accepted.connect(function() {
