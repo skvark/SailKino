@@ -41,12 +41,12 @@ Page {
             id: menu
 
             MenuItem {
-                text: "About"
+                text: qsTr("About")
                 onClicked: pageStack.push("About.qml")
             }
 
             MenuItem {
-                text: "Country & Language"
+                text: qsTr("Country & Language")
                 onClicked: {
                     var dialog = pageStack.push("SelectLocationLanguage.qml")
                     dialog.accepted.connect(function() {
@@ -74,8 +74,8 @@ Page {
         TextSwitch {
             id: filterSwitch
             anchors.top: generalsection.bottom
-            text: "Filter events"
-            description: "Filters events which have no shows for selected date."
+            text: qsTr("Filter events")
+            description: qsTr("Filters events which have no shows for selected date.")
             automaticCheck: true
             checked: kinoAPI.getFilterState()
             onCheckedChanged: {

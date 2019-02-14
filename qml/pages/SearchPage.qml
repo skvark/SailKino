@@ -9,7 +9,7 @@ Page {
 
     onSearchStringChanged: getSortedItems()
     Component.onCompleted: {
-        searchField.placeholderText = "Start typing title...";
+        searchField.placeholderText = qsTr("Start typing title...");
         searchType = "title";
         getSortedItems();
     }
@@ -22,9 +22,9 @@ Page {
         PullDownMenu {
             id: menu
             MenuItem {
-                text: (searchType === "title" ? "Search by Genre" : "Search by Title")
+                text: (searchType === "title" ? qsTr("Search by Genre") : qsTr("Search by Title"))
                 onClicked: {
-                    searchField.placeholderText = (searchType === "title" ? "Start typing genre..." : "Start typing title...")
+                    searchField.placeholderText = (searchType === "title" ? qsTr("Start typing genre...") : qsTr("Start typing title..."))
                     searchField.text = "";
                     searchType = (searchType === "title" ? "genre" : "title");
                 }

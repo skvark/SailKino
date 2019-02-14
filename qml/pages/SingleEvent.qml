@@ -26,7 +26,7 @@ Page {
             id: menu
 
             MenuItem {
-                text: "Change Date"
+                text: qsTr("Change Date")
 
                 onClicked: {
                     var dialog = pageStack.push(pickerComponent, {

@@ -94,7 +94,7 @@ Page {
                         anchors.centerIn: parent
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.highlightColor
-                        text: "In Theatres"
+                        text: qsTr("In Theatres")
                     }
 
                     onClicked: if (menuView.currentIndex !== 0 ) {
@@ -139,7 +139,7 @@ Page {
                         anchors.centerIn: parent
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.highlightColor
-                        text: "Coming Soon"
+                        text: qsTr("Coming Soon")
                     }
 
                     onClicked: if (menuView.currentIndex !== 1 ) {
@@ -207,7 +207,7 @@ Page {
                 enabled: !pholder.enabled
 
                 MenuItem {
-                    text: "Change Date"
+                    text: qsTr("Change Date")
 
                     onClicked: {
                         var dialog = pageStack.push(pickerComponent, {
@@ -227,14 +227,14 @@ Page {
                 }
 
                 MenuItem {
-                    text: "Search"
+                    text: qsTr("Search")
                     onClicked: {
                         pageStack.push("SearchPage.qml");
                     }
                 }
 
                 MenuItem {
-                    text: "Settings"
+                    text: qsTr("Settings")
                     onClicked: {
                         filterdatetimer.stop();
                         pageStack.push("Settings.qml");

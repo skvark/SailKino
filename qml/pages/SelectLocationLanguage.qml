@@ -45,13 +45,13 @@ Dialog {
 
             DialogHeader {
                id: header
-               acceptText: "Select"
+               acceptText: qsTr("Select")
             }
 
             ComboBox {
                id: combo
-               label: "Location"
-               description: "Select location to see available languages."
+               label: qsTr("Location")
+               description: qsTr("Select location to see available languages.")
                currentIndex: 0
                width: parent.width
 

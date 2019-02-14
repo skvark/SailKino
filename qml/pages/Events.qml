@@ -63,7 +63,7 @@ Item {
             id: menu
 
             MenuItem {
-                text: "Settings"
+                text: qsTr("Settings")
                 onClicked: {
                     pgheader = "";
                     filterdatetimer.stop();
@@ -74,7 +74,7 @@ Item {
             MenuItem {
                 enabled: listview.count > 0
                 visible: listview.count > 0
-                text: "Search"
+                text: qsTr("Search")
                 onClicked: {
                     pageStack.push("SearchPage.qml");
                 }
