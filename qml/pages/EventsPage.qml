@@ -28,7 +28,7 @@ Page {
         id: menuView
         itemWidth: width
         itemHeight: height
-        height: app.height - footer.visibleHeight
+        height: page.height - footer.height
         clip: true
 
         anchors {
@@ -57,11 +57,16 @@ Page {
 
     Item {
         id: footer
-        property int visibleHeight: footercontent.contentY + height
-        anchors { bottom: parent.bottom; left: parent.left; right: parent.right }
-        height: 0.13 * Screen.height
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+        height: Theme.itemSizeSmall + 1.25*Theme.fontSizeExtraSmall + 3*Theme.paddingSmall
 
         SilicaFlickable {
+
+            enabled: !pholder.enabled
 
             id: footercontent
             anchors.fill: parent
@@ -75,9 +80,9 @@ Page {
             }
 
             Row {
-
                 id: nav
-                height: 0.0677 * Screen.height
+                height: Theme.itemSizeSmall
+                width: parent.width
 
                 BackgroundItem {
 
@@ -86,12 +91,10 @@ Page {
                     height: parent.height
 
                     Label {
-                        anchors.fill: parent
+                        anchors.centerIn: parent
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.highlightColor
                         text: "In Theatres"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
 
                     onClicked: if (menuView.currentIndex !== 0 ) {
@@ -102,14 +105,15 @@ Page {
                         id: dockrectangle1
                         anchors.fill: parent
                         color: Theme.rgba(Theme.highlightColor, 0.0)
-                        radius: 5;
+                        radius: Theme.paddingSmall
                         anchors.margins: Theme.paddingMedium
+                        visible: !pholder.enabled
 
                         states: [
                             State { name: "visible";
                                 PropertyChanges {
                                     target: dockrectangle1;
-                                    color: Theme.rgba(Theme.highlightColor, 0.4)
+                                    color: Theme.rgba(Theme.highlightColor, 0.3)
                                 }
                             },
                             State { name: "hidden";
@@ -128,16 +132,14 @@ Page {
                 BackgroundItem {
 
                     id: dockbackground2
-                    width: footercontent.width / 2
+                    width: parent.width / 2
                     height: parent.height
 
                     Label {
-                        anchors.fill: parent
+                        anchors.centerIn: parent
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.highlightColor
                         text: "Coming Soon"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
 
                     onClicked: if (menuView.currentIndex !== 1 ) {
@@ -147,9 +149,10 @@ Page {
                     Rectangle {
                         id: dockrectangle2
                         anchors.fill: parent
-                        radius: 5;
+                        radius: Theme.paddingSmall;
                         color: Theme.rgba(Theme.highlightColor, 0.0)
                         anchors.margins: Theme.paddingMedium
+                        visible: !pholder.enabled
 
                         states: [
                             State {
@@ -175,35 +178,33 @@ Page {
             }
 
             Row {
-                height: 0.0625 * Screen.height
                 anchors.top: nav.bottom
-
-                Item {
-                    anchors.margins: Theme.paddingMedium
-                    width: footercontent.width
-                    height: parent.height
-
-                    Label {
-                        id: locationdate
-                        anchors.fill: parent
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.topMargin: 5
-                        textFormat: Text.RichText
-                        text: {
-                            if (kinoAPI.getAreaName().length !== 0) {
-                                return kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
-                            } else {
-                                return kinoAPI.getDate().toDateString();
-                            }
+                width: parent.width
+                height: 1.25*Theme.fontSizeExtraSmall + 3*Theme.paddingSmall
+                Label {
+                    id: locationdate
+                    width: parent.width
+                    height: 1.25*Theme.fontSizeExtraSmall
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    text: {
+                        if (kinoAPI.getAreaName().length !== 0) {
+                            return kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
+                        } else {
+                            return kinoAPI.getDate().toDateString();
                         }
-                        wrapMode: Text.Wrap
-                        font.pixelSize: 0.0229 * Screen.height
                     }
+                    wrapMode: Text.NoWrap
+                    elide: Text.ElideMiddle
                 }
             }
 
             PushUpMenu {
                 id: menu
+
+                visible: !pholder.enabled
+                enabled: !pholder.enabled
 
                 MenuItem {
                     text: "Change Date"
