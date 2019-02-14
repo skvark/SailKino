@@ -72,13 +72,6 @@ Page {
             anchors.fill: parent
             contentHeight: parent.height
 
-            Image {
-               id: background
-               fillMode: Image.PreserveAspectCrop
-               anchors.fill: parent
-               source: "image://theme/graphic-header"
-            }
-
             Row {
                 id: nav
                 height: 3*Theme.fontSizeSmall

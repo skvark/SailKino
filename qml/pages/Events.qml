@@ -119,19 +119,19 @@ Item {
                     width: previewimage.width
                     Image {
                         id: previewimage
-                        source: {
-                            if (mediumimageportrait !== "") {
-                                return mediumimageportrait;
-                            } else {
-                                return "../images/default-cover.png"
-                            }
-                        }
+                        source: mediumimageportrait
                         fillMode: Image.PreserveAspectCrop
                         width: row.width / 3.0
                         height: row.width / 2.0
                         sourceSize.width: width
                         sourceSize.height: height
 
+                        // Missing thumbnail?
+                        Image {
+                            anchors.centerIn: parent
+                            source: "image://theme/icon-l-image"
+                            visible: mediumimageportrait === ""
+                        }
                     }
                 }
 
