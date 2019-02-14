@@ -6,6 +6,8 @@ Dialog {
 
     id: page
 
+    canAccept: listView.currentIndex > -1
+
     onAccepted: {
         save();
     }
@@ -22,7 +24,7 @@ Dialog {
         kinoAPI.resetLanguage();
         for(var i = 0; i < kinoAPI.getLocations().length; ++i) {
             if(old_country === kinoAPI.getLocations()[i]) {
-                combo.currentIndex = i;
+                combo1.currentIndex = i;
                 kinoAPI.resetLanguage();
                 kinoAPI.saveLocation(old_country);
                 break;
@@ -49,7 +51,7 @@ Dialog {
             }
 
             ComboBox {
-               id: combo
+               id: combo1
                label: qsTr("Country")
                description: qsTr("Select country to see available languages.")
                currentIndex: 0
@@ -60,30 +62,46 @@ Dialog {
                     Repeater {
                         model: kinoAPI.getLocations()
                         delegate: MenuItem {
-                            text: model.modelData
+                            text: countryTr[model.modelData]
                             onClicked: {
                                 current_country = modelData;
                                 kinoAPI.resetLanguage();
                                 kinoAPI.saveLocation(current_country);
                                 listView.currentIndex = -1;
                             }
+                            Component.onCompleted: console.log("Country:", model.modelData, countryTr[model.modelData])
                         }
                     }
                 }
 
+            }
+            ComboBox {
+                id: combo2
+                label: qsTr("Language")
+                description: qsTr("Select language from the list below.")
+                visible: !loading
+
+                MouseArea {
+                    anchors.fill: parent
+                }
             }
         }
 
         SilicaListView {
 
             id: listView
+            onCurrentIndexChanged: console.log("CurrInd",currentIndex)
             anchors {
                top: locations.bottom
                left: parent.left
                right: parent.right
                bottom: parent.bottom
-               leftMargin: Theme.paddingMedium
-               topMargin: Theme.paddingMedium
+            }
+
+            BusyIndicator {
+                anchors.centerIn: parent
+                size: BusyIndicatorSize.Large
+                running: loading
             }
 
             delegate: ListItem {
@@ -97,8 +115,10 @@ Dialog {
                 Label {
                     id: label
                     anchors.fill: parent
-                    text: modelData
-                    anchors.leftMargin: Theme.paddingMedium
+                    text: languageTr[modelData]
+                    anchors {
+                        leftMargin: Theme.horizontalPageMargin
+                    }
                     verticalAlignment: Text.AlignVCenter
                     color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 }
@@ -107,24 +127,38 @@ Dialog {
                     listView.currentIndex = index;
                     current_lang = modelData
                 }
+                Component.onCompleted: console.log("Language:", model.modelData, languageTr[modelData])
             }
 
             VerticalScrollDecorator { flickable: listView }
 
-            BusyIndicator {
-                anchors.centerIn: parent
-                size: BusyIndicatorSize.Large
-                running: loading
-            }
         }
 
     }
+
+
 
     property bool loading: false;
     property string current_lang;
     property string current_country;
     property string old_lang;
     property string old_country;
+
+    property variant countryTr: {
+        "Finland": qsTr("Finland", "Country"),
+                "Estonia": qsTr("Estonia", "Country"),
+                "Latvia": qsTr("Latvia", "Country"),
+                "Lithuania": qsTr("Lithuania", "Country")
+    }
+
+    property variant languageTr: {
+        "English": qsTr("English", "Language"),
+                "Finnish": qsTr("Finnish", "Language"),
+                "Estonian": qsTr("Estonian", "Language"),
+                "Latvian": qsTr("Latvian", "Language"),
+                "Lithuanian": qsTr("Lithuanian", "Language"),
+                "Russian": qsTr("Russian", "Language")
+    }
 
     function save() {
         kinoAPI.saveLanguage(current_lang);
@@ -138,10 +172,7 @@ Dialog {
         onLanguagesReady: {
             loading = false;
             listView.model = langs;
-            if(langs.length > 0) {
-                current_lang = langs[0];
-                listView.currentIndex = 0;
-            }
+            listView.currentIndex = -1;
         }
     }
 }

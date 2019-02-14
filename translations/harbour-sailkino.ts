@@ -60,37 +60,37 @@
 <context>
     <name>EventsPage</name>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="24"/>
+        <location filename="../qml/pages/EventsPage.qml" line="21"/>
         <source>Please select country, language and area in the settings to see events.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="101"/>
+        <location filename="../qml/pages/EventsPage.qml" line="98"/>
         <source>In Theatres</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="149"/>
+        <location filename="../qml/pages/EventsPage.qml" line="146"/>
         <source>Coming Soon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="219"/>
+        <location filename="../qml/pages/EventsPage.qml" line="216"/>
         <source>Change Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="239"/>
+        <location filename="../qml/pages/EventsPage.qml" line="236"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="246"/>
+        <location filename="../qml/pages/EventsPage.qml" line="243"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="306"/>
+        <location filename="../qml/pages/EventsPage.qml" line="303"/>
         <source>Coming soon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -127,18 +127,88 @@
 <context>
     <name>SelectLocationLanguage</name>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="48"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="50"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="53"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="55"/>
         <source>Country</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SelectLocationLanguage.qml" line="54"/>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="56"/>
         <source>Select country to see available languages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="80"/>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="81"/>
+        <source>Select language from the list below.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="148"/>
+        <source>Finland</source>
+        <comment>Country</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="149"/>
+        <source>Estonia</source>
+        <comment>Country</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="150"/>
+        <source>Latvia</source>
+        <comment>Country</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="151"/>
+        <source>Lithuania</source>
+        <comment>Country</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="155"/>
+        <source>English</source>
+        <comment>Language</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="156"/>
+        <source>Finnish</source>
+        <comment>Language</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="157"/>
+        <source>Estonian</source>
+        <comment>Language</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="158"/>
+        <source>Latvian</source>
+        <comment>Language</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="159"/>
+        <source>Lithuanian</source>
+        <comment>Language</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SelectLocationLanguage.qml" line="160"/>
+        <source>Russian</source>
+        <comment>Language</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -182,29 +252,6 @@
     <message>
         <location filename="../qml/pages/Settings.qml" line="106"/>
         <source>You haven&apos;t selected country and language yet. Please select them via the pulley menu.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SettingsManager</name>
-    <message>
-        <location filename="../src/settings.cpp" line="4"/>
-        <source>Finland</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="5"/>
-        <source>Estonia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="6"/>
-        <source>Latvia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/settings.cpp" line="7"/>
-        <source>Lithuania</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
