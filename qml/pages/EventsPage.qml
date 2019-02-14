@@ -30,7 +30,7 @@ Page {
         id: menuView
         itemWidth: width
         itemHeight: height
-        height: page.height - footer.height
+        height: page.height - footer.visibleHeight
         clip: true
 
         anchors {
@@ -59,6 +59,7 @@ Page {
 
     Item {
         id: footer
+        property int visibleHeight: footercontent.contentY + height
         anchors {
             bottom: parent.bottom
             left: parent.left
