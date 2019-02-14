@@ -13,6 +13,8 @@ Page {
     }
 
     SilicaFlickable {
+        enabled: pholder.enabled
+        visible: enabled
 
         width: parent.width
 
@@ -295,7 +297,11 @@ Page {
                                        kinoAPI.getAreaName(),
                                        false);
             comingSoon.setModel(kinoAPI.comingSoon, "Coming soon", true);
-            locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
+            if (kinoAPI.getAreaName().length !== 0) {
+                locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString()
+            } else {
+                locationdate.text = kinoAPI.getDate().toDateString()
+            }
             filterdatetimer.start();
         }
 
@@ -311,8 +317,16 @@ Page {
         }
 
         onDateChanged: {
-            locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
+            if (kinoAPI.getAreaName().length !== 0) {
+                locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString()
+            } else {
+                locationdate.text = kinoAPI.getDate().toDateString()
+            }
         }
+    }
+    onLoadingChanged: {
+        if(loading)
+            locationdate.text = kinoAPI.getDate().toDateString()
     }
 }
 

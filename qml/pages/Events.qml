@@ -56,7 +56,7 @@ Item {
 
         header: PageHeader {
             title: pgheader
-            description: dt
+            description: pgheader === "" ? "" : dt
         }
 
         PullDownMenu {
