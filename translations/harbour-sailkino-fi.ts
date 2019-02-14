@@ -65,32 +65,32 @@
         <translation>Ole hyvä ja valitse asetuksista teatteri, kieli ja maa nähdäksesi esitykset.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="98"/>
+        <location filename="../qml/pages/EventsPage.qml" line="91"/>
         <source>In Theatres</source>
         <translation>Ohjelmistossa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="146"/>
+        <location filename="../qml/pages/EventsPage.qml" line="139"/>
         <source>Coming Soon</source>
         <translation>Tulossa pian</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="216"/>
+        <location filename="../qml/pages/EventsPage.qml" line="209"/>
         <source>Change Date</source>
         <translation>Vaihda päivä</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="236"/>
+        <location filename="../qml/pages/EventsPage.qml" line="229"/>
         <source>Search</source>
         <translation>Haku</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="243"/>
+        <location filename="../qml/pages/EventsPage.qml" line="236"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="303"/>
+        <location filename="../qml/pages/EventsPage.qml" line="296"/>
         <source>Coming soon</source>
         <translation>Tulossa pian</translation>
     </message>
