@@ -13,9 +13,6 @@ Page {
     }
 
     SilicaFlickable {
-        enabled: pholder.enabled
-        visible: enabled
-
         width: parent.width
 
         ViewPlaceholder {
@@ -109,7 +106,7 @@ Page {
                         id: dockrectangle1
                         anchors.centerIn: parent
                         height: 1.5*inTeathersLabel.height
-                        width: Math.max(inTeathersLabel.width, inTeathersLabel.width) * 1.5
+                        width: Math.min(Math.max(inTeathersLabel.width, inTeathersLabel.width) * 1.5, footercontent.width / 2)
                         color: Theme.rgba(Theme.highlightColor, 0.0)
                         radius: Theme.paddingSmall
                         anchors.margins: Theme.paddingMedium
@@ -157,7 +154,7 @@ Page {
                         id: dockrectangle2
                         anchors.centerIn: parent
                         height: comingSoonLabel.height * 2
-                        width: Math.max(inTeathersLabel.width, inTeathersLabel.width) * 1.5
+                        width: Math.min(Math.max(inTeathersLabel.width, inTeathersLabel.width) * 1.5, footercontent.width / 2)
                         radius: Theme.paddingSmall;
                         color: Theme.rgba(Theme.highlightColor, 0.0)
                         anchors.margins: Theme.paddingMedium
