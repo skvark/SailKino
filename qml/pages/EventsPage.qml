@@ -64,7 +64,7 @@ Page {
             left: parent.left
             right: parent.right
         }
-        height: Theme.itemSizeSmall + 1.25*Theme.fontSizeExtraSmall + 3*Theme.paddingSmall
+        height: 2*Theme.fontSizeSmall + 1.25*Theme.fontSizeExtraSmall + 3*Theme.paddingSmall
 
         SilicaFlickable {
 
@@ -83,7 +83,7 @@ Page {
 
             Row {
                 id: nav
-                height: Theme.itemSizeSmall
+                height: 2*Theme.fontSizeSmall
                 width: parent.width
 
                 BackgroundItem {
