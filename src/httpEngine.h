@@ -62,7 +62,6 @@ private:
     void LanguagesRequest(QNetworkReply *finished);
     void scheduleDatesRequest(QNetworkReply *finished);
     void scheduleRequest(QNetworkReply *finished);
-    void youtubeRequest(QNetworkReply *finished, QString eventID);
     QString generateUrl(queryItemList &queryItems);
     void GET(QUrl &url, GetMethod method, EventModelType type);
     bool checkError(QNetworkReply *finished);
@@ -73,7 +72,6 @@ signals:
     void scheludeDatesReady(const QByteArray &data);
     void languagesReady(const QByteArray &data);
     void areasReady(const QByteArray &data);
-    void youtubeReady(QString url, QString id);
     void networkError(QNetworkReply::NetworkError error);
 
 public slots:
@@ -82,7 +80,6 @@ public slots:
 private:
     QNetworkAccessManager nam_;
     QHash<QNetworkReply*, QPair<GetMethod, EventModelType> > hash_;
-    QMap<QNetworkReply*, QString> youtubeReplies_;
     QString baseUrl_;
     QString lang_;
 };
