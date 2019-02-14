@@ -81,10 +81,10 @@ Dialog {
                top: locations.bottom
                left: parent.left
                right: parent.right
+               bottom: parent.bottom
                leftMargin: Theme.paddingMedium
                topMargin: Theme.paddingMedium
             }
-            height: 400
 
             delegate: ListItem {
 
@@ -92,6 +92,7 @@ Dialog {
                 height: Theme.ItemSizeMedium
                 width: parent.width
                 highlighted: listView.currentIndex == index;
+                visible: !loading
 
                 Label {
                     id: label
