@@ -177,7 +177,6 @@ void Parser::parseLanguage(QXmlStreamReader &xml)
     QString isocode;
     QString isocodetwo;
     QString name;
-    QString localName;
     xml.readNext();
 
     while(!(xml.tokenType() == QXmlStreamReader::EndElement &&
@@ -193,17 +192,14 @@ void Parser::parseLanguage(QXmlStreamReader &xml)
             if(xml.name() == "Name") {
                 name = parseElement(xml);
             }
-            if(xml.name() == "LocalName") {
-                localName = parseElement(xml);
-            }
         }
         xml.readNext();
     }
 
     if (isocodetwo == "FI") {
-        languages_.insert(isocodetwo, QString("%1 (%2)").arg(localName).arg(name));
+        languages_.insert(isocodetwo, name);
     } else {
-        languages_.insert(isocode, QString("%1 (%2)").arg(localName).arg(name));
+        languages_.insert(isocode, name);
     }
 }
 
