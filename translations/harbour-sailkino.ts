@@ -65,28 +65,33 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="100"/>
+        <location filename="../qml/pages/EventsPage.qml" line="101"/>
         <source>In Theatres</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="145"/>
+        <location filename="../qml/pages/EventsPage.qml" line="149"/>
         <source>Coming Soon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="213"/>
+        <location filename="../qml/pages/EventsPage.qml" line="219"/>
         <source>Change Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="233"/>
+        <location filename="../qml/pages/EventsPage.qml" line="239"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/EventsPage.qml" line="240"/>
+        <location filename="../qml/pages/EventsPage.qml" line="246"/>
         <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/EventsPage.qml" line="306"/>
+        <source>Coming soon</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

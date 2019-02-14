@@ -303,7 +303,7 @@ Page {
             inSelectedTheatre.setModel(kinoAPI.inTheatres,
                                        kinoAPI.getAreaName(),
                                        false);
-            comingSoon.setModel(kinoAPI.comingSoon, "Coming soon", true);
+            comingSoon.setModel(kinoAPI.comingSoon, qsTr("Coming soon"), true);
             if (kinoAPI.getAreaName().length !== 0) {
                 locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString()
             } else {
