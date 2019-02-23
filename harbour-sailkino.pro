@@ -29,17 +29,6 @@ SOURCES += src/SailKino.cpp \
     src/showtimemodel.cpp \
     src/schedulefiltermodel.cpp
 
-OTHER_FILES += \
-    qml/cover/CoverPage.qml \
-    harbour-sailkino.desktop \
-    qml/harbour-sailkino.qml \
-    qml/pages/Events.qml \
-    qml/pages/EventsPage.qml \
-    qml/pages/SingleEvent.qml \
-    qml/pages/SearchPage.qml \
-    qml/pages/SelectLocationLanguage.qml \
-    qml/pages/Settings.qml \
-    qml/pages/About.qml
 
 HEADERS += \
     src/httpEngine.h \
@@ -53,7 +42,18 @@ HEADERS += \
     src/schedulefiltermodel.h
 
 DISTFILES += \
-    rpm/harbour-sailkino.spec
+    rpm/harbour-sailkino.spec \
+    translations/*.ts \
+    qml/cover/CoverPage.qml \
+    harbour-sailkino.desktop \
+    qml/harbour-sailkino.qml \
+    qml/pages/Events.qml \
+    qml/pages/EventsPage.qml \
+    qml/pages/SingleEvent.qml \
+    qml/pages/SearchPage.qml \
+    qml/pages/SelectLocationLanguage.qml \
+    qml/pages/Settings.qml \
+    qml/pages/About.qml
 
 TRANSLATIONS += \
-    translations/*.ts
+    translations/harbour-sailkino-fi.ts
