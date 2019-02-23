@@ -26,7 +26,7 @@ Page {
             id: menu
 
             MenuItem {
-                text: "Change Date"
+                text: qsTr("Change Date")
 
                 onClicked: {
                     var dialog = pageStack.push(pickerComponent, {
@@ -72,7 +72,7 @@ Page {
                    if (event.getLargeImageLandscape() !== "") {
                               return event.getLargeImageLandscape();
                            } else {
-                              return "../images/default-cover.png"
+                              return "image://theme/icon-l-image"
                            }
                        }
 
@@ -81,15 +81,17 @@ Page {
                BackgroundItem {
                    id: video
                    anchors.fill: parent
+                   enabled: event.getTrailer() !== ""
+                   visible: enabled
                    onClicked: {
-                       onClicked: pageStack.push(Qt.resolvedUrl("TrailerPlayer.qml"), { videourl: event.getTrailer() })
+                       onClicked: Qt.openUrlExternally(event.getTrailer())
+                   }
+                   Image {
+                       anchors.centerIn: parent
+                       source: "image://theme/icon-l-play"
                    }
                }
 
-               Image {
-                   anchors.fill: parent
-                   source: "../images/play.png"
-               }
 
             }
 

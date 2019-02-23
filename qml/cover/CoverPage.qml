@@ -24,13 +24,12 @@ CoverBackground {
 
     CoverPlaceholder {
         id: holder
+        property string title
         visible: true
-        text: {
-            if(ready && active) {
-                "SailKino \n\r\n\r" + events.get(index - 1).title
-            } else {
-                "SailKino"
-            }
+        text: "SailKino"
+        onTitleChanged: {
+            if(title !== "")
+                text = "SailKino\n\n"+title
         }
         z: -1
     }
@@ -47,12 +46,12 @@ CoverBackground {
             to: 0
             duration: 1000
             onStopped: {
-                if(events.get(index - 1).mediumimageportrait !== "")
+                if(events.get(index - 1).mediumimageportrait !== undefined)
                 {
                     coverpic.source = events.get(index - 1).mediumimageportrait
                     coverpic.visible = true;
                 }
-                else if (events.get(index - 1).smallimageportrait !== "")
+                else if (events.get(index - 1).smallimageportrait !== undefined)
                 {
                     coverpic.source = events.get(index - 1).smallimageportrait
                     coverpic.visible = true;
@@ -61,7 +60,8 @@ CoverBackground {
                 {
                     coverpic.visible = false;
                     coverpic.source = ""
-                    holder.text = events.get(index - 1).title
+                    if(events.get(index - 1).title !== undefined)
+                        holder.title = events.get(index - 1).title
                 }
             }
         }

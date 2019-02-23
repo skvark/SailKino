@@ -4,7 +4,6 @@
 #include <parser.h>
 #include <settings.h>
 #include <eventsmodel.h>
-#include <QDebug>
 #include <httpEngine.h>
 #include <settings.h>
 #include <QString>

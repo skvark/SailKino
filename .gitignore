@@ -1,19 +1,4 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-# Compiled Dynamic libraries
-*.so
-*.dylib
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-# Qt
 *.pro.user
 *.pro.user.*
-moc_*.cpp
-qrc_*.cpp
-Makefile
-*-build-*
 *.autosave
+/rpm/*.spec.*

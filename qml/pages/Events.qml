@@ -54,26 +54,16 @@ Item {
 
         id: listview
 
-        header: Component {
-
-            PageHeader {
-                title: pgheader
-                height: 0.146 * Screen.height
-
-                SectionHeader {
-                    id: section
-                    text: dt
-                    anchors.top: parent.top
-                    anchors.topMargin: 0.0625 * Screen.height
-                }
-            }
+        header: PageHeader {
+            title: pgheader
+            description: pgheader === "" ? "" : dt
         }
 
         PullDownMenu {
             id: menu
 
             MenuItem {
-                text: "Settings"
+                text: qsTr("Settings")
                 onClicked: {
                     pgheader = "";
                     filterdatetimer.stop();
@@ -82,7 +72,9 @@ Item {
             }
 
             MenuItem {
-                text: "Search"
+                enabled: listview.count > 0
+                visible: listview.count > 0
+                text: qsTr("Search")
                 onClicked: {
                     pageStack.push("SearchPage.qml");
                 }
@@ -100,116 +92,104 @@ Item {
         delegate: ListItem {
 
             width: parent.width
-            height: background.height + Theme.paddingMedium
-            anchors.topMargin: Theme.paddingMedium
-            anchors.bottomMargin: Theme.paddingMedium
-
-            Rectangle {
-                anchors.fill: background
-                radius: 5;
-                color: Theme.rgba(Theme.highlightBackgroundColor, 0.3)
-            }
+            height: row.height + spacer.height
+            contentHeight: height
 
             BackgroundItem {
 
                 id: background
-                anchors.left: parent.left;
-                anchors.leftMargin: Theme.paddingMedium
-                anchors.right: parent.right;
-                anchors.rightMargin: Theme.paddingMedium
-                height: row.height + row2.height + 30;
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    bottom: row.bottom
+                }
+                height: row.height// + Theme.paddingMedium;
                 onClicked: pageStack.push(Qt.resolvedUrl("SingleEvent.qml"), { id: id, comingsoonmodel: comingsoonmodel })
 
             }
 
             Row {
-
                 id: row
                 anchors.left: parent.left;
-                anchors.leftMargin: Theme.paddingMedium
-                anchors.right: background.right;
+                anchors.right: parent.right;
 
                 Column {
-                        id: column
-                        width: background.width - previewimage.width
-                        height: previewimage.height + 10
+                    id: column1
+                    width: previewimage.width
+                    Image {
+                        id: previewimage
+                        source: mediumimageportrait
+                        fillMode: Image.PreserveAspectCrop
+                        width: row.width / 3.0
+                        height: row.width / 2.0
+                        sourceSize.width: width
+                        sourceSize.height: height
 
-                        Label {
-                            id: header
-                            height: 110
-                            width: parent.width
-                            anchors.left: parent.left;
-                            anchors.right: parent.right;
-                            textFormat: Text.RichText
-                            text: title
-                            anchors.leftMargin: 15
-                            font.pixelSize: Screen.width >= 1000 ? 46 : 36
-                            wrapMode: Text.WordWrap
-                            verticalAlignment: Text.AlignVCenter
+                        // Missing thumbnail?
+                        Image {
+                            anchors.centerIn: parent
+                            source: "image://theme/icon-l-image"
+                            visible: mediumimageportrait === ""
                         }
-                        Label {
-                            id: genres
-                            height: 20
-                            width: parent.width
-                            anchors.left: parent.left;
-                            anchors.right: parent.right;
-                            textFormat: Text.RichText
-                            text: genre
-                            anchors.leftMargin: 15
-                            font.pixelSize: Screen.width >= 1000 ? 35 : 25
-                            color: Theme.rgba(Theme.secondaryColor, 0.5)
-                            wrapMode: Text.WordWrap
-                        }
-
                     }
+                }
 
                 Column {
                     id: column2
-
-                    Image {
-                       id: previewimage
-                       source: {
-                                   if (smallimageportrait !== "") {
-                                      return smallimageportrait;
-                                   } else {
-                                      return "../images/default-cover.png"
-                                   }
-                               }
-                       sourceSize.width: 99
-                       sourceSize.height: 146
-                    }
-                }
-            }
-
-            Row {
-
-                id: row2
-                anchors.left: parent.left;
-                anchors.top: row.bottom;
-                anchors.leftMargin: Theme.paddingMedium
-                anchors.right: parent.right;
-                anchors.rightMargin: Theme.paddingMedium
-                anchors.topMargin: Theme.paddingMedium
-                spacing: Theme.paddingMedium
-
-
-                Column {
-                        id: column3
-                        width: parent.width
+                    width: background.width - previewimage.width
+                    height: column1.height
 
                     Label {
-                        id: moviecontent
-                        anchors.topMargin: 24
+                        id: header
+                        width: parent.width
                         anchors.left: parent.left;
                         anchors.right: parent.right;
-                        anchors.leftMargin: 15
-                        anchors.rightMargin: 5
-                        textFormat: Text.RichText
+                        text: title
+                        anchors.leftMargin: Theme.paddingMedium
+                        anchors.rightMargin: Theme.paddingSmall
+                        font.pixelSize: Theme.fontSizeMedium
+                        wrapMode: Text.NoWrap
+                        maximumLineCount: 1
+                        truncationMode: TruncationMode.Fade
+                    }
+                    Label {
+                        id: genres
+                        width: parent.width
+                        anchors.left: parent.left;
+                        anchors.right: parent.right;
+                        text: genre
+                        anchors.leftMargin: Theme.paddingMedium
+                        anchors.rightMargin: Theme.paddingSmall
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        opacity: 0.5
+                        wrapMode: Text.NoWrap
+                        maximumLineCount: 1
+                        truncationMode: TruncationMode.Fade
+                    }
+                    Label {
+                        id: moviecontent
+                        anchors.left: parent.left;
+                        anchors.right: parent.right;
+                        height: previewimage.height - header.height - genres.height
+                        anchors.leftMargin: Theme.paddingMedium
+                        anchors.rightMargin: Theme.paddingSmall
                         text: shortsynopsis
                         wrapMode: Text.Wrap
-                        font.pixelSize: Theme.fontSizeSmall
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                        elide: Text.ElideRight
+                        clip: true
+                        maximumLineCount: Math.floor((previewimage.height - header.height - genres.height) / genres.height)
                     }
+
                 }
+            }
+            Rectangle {
+                id: spacer
+                anchors.top: row.bottom
+                width: parent.width
+                height: Theme.paddingSmall
+                color: Theme.rgba(Theme.highlightBackgroundColor, 0.3)
             }
         }
 

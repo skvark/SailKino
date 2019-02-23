@@ -13,7 +13,6 @@ Page {
     }
 
     SilicaFlickable {
-
         width: parent.width
 
         ViewPlaceholder {
@@ -28,7 +27,7 @@ Page {
         id: menuView
         itemWidth: width
         itemHeight: height
-        height: app.height - footer.visibleHeight
+        height: page.height - footer.visibleHeight
         clip: true
 
         anchors {
@@ -58,26 +57,25 @@ Page {
     Item {
         id: footer
         property int visibleHeight: footercontent.contentY + height
-        anchors { bottom: parent.bottom; left: parent.left; right: parent.right }
-        height: 0.13 * Screen.height
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+        height: 3*Theme.fontSizeSmall + 1.25*Theme.fontSizeExtraSmall + 3*Theme.paddingSmall
 
         SilicaFlickable {
+
+            enabled: !pholder.enabled
 
             id: footercontent
             anchors.fill: parent
             contentHeight: parent.height
 
-            Image {
-               id: background
-               fillMode: Image.PreserveAspectCrop
-               anchors.fill: parent
-               source: "image://theme/graphic-header"
-            }
-
             Row {
-
                 id: nav
-                height: 0.0677 * Screen.height
+                height: 3*Theme.fontSizeSmall
+                width: parent.width
 
                 BackgroundItem {
 
@@ -86,12 +84,11 @@ Page {
                     height: parent.height
 
                     Label {
-                        anchors.fill: parent
+                        id: inTeathersLabel
+                        anchors.centerIn: parent
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.highlightColor
-                        text: "In Theatres"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        text: qsTr("In Theatres")
                     }
 
                     onClicked: if (menuView.currentIndex !== 0 ) {
@@ -100,16 +97,19 @@ Page {
 
                     Rectangle {
                         id: dockrectangle1
-                        anchors.fill: parent
+                        anchors.centerIn: parent
+                        height: 1.5*inTeathersLabel.height
+                        width: Math.min(Math.max(inTeathersLabel.width, inTeathersLabel.width) * 1.5, footercontent.width / 2)
                         color: Theme.rgba(Theme.highlightColor, 0.0)
-                        radius: 5;
+                        radius: Theme.paddingSmall
                         anchors.margins: Theme.paddingMedium
+                        visible: !pholder.enabled
 
                         states: [
                             State { name: "visible";
                                 PropertyChanges {
                                     target: dockrectangle1;
-                                    color: Theme.rgba(Theme.highlightColor, 0.4)
+                                    color: Theme.rgba(Theme.highlightColor, 0.3)
                                 }
                             },
                             State { name: "hidden";
@@ -128,16 +128,15 @@ Page {
                 BackgroundItem {
 
                     id: dockbackground2
-                    width: footercontent.width / 2
+                    width: parent.width / 2
                     height: parent.height
 
                     Label {
-                        anchors.fill: parent
+                        id: comingSoonLabel
+                        anchors.centerIn: parent
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.highlightColor
-                        text: "Coming Soon"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        text: qsTr("Coming Soon")
                     }
 
                     onClicked: if (menuView.currentIndex !== 1 ) {
@@ -146,10 +145,13 @@ Page {
 
                     Rectangle {
                         id: dockrectangle2
-                        anchors.fill: parent
-                        radius: 5;
+                        anchors.centerIn: parent
+                        height: 1.5*comingSoonLabel.height
+                        width: Math.min(Math.max(inTeathersLabel.width, inTeathersLabel.width) * 1.5, footercontent.width / 2)
+                        radius: Theme.paddingSmall;
                         color: Theme.rgba(Theme.highlightColor, 0.0)
                         anchors.margins: Theme.paddingMedium
+                        visible: !pholder.enabled
 
                         states: [
                             State {
@@ -175,38 +177,36 @@ Page {
             }
 
             Row {
-                height: 0.0625 * Screen.height
                 anchors.top: nav.bottom
-
-                Item {
-                    anchors.margins: Theme.paddingMedium
-                    width: footercontent.width
-                    height: parent.height
-
-                    Label {
-                        id: locationdate
-                        anchors.fill: parent
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.topMargin: 5
-                        textFormat: Text.RichText
-                        text: {
-                            if (kinoAPI.getAreaName().length !== 0) {
-                                return kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
-                            } else {
-                                return kinoAPI.getDate().toDateString();
-                            }
+                width: parent.width
+                height: 1.25*Theme.fontSizeExtraSmall + 3*Theme.paddingSmall
+                Label {
+                    id: locationdate
+                    width: parent.width
+                    height: 1.25*Theme.fontSizeExtraSmall
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    text: {
+                        if (kinoAPI.getAreaName().length !== 0) {
+                            return kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
+                        } else {
+                            return kinoAPI.getDate().toDateString();
                         }
-                        wrapMode: Text.Wrap
-                        font.pixelSize: 0.0229 * Screen.height
                     }
+                    wrapMode: Text.NoWrap
+                    elide: Text.ElideMiddle
                 }
             }
 
             PushUpMenu {
                 id: menu
 
+                visible: !pholder.enabled
+                enabled: !pholder.enabled
+
                 MenuItem {
-                    text: "Change Date"
+                    text: qsTr("Change Date")
 
                     onClicked: {
                         var dialog = pageStack.push(pickerComponent, {
@@ -226,14 +226,14 @@ Page {
                 }
 
                 MenuItem {
-                    text: "Search"
+                    text: qsTr("Search")
                     onClicked: {
                         pageStack.push("SearchPage.qml");
                     }
                 }
 
                 MenuItem {
-                    text: "Settings"
+                    text: qsTr("Settings")
                     onClicked: {
                         filterdatetimer.stop();
                         pageStack.push("Settings.qml");
@@ -293,8 +293,12 @@ Page {
             inSelectedTheatre.setModel(kinoAPI.inTheatres,
                                        kinoAPI.getAreaName(),
                                        false);
-            comingSoon.setModel(kinoAPI.comingSoon, "Coming soon", true);
-            locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
+            comingSoon.setModel(kinoAPI.comingSoon, qsTr("Coming soon"), true);
+            if (kinoAPI.getAreaName().length !== 0) {
+                locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString()
+            } else {
+                locationdate.text = kinoAPI.getDate().toDateString()
+            }
             filterdatetimer.start();
         }
 
@@ -310,8 +314,16 @@ Page {
         }
 
         onDateChanged: {
-            locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString();
+            if (kinoAPI.getAreaName().length !== 0) {
+                locationdate.text = kinoAPI.getAreaName() + " — " + kinoAPI.getDate().toDateString()
+            } else {
+                locationdate.text = kinoAPI.getDate().toDateString()
+            }
         }
+    }
+    onLoadingChanged: {
+        if(loading)
+            locationdate.text = kinoAPI.getDate().toDateString()
     }
 }
 

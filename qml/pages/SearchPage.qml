@@ -9,7 +9,7 @@ Page {
 
     onSearchStringChanged: getSortedItems()
     Component.onCompleted: {
-        searchField.placeholderText = "Start typing title...";
+        searchField.placeholderText = qsTr("Start typing title...");
         searchType = "title";
         getSortedItems();
     }
@@ -17,30 +17,23 @@ Page {
     SilicaFlickable {
 
         id: flick
-        width: parent.width
-        height: headerContainer.height
+        anchors.fill: parent
 
         PullDownMenu {
             id: menu
             MenuItem {
-                text: "Search by Genre"
+                text: (searchType === "title" ? qsTr("Search by Genre") : qsTr("Search by Title"))
                 onClicked: {
-                    searchType = "genre";
-                    searchField.placeholderText = "Start typing genre..."
-                }
-            }
-            MenuItem {
-                text: "Search by Title"
-                onClicked: {
-                    searchType = "title";
-                    searchField.placeholderText = "Start typing title..."
+                    searchField.placeholderText = (searchType === "title" ? qsTr("Start typing genre...") : qsTr("Start typing title..."))
+                    searchField.text = "";
+                    searchType = (searchType === "title" ? "genre" : "title");
                 }
             }
         }
 
         Column {
             id: headerContainer
-            width: searchPage.width
+            width: parent.width
 
             PageHeader {
                 title: qsTr("Events")
@@ -65,38 +58,48 @@ Page {
             model: filteredModel
             width: parent.width
             anchors.top: headerContainer.bottom
-            anchors.topMargin: 70
-            height: Screen.height - 400
+            anchors.bottom: parent.bottom
+            clip: true
 
             delegate: ListItem {
-
+                height: titlelabel.height + genreLabel.height + 2*Theme.paddingSmall
+                contentHeight: height
                 Label {
                     id: titlelabel
                     anchors {
+                        top: parent.top
                         left: parent.left
                         right: parent.right
-                        leftMargin: searchField.textLeftMargin
-                        topMargin: 15
+                        topMargin: Theme.paddingSmall
+                        leftMargin: Theme.paddingLarge
+                        rightMargin: Theme.paddingLarge
                     }
-                    textFormat: Text.RichText
                     text: title
+                    font.pixelSize: Theme.fontSizeSmall
+                    maximumLineCount: 1
+                    truncationMode: TruncationMode.Fade
                 }
 
                 Label {
+                    id: genreLabel
                     anchors {
+                        top: titlelabel.bottom
                         left: parent.left
                         right: parent.right
-                        top: titlelabel.bottom
-                        leftMargin: searchField.textLeftMargin
+                        leftMargin: Theme.paddingLarge
+                        rightMargin: Theme.paddingLarge
+                        bottomMargin: Theme.paddingSmall
                     }
 
-                    font.pixelSize: 20
+                    font.pixelSize: Theme.fontSizeSmall
                     textFormat: Text.RichText
                     text: {
                         kinoAPI.setID(id);
                         return kinoAPI.getEvent.getGenres();
                     }
-                    color: Theme.rgba(Theme.secondaryColor, 0.5)
+                    opacity: 0.5
+                    maximumLineCount: 1
+                    truncationMode: TruncationMode.Fade
                 }
 
                 BackgroundItem {
@@ -107,8 +110,8 @@ Page {
                     }
                 }
             }
+            VerticalScrollDecorator { flickable: listview }
         }
-        VerticalScrollDecorator { flickable: listview }
     }
 
     ListModel { id: filteredModel }

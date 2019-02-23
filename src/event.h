@@ -49,16 +49,12 @@ public:
     Show *addSchedule(QMap<QString, QString> data);
     ShowTimeModel *getModel() const;
 
-    void verifyTrailerUrl();
     void setTrailerUrl(QString url);
 
     ScheduleFilterModel *getFilteredModel() const;
     void filter();
     Q_INVOKABLE bool filteredHasShows();
     Q_INVOKABLE void reFilter();
-
-signals:
-    void parseYoutube(QString video_id, QString id);
 
 private:
     QString id_;

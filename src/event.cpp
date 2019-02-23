@@ -1,7 +1,7 @@
 #include "event.h"
 #include <QDateTime>
 
-Event::Event(QObject *parent)
+Event::Event(QObject *parent): QObject(parent)
 {
 
 }
@@ -81,14 +81,6 @@ QString Event::mediumImagePortrait()
 QString Event::getLargeImageLandscape()
 {
     return largeImageLandscape_;
-}
-
-void Event::verifyTrailerUrl() {
-    if (trailerType_ != "YouTubeVideo") {
-        return;
-    } else {
-        emit parseYoutube(trailer_, id_);
-    }
 }
 
 QString Event::getTrailer()

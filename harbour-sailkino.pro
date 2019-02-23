@@ -9,7 +9,7 @@
 
 
 TARGET = harbour-sailkino
-CONFIG += sailfishapp
+CONFIG += sailfishapp sailfishapp_i18n
 CONFIG += c++11
 
 QT += network dbus
@@ -36,7 +36,6 @@ OTHER_FILES += \
     qml/pages/Events.qml \
     qml/pages/EventsPage.qml \
     qml/pages/SingleEvent.qml \
-    qml/pages/TrailerPlayer.qml \
     qml/pages/SearchPage.qml \
     qml/pages/SelectLocationLanguage.qml \
     qml/pages/Settings.qml \
@@ -54,7 +53,7 @@ HEADERS += \
     src/schedulefiltermodel.h
 
 DISTFILES += \
-    qml/pages/ScreenBlank.qml \
     rpm/harbour-sailkino.spec
 
-
+TRANSLATIONS += \
+    translations/*.ts
