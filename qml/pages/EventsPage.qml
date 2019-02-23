@@ -146,7 +146,7 @@ Page {
                     Rectangle {
                         id: dockrectangle2
                         anchors.centerIn: parent
-                        height: comingSoonLabel.height * 2
+                        height: 1.5*comingSoonLabel.height
                         width: Math.min(Math.max(inTeathersLabel.width, inTeathersLabel.width) * 1.5, footercontent.width / 2)
                         radius: Theme.paddingSmall;
                         color: Theme.rgba(Theme.highlightColor, 0.0)
