@@ -58,11 +58,10 @@ rm -rf %{buildroot}
 # << install post
 
 %files
+%defattr(-,root,root,-)
+%{_bindir}
+%{_datadir}/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 # >> files
-%defattr(0644,root,root,0755)
-%attr(0755,-,-) %{_bindir}/%{name}
 # << files
-/usr/bin
-/usr/share/harbour-sailkino
-/usr/share/applications
-/usr/share/icons/hicolor/86x86/apps
