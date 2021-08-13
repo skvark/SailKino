@@ -13,8 +13,8 @@ Name:       harbour-sailkino
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Finnkino movies.
-Version:    0.8
-Release:    0
+Version:    0.9
+Release:    1
 Group:      Qt/Qt
 License:    The MIT License (MIT)
 URL:        http://example.org/
@@ -58,11 +58,10 @@ rm -rf %{buildroot}
 # << install post
 
 %files
+%defattr(-,root,root,-)
+%{_bindir}
+%{_datadir}/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 # >> files
-%defattr(0644,root,root,0755)
-%attr(0755,-,-) %{_bindir}/%{name}
 # << files
-/usr/bin
-/usr/share/harbour-sailkino
-/usr/share/applications
-/usr/share/icons/hicolor/86x86/apps
